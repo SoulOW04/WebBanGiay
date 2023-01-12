@@ -1,0 +1,90 @@
+﻿@model WebBanGiayMVC.Models.SanPham
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SanPham</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenSanPham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSanPham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTaSanPham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTaSanPham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaSanPham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaSanPham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AvatarSanPham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvatarSanPham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DanhSachAnhSanPham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DanhSachAnhSanPham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiDungSanPham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoiDungSanPham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HangSanPham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HangSanPham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Loai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Loai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrangThai)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
