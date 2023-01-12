@@ -1,21 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebBanGiayMVC.DataAccess;
+using WebBanGiayMVC.Models;
 
 namespace WebBanGiayMVC.Business
 {
     internal interface IDanhMucService
     {
-        List<Category> GetCategories();
+        List<DanhMuc> GetAllDanhMuc(out int total);
     }
 
-    public class Category : IDanhMucService
+    public class DanhMucService : IDanhMucService
     {
-        public List<Category> GetCategories()
+
+        DanhMucDA _dataAccess = new DanhMucDA();
+        public List<DanhMuc> GetAllDanhMuc(out int total)
         {
-            throw new NotImplementedException();
+            
+            return _dataAccess.GetAllDanhMucByEF(out total);
+            
         }
 
     }
