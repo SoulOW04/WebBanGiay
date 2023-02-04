@@ -7,5 +7,6 @@ namespace WebBanGiayMVC.DataAccess
 {
     public class ConfigDA
     {
+
     }
 }

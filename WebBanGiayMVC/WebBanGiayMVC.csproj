@@ -131,6 +131,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\SanPhamsController.cs" />
+    <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Service\DanhMuc\IDanhMucService.cs" />
     <Compile Include="Service\CauHinh\ICauHinhService.cs" />
     <Compile Include="Service\ChiTietDonHang\IChiTietDonHangService.cs" />
@@ -139,7 +140,6 @@
     <Compile Include="Service\SanPham\ISanPhamService.cs" />
     <Compile Include="Service\ThongSoSanPham\IThongSoSanPhamService.cs" />
     <Compile Include="Service\ThongSoKiThuat\IThongSoKiThuatService.cs" />
-    <Compile Include="Controllers\Home2Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DataAccess\DanhMucDA.cs" />
     <Compile Include="DataAccess\ConfigDA.cs" />
@@ -1300,17 +1300,22 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home2\Index.cshtml" />
-    <Content Include="Views\Shared\_Home2IndexLayout.cshtml" />
-    <Content Include="Views\Home2\About.cshtml" />
-    <Content Include="Views\Shared\_Home2AboutLayout.cshtml" />
-    <Content Include="Views\Home2\Add_To_Wishlist.cshtml" />
-    <Content Include="Views\Shared\_Home2AddWishlistLayout.cshtml" />
     <Content Include="Views\SanPhams\Create.cshtml" />
     <Content Include="Views\SanPhams\Delete.cshtml" />
     <Content Include="Views\SanPhams\Details.cshtml" />
     <Content Include="Views\SanPhams\Edit.cshtml" />
     <Content Include="Views\SanPhams\Index.cshtml" />
+    <Content Include="Views\Shared\_FooterLayout.cshtml" />
+    <Content Include="Views\TrangChu\Index.cshtml" />
+    <Content Include="Views\TrangChu\About.cshtml" />
+    <Content Include="Views\TrangChu\Add_To_Wishlist.cshtml" />
+    <Content Include="Views\TrangChu\Cart.cshtml" />
+    <Content Include="Views\TrangChu\Checkout.cshtml" />
+    <Content Include="Views\TrangChu\Contact.cshtml" />
+    <Content Include="Views\TrangChu\Men.cshtml" />
+    <Content Include="Views\TrangChu\Women.cshtml" />
+    <Content Include="Views\TrangChu\Order_Complete.cshtml" />
+    <Content Include="Views\TrangChu\Product_Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

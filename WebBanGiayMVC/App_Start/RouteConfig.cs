@@ -16,7 +16,7 @@ namespace WebBanGiayMVC
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home2", action = "Add_To_Wishlist", id = UrlParameter.Optional }
+                defaults: new { controller = "TrangChu", action = "Cart", id = UrlParameter.Optional }
             );
         }
     }
