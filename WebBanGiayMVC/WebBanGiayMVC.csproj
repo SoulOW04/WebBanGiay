@@ -1319,6 +1319,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Service\BaseService\" />
     <Folder Include="Service\CauHinh\ViewModel\" />
     <Folder Include="Service\ChiTietDonHang\ViewModel\" />
     <Folder Include="Service\DanhMuc\ViewModel\" />
