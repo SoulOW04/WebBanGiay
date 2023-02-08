@@ -3,15 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebBanGiayMVC.Business;
+using WebBanGiayMVC.Models;
 
 namespace WebBanGiayMVC.Controllers
 {
     public class TrangChuController : Controller
     {
+        Model_Context db = new Model_Context();
+        CauHinhService cauHinhService;
+        public TrangChuController()
+        {
+            cauHinhService = new CauHinhService();
+        }
         // GET: TrangChu
         public ActionResult Index()
         {
-            return View();
+            
+            var cauHinhLogo = cauHinhService.GetCauHinhByMaCauHinh("Logo");
+            if(cauHinhLogo != null)
+            {
+                ViewBag.Logo = cauHinhLogo.GiaTriCauHinh;
+            }
+            return View(db.SanPhams.ToList());
         }
         public ActionResult About()
         {
