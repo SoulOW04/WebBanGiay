@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
+    var logo = ViewBag.Logo as string;
 }
 
 <!DOCTYPE HTML>
@@ -22,8 +23,16 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-7 col-md-9">
-                            <div id="colorlib-logo"><a href="index.html">Footwear</a></div>
-                        </div>
+                            <div id="colorlib-logo">
+                                @if (!string.IsNullOrEmpty(logo))
+                                {
+                                    <a href="index.html">
+                                        <img src="@logo" width="120" height="120"/>
+                                    </a>
+
+                                }
+                            </div>
+                            </div>
                         <div class="col-sm-5 col-md-3">
                             <form action="#" class="search-wrap">
                                 <div class="form-group">
