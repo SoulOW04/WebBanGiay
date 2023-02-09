@@ -5,18 +5,21 @@ using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 using WebBanGiayMVC.Business;
+using WebBanGiayMVC.DataAccess;
 using WebBanGiayMVC.Models;
 
 namespace WebBanGiayMVC.Controllers
 {
     public class TrangChuController : Controller
     {
-        Model_Context db = new Model_Context();
         CauHinhService cauHinhService;
+        ThongSoSanPhamService thongSoSanPhamService;
+        Model_Context db = new Model_Context();
         CauHinh cauHinh = new CauHinh();
         public TrangChuController()
         {
             cauHinhService = new CauHinhService();
+            thongSoSanPhamService = new ThongSoSanPhamService();
         }
         // GET: TrangChu
         public ActionResult Index()
@@ -68,8 +71,19 @@ namespace WebBanGiayMVC.Controllers
         {
             return View();
         }
-        public ActionResult Product_Detail()
+        public ActionResult Product_Detail(int id)
         {
+            var product = new ThongSoSanPhamDA().GetThongTinSanPhamById(id);
+            
+
+            //SanPham sanPham = db.SanPhams.Find(id);
+            //var sanPhamId = sanPham.Id;
+            //if (sanPhamId != null)
+            //{
+            //    var chitTietDonHang = thongSoSanPhamService.GetThongTinSanPhamById(sanPhamId);
+            //}
+          
+            
             return View();
         }
     }

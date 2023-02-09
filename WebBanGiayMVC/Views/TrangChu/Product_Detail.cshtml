@@ -1,4 +1,4 @@
-﻿
+﻿@model WebBanGiayMVC.Models.SanPham
 @{
     ViewBag.Title = "Product_Detail";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
@@ -99,28 +99,28 @@
                             <div class="item">
                                 <div class="product-entry border">
                                     <a href="#" class="prod-img">
-                                        <img src="images/item-1.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+                                        <img src="@Html.DisplayFor(model => model.AvatarSanPham)" class="img-fluid" alt="Free html5 bootstrap 4 template">
                                     </a>
                                 </div>
                             </div>
                             <div class="item">
                                 <div class="product-entry border">
                                     <a href="#" class="prod-img">
-                                        <img src="images/item-2.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+                                        <img src="@Html.DisplayFor(model => model.AvatarSanPham)" alt="Free html5 bootstrap 4 template">
                                     </a>
                                 </div>
                             </div>
                             <div class="item">
                                 <div class="product-entry border">
                                     <a href="#" class="prod-img">
-                                        <img src="images/item-3.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+                                        <img src="@Html.DisplayFor(model => model.AvatarSanPham)" alt="Free html5 bootstrap 4 template">
                                     </a>
                                 </div>
                             </div>
                             <div class="item">
                                 <div class="product-entry border">
                                     <a href="#" class="prod-img">
-                                        <img src="images/item-4.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+                                        <img src="@Html.DisplayFor(model => model.AvatarSanPham)" alt="Free html5 bootstrap 4 template">
                                     </a>
                                 </div>
                             </div>
@@ -128,9 +128,9 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="product-desc">
-                            <h3>Women's Boots Shoes Maca</h3>
+                            <h3>@Html.DisplayFor(model => model.TenSanPham)</h3>
                             <p class="price">
-                                <span>$68.00</span>
+                                <span>@Html.DisplayFor(model => model.GiaSanPham)</span>
                                 <span class="rate">
                                     <i class="icon-star-full"></i>
                                     <i class="icon-star-full"></i>
@@ -140,33 +140,13 @@
                                     (74 Rating)
                                 </span>
                             </p>
-                            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+                            <p>@Html.DisplayFor(model => model.MoTaSanPham)</p>
                             <div class="size-wrap">
                                 <div class="block-26 mb-2">
                                     <h4>Size</h4>
                                     <ul>
-                                        <li><a href="#">7</a></li>
-                                        <li><a href="#">7.5</a></li>
-                                        <li><a href="#">8</a></li>
-                                        <li><a href="#">8.5</a></li>
-                                        <li><a href="#">9</a></li>
-                                        <li><a href="#">9.5</a></li>
-                                        <li><a href="#">10</a></li>
-                                        <li><a href="#">10.5</a></li>
-                                        <li><a href="#">11</a></li>
-                                        <li><a href="#">11.5</a></li>
-                                        <li><a href="#">12</a></li>
-                                        <li><a href="#">12.5</a></li>
-                                        <li><a href="#">13</a></li>
-                                        <li><a href="#">13.5</a></li>
-                                        <li><a href="#">14</a></li>
-                                    </ul>
-                                </div>
-                                <div class="block-26 mb-4">
-                                    <h4>Width</h4>
-                                    <ul>
-                                        <li><a href="#">M</a></li>
-                                        <li><a href="#">W</a></li>
+                                        <li><a href="#">@*@Html.DisplayFor(model => model.KichThuocSanPham)*@</a></li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -372,40 +352,41 @@
     </div>
 
 
-    <script>$(document).ready(function(){
+    <script>
+        $(document).ready(function () {
 
-		var quantitiy=0;
-		   $('.quantity-right-plus').click(function(e){
+            var quantitiy = 0;
+            $('.quantity-right-plus').click(function (e) {
 
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                var quantity = parseInt($('#quantity').val());
 
-		        // If is not undefined
+                // If is not undefined
 
-		            $('#quantity').val(quantity + 1);
+                $('#quantity').val(quantity + 1);
 
 
-		            // Increment
+                // Increment
 
-		    });
+            });
 
-		     $('.quantity-left-minus').click(function(e){
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
+            $('.quantity-left-minus').click(function (e) {
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                var quantity = parseInt($('#quantity').val());
 
-		        // If is not undefined
+                // If is not undefined
 
-		            // Increment
-		            if(quantity>0){
-		            $('#quantity').val(quantity - 1);
-		            }
-		    });
+                // Increment
+                if (quantity > 0) {
+                    $('#quantity').val(quantity - 1);
+                }
+            });
 
-		});</script>
+        });</script>
 
 
 </body>
