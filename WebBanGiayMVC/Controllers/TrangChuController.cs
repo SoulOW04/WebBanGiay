@@ -29,7 +29,7 @@ namespace WebBanGiayMVC.Controllers
             {
                 ViewBag.Logo = cauHinhLogo.GiaTriCauHinh;
             }
-            return View();
+            return View(db.SanPhams.ToList());
         }
         public ActionResult About()
         {
