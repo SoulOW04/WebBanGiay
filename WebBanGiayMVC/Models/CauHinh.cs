@@ -20,5 +20,7 @@ namespace WebBanGiayMVC.Models
         public int? Loai { get; set; }
 
         public int? TrangThai { get; set; }
+
+        public string MoTa { get; set; }
     }
 }

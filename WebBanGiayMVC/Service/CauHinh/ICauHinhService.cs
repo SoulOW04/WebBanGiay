@@ -11,6 +11,7 @@ namespace WebBanGiayMVC.Business
     internal interface ICauHinhService
     {
         CauHinh GetCauHinhByMaCauHinh(string code);
+        List<CauHinh> GetCauHinhByLoai(int loai);
     }
     public class CauHinhService : ICauHinhService
     {
@@ -19,6 +20,10 @@ namespace WebBanGiayMVC.Business
         public CauHinh GetCauHinhByMaCauHinh(string code)
         {
             return _cauHinhDA.GetCauHinhByMaCauHinh(code);
+        }
+        public List<CauHinh> GetCauHinhByLoai(int loai)
+        {
+            return _cauHinhDA.GetCauHinhByLoai(loai);
         }
     }
 
