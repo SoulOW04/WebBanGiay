@@ -41,6 +41,13 @@ namespace WebBanGiayMVC.Controllers
         }
         public ActionResult About()
         {
+            var cauHinhProc = cauHinhService.GetCauHinhByMaCauHinh("About");
+            if (cauHinhProc != null)
+            {
+                ViewBag.Anh = cauHinhProc.GiaTriCauHinh;
+                ViewBag.TieuDe = cauHinhProc.TenCauHinh;
+                ViewBag.MoTa = cauHinhProc.MoTa;
+            }
             return View();
         }
         public ActionResult Add_To_Wishlist()
@@ -84,7 +91,7 @@ namespace WebBanGiayMVC.Controllers
             //}
           
             
-            return View();
+            return View(product);
         }
     }
 }
