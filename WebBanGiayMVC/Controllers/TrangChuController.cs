@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 using WebBanGiayMVC.Business;
@@ -14,7 +15,7 @@ namespace WebBanGiayMVC.Controllers
         CauHinhService cauHinhService;
         ThongSoSanPhamService thongSoSanPhamService;
         Model_Context db = new Model_Context();
-
+        CauHinh cauHinh = new CauHinh();
         public TrangChuController()
         {
             cauHinhService = new CauHinhService();
@@ -23,16 +24,30 @@ namespace WebBanGiayMVC.Controllers
         // GET: TrangChu
         public ActionResult Index()
         {
-            
+            //lay cau hinh logo
             var cauHinhLogo = cauHinhService.GetCauHinhByMaCauHinh("Logo");
-            if(cauHinhLogo != null)
+            if (cauHinhLogo != null)
             {
                 ViewBag.Logo = cauHinhLogo.GiaTriCauHinh;
+            }
+            
+            //lay cau hinh banner
+            var cauHinhBanner = cauHinhService.GetCauHinhByLoai(1);
+            if (cauHinhBanner != null)
+            {
+                ViewBag.Banner = cauHinhBanner.ToList();
             }
             return View(db.SanPhams.ToList());
         }
         public ActionResult About()
         {
+            var cauHinhProc = cauHinhService.GetCauHinhByMaCauHinh("About");
+            if (cauHinhProc != null)
+            {
+                ViewBag.Anh = cauHinhProc.GiaTriCauHinh;
+                ViewBag.TieuDe = cauHinhProc.TenCauHinh;
+                ViewBag.MoTa = cauHinhProc.MoTa;
+            }
             return View();
         }
         public ActionResult Add_To_Wishlist()
@@ -76,7 +91,7 @@ namespace WebBanGiayMVC.Controllers
             //}
           
             
-            return View();
+            return View(product);
         }
     }
 }
