@@ -1325,6 +1325,7 @@
     <Folder Include="Service\SanPham\ViewModel\" />
     <Folder Include="Service\ThongSoKiThuat\ViewModel\" />
     <Folder Include="Service\ThongSoSanPham\ViewModel\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
