@@ -11,17 +11,31 @@ namespace WebBanGiayMVC.Business
 {
     internal interface IDanhMucService
     {
-        List<DanhMuc> GetAllDanhMucs();
+        List<DanhMuc> PhanTrangDanhMuc();
+        List<DanhMuc> GetAllDanhMuc();
+        DanhMuc GetDanhMucByLoai(int? loai);
     }
 
-    public class DanhMucSerVice : IDanhMucService
+    public class DanhMucService : IDanhMucService
     {
         DanhMucDA _danhMucDA = new DanhMucDA();
-        public List<DanhMuc> GetAllDanhMucs()
+        public List<DanhMuc> PhanTrangDanhMuc()
         {
             var total = 0;
-            return _danhMucDA.GetAllDanhMucs(out total);
+            return _danhMucDA.PhanTrangDanhMuc(out total);
             
+        }
+        public List<DanhMuc> GetAllDanhMuc()
+        {
+            
+            return _danhMucDA.GetAllDanhMuc();
+
+        }
+        public DanhMuc GetDanhMucByLoai(int? loai)
+        {
+
+            return _danhMucDA.GetDanhMucByLoai(loai);
+
         }
 
     }

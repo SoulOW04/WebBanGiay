@@ -13,6 +13,7 @@ namespace WebBanGiayMVC.Controllers
     public class TrangChuController : Controller
     {
         CauHinhService cauHinhService;
+        DanhMucService danhMucService;
         ThongSoSanPhamService thongSoSanPhamService;
         Model_Context db = new Model_Context();
         CauHinh cauHinh = new CauHinh();
@@ -72,7 +73,13 @@ namespace WebBanGiayMVC.Controllers
         }
         public ActionResult Women()
         {
-            return View();
+            var danhMuc = danhMucService.GetAllDanhMuc();
+            if (danhMuc != null)
+            {
+                ViewBag.danhMuc = danhMuc.ToList();
+            }
+
+            return View(db.SanPhams.ToList());
         }
         public ActionResult Order_Complete()
         {
