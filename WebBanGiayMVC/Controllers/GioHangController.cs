@@ -24,13 +24,14 @@ namespace WebBanGiayMVC.Controllers
             return View(list);
         }
 
-        public ActionResult AddItem(int productId,int quantity)
+        public ActionResult Cart(int productId, int quantity)
         {
+            
             var cart = Session[gioHang];
             if (cart != null)
             {
                 var list = (List<ChiTietDonHang>)cart;
-                if (list.Exists(x=>x.SanPhamId == productId))
+                if (list.Exists(x => x.SanPhamId == productId))
                 {
                     foreach (var item in list)
                     {

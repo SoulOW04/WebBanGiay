@@ -1,7 +1,8 @@
-﻿
+﻿@model List<WebBanGiayMVC.Models.ChiTietDonHang>
 @{
     ViewBag.Title = "Cart";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
+    var logo = ViewBag.Logo as string;
 }
 
 <!DOCTYPE HTML>
@@ -11,7 +12,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    
+
 
 </head>
 <body>
@@ -24,7 +25,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-7 col-md-9">
-                            <div id="colorlib-logo"><a href="index.html">Footwear</a></div>
+                            <div id="colorlib-logo">
+                                @if (!string.IsNullOrEmpty(logo))
+                                {
+                                    <a href="index.html">
+                                        <img src="@logo" width="120" height="120" />
+                                    </a>
+
+                                }
+                            </div>
                         </div>
                         <div class="col-sm-5 col-md-3">
                             <form action="#" class="search-wrap">
@@ -132,95 +141,40 @@
                                 <span>Remove</span>
                             </div>
                         </div>
-                        <div class="product-cart d-flex">
-                            <div class="one-forth">
-                                <div class="product-img" style="background-image: url(images/item-6.jpg);">
+                        @foreach (var item in Model)
+                        {
+                            <div class="product-cart d-flex">
+                                <div class="one-forth">
+                                    <div class="product-img" style="background-image: url(@item.) ;">
+                                    </div>
+                                    <div class="display-tc">
+                                        <h3>Product Name</h3>
+                                    </div>
                                 </div>
-                                <div class="display-tc">
-                                    <h3>Product Name</h3>
+                                <div class="one-eight text-center">
+                                    <div class="display-tc">
+                                        <span class="price">$68.00</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="one-eight text-center">
-                                <div class="display-tc">
-                                    <span class="price">$68.00</span>
+                                <div class="one-eight text-center">
+                                    <div class="display-tc">
+                                        <input type="text" id="quantity" name="quantity" class="form-control input-number text-center" value="1" min="1" max="100">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="one-eight text-center">
-                                <div class="display-tc">
-                                    <input type="text" id="quantity" name="quantity" class="form-control input-number text-center" value="1" min="1" max="100">
+                                <div class="one-eight text-center">
+                                    <div class="display-tc">
+                                        <span class="price">$120.00</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="one-eight text-center">
-                                <div class="display-tc">
-                                    <span class="price">$120.00</span>
-                                </div>
-                            </div>
-                            <div class="one-eight text-center">
-                                <div class="display-tc">
-                                    <a href="#" class="closed"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-cart d-flex">
-                            <div class="one-forth">
-                                <div class="product-img" style="background-image: url(images/item-7.jpg);">
-                                </div>
-                                <div class="display-tc">
-                                    <h3>Product Name</h3>
+                                <div class="one-eight text-center">
+                                    <div class="display-tc">
+                                        <a href="#" class="closed"></a>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="one-eight text-center">
-                                <div class="display-tc">
-                                    <span class="price">$68.00</span>
-                                </div>
-                            </div>
-                            <div class="one-eight text-center">
-                                <div class="display-tc">
-                                    <form action="#">
-                                        <input type="text" name="quantity" class="form-control input-number text-center" value="1" min="1" max="100">
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="one-eight text-center">
-                                <div class="display-tc">
-                                    <span class="price">$120.00</span>
-                                </div>
-                            </div>
-                            <div class="one-eight text-center">
-                                <div class="display-tc">
-                                    <a href="#" class="closed"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-cart d-flex">
-                            <div class="one-forth">
-                                <div class="product-img" style="background-image: url(images/item-8.jpg);">
-                                </div>
-                                <div class="display-tc">
-                                    <h3>Product Name</h3>
-                                </div>
-                            </div>
-                            <div class="one-eight text-center">
-                                <div class="display-tc">
-                                    <span class="price">$68.00</span>
-                                </div>
-                            </div>
-                            <div class="one-eight text-center">
-                                <div class="display-tc">
-                                    <input type="text" id="quantity" name="quantity" class="form-control input-number text-center" value="1" min="1" max="100">
-                                </div>
-                            </div>
-                            <div class="one-eight text-center">
-                                <div class="display-tc">
-                                    <span class="price">$120.00</span>
-                                </div>
-                            </div>
-                            <div class="one-eight text-center">
-                                <div class="display-tc">
-                                    <a href="#" class="closed"></a>
-                                </div>
-                            </div>
-                        </div>
+
+                        }
+
                     </div>
                 </div>
                 <div class="row row-pb-lg">
