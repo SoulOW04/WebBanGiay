@@ -10,7 +10,7 @@ using WebBanGiayMVC.Models;
 
 namespace WebBanGiayMVC.DataAccess
 {
-    public class ConfigDA
+    public class CauHinhDA
     {
         private string cs = ConfigurationManager.ConnectionStrings["Model_Context1"].ConnectionString;
         private Model_Context _context = new Model_Context();

@@ -9,11 +9,11 @@ namespace WebBanGiayMVC.Controllers
 {
     public class HomeController : Controller
     {
-        DanhMucSerVice danhMucService = new DanhMucSerVice();
+        DanhMucService danhMucService = new DanhMucService();
         public ActionResult Index()
         {
-            var model = danhMucService.GetAllDanhMucs();
-            return View(model);
+            //var model = danhMucService.GetAllDanhMucs();
+            return View();
         }
 
         public ActionResult About()
