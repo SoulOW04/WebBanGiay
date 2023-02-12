@@ -6,6 +6,9 @@
     var logo = ViewBag.Logo as string;
 
     var banner = ViewBag.Banner as int?;
+
+    var womenB = ViewBag.WomenBanner as string;
+    var menB = ViewBag.MenBanner as string;
 }
 
 <!DOCTYPE HTML>
@@ -96,10 +99,7 @@
                 <ul class="slides">
                     @foreach (var list in @ViewBag.Banner)
                     {
-                        <li>
-                            <div>
-                                <img src="@list.GiaTriCauHinh">
-                            </div>
+                        <li style="background-image: url('@list.GiaTriCauHinh')">
                             <div class="overlay"></div>
                             <div class="container-fluid">
                                 <div class="row">
@@ -134,17 +134,18 @@
                 <div class="row">
                     <div class="col-sm-6 text-center">
                         <div class="featured">
-                            <a href="#" class="featured-img" style="background-image: url(images/men.jpg);"></a>
+                            <a href="@Url.Action("Men", "TrangChu")" class="featured-img" style="background-image: url('@menB')"></a>
                             <div class="desc">
-                                <h2><a href="#">Shop Men's Collection</a></h2>
+                                <h2><a href="@Url.Action("Men", "TrangChu")">Shop Men's Collection</a></h2>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 text-center">
                         <div class="featured">
-                            <a href="#" class="featured-img" style="background-image: url(images/women.jpg);"></a>
+                            <a href="@Url.Action("Women", "TrangChu")" class="featured-img" style="background-image: url('@womenB')"></a>
                             <div class="desc">
-                                <h2><a href="#">Shop Women's Collection</a></h2>
+                                
+                                <h2><a href="@Url.Action("Women", "TrangChu")">Shop Women's Collection</a></h2>
                             </div>
                         </div>
                     </div>
@@ -197,19 +198,19 @@
                 </div>
                 <div class="row">
                     <div class="col partner-col text-center">
-                        <img src="images/brand-1.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+                        <img src="~/footwear-master/images/brand-1.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
                     </div>
                     <div class="col partner-col text-center">
-                        <img src="images/brand-2.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+                        <img src="~/footwear-master/images/brand-2.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
                     </div>
                     <div class="col partner-col text-center">
-                        <img src="images/brand-3.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+                        <img src="~/footwear-master/images/brand-3.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
                     </div>
                     <div class="col partner-col text-center">
-                        <img src="images/brand-4.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+                        <img src="~/footwear-master/images/brand-4.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
                     </div>
                     <div class="col partner-col text-center">
-                        <img src="images/brand-5.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+                        <img src="~/footwear-master/images/brand-5.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
                     </div>
                 </div>
             </div>

@@ -2,7 +2,15 @@
 @{
     ViewBag.Title = "Women";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
-    var danhMucPhuNu = ViewBag.danhMuc;
+
+    var anhCH = ViewBag.AnhCH as string;
+    var tenCH = ViewBag.TenCH as string;
+    var anhCH1 = ViewBag.AnhCH1 as string;
+    var tenCH1 = ViewBag.TenCH1 as string;
+    var anhCH2 = ViewBag.AnhCH2 as string;
+    var tenCH2 = ViewBag.TenCH2 as string;
+    var anhCH3 = ViewBag.AnhCH3 as string;
+    var tenCH3 = ViewBag.TenCH3 as string;
 }
 
 <!DOCTYPE HTML>
@@ -95,8 +103,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <div class="breadcrumbs-img" style="background-image: url(images/cover-img-1.jpg);">
-                            <h2>Women's</h2>
+                        <div class="breadcrumbs-img" style="background-image: url(@anhCH);">
+                            <h2>@tenCH</h2>
                         </div>
                         <div class="menu text-center">
                             <p><a href="#">New Arrivals</a> <a href="#">Best Sellers</a> <a href="#">Extended Widths</a> <a href="#">Sale</a></p>
@@ -111,24 +119,24 @@
                 <div class="row">
                     <div class="col-sm-4 text-center">
                         <div class="featured">
-                            <div class="featured-img featured-img-2" style="background-image: url(images/img_bg_2.jpg);">
-                                <h2>Casuals</h2>
+                            <div class="featured-img featured-img-2" style="background-image: url(@anhCH1);">
+                                <h2>@tenCH1</h2>
                                 <p><a href="#" class="btn btn-primary btn-lg">Shop now</a></p>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-4 text-center">
                         <div class="featured">
-                            <div class="featured-img featured-img-2" style="background-image: url(images/women.jpg);">
-                                <h2>Dress</h2>
+                            <div class="featured-img featured-img-2" style="background-image: url(@anhCH2);">
+                                <h2>@tenCH2</h2>
                                 <p><a href="#" class="btn btn-primary btn-lg">Shop now</a></p>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-4 text-center">
                         <div class="featured">
-                            <div class="featured-img featured-img-2" style="background-image: url(images/item-11.jpg);">
-                                <h2>Sports</h2>
+                            <div class="featured-img featured-img-2" style="background-image: url(@anhCH3);">
+                                <h2>@tenCH3</h2>
                                 <p><a href="#" class="btn btn-primary btn-lg">Shop now</a></p>
                             </div>
                         </div>
@@ -286,19 +294,19 @@
                 </div>
                 <div class="row">
                     <div class="col partner-col text-center">
-                        <img src="images/brand-1.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+                        <img src="~/footwear-master/images/brand-1.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
                     </div>
                     <div class="col partner-col text-center">
-                        <img src="images/brand-2.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+                        <img src="~/footwear-master/images/brand-2.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
                     </div>
                     <div class="col partner-col text-center">
-                        <img src="images/brand-3.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+                        <img src="~/footwear-master/images/brand-3.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
                     </div>
                     <div class="col partner-col text-center">
-                        <img src="images/brand-4.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+                        <img src="~/footwear-master/images/brand-4.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
                     </div>
                     <div class="col partner-col text-center">
-                        <img src="images/brand-5.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+                        <img src="~/footwear-master/images/brand-5.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
                     </div>
                 </div>
             </div>

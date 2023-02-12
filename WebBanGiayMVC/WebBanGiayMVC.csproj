@@ -142,7 +142,7 @@
     <Compile Include="Service\ThongSoKiThuat\IThongSoKiThuatService.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DataAccess\DanhMucDA.cs" />
-    <Compile Include="DataAccess\ConfigDA.cs" />
+    <Compile Include="DataAccess\CauHinhDA.cs" />
     <Compile Include="DataAccess\DonHangDA.cs" />
     <Compile Include="DataAccess\ChiTietDonHangDA.cs" />
     <Compile Include="DataAccess\SanPhamDA.cs" />
