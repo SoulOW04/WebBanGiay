@@ -7,6 +7,7 @@ namespace WebBanGiayMVC.Models
     using System.Data.Entity.Spatial;
 
     [Table("ChiTietDonHang")]
+    [Serializable]
     public partial class ChiTietDonHang
     {
         public int Id { get; set; }

@@ -130,6 +130,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\SanPhamsController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Service\DanhMuc\IDanhMucService.cs" />
@@ -1325,6 +1326,7 @@
     <Folder Include="Service\SanPham\ViewModel\" />
     <Folder Include="Service\ThongSoKiThuat\ViewModel\" />
     <Folder Include="Service\ThongSoSanPham\ViewModel\" />
+    <Folder Include="Views\GioHang\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
