@@ -143,7 +143,7 @@
     <Compile Include="Service\ThongSoKiThuat\IThongSoKiThuatService.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DataAccess\DanhMucDA.cs" />
-    <Compile Include="DataAccess\ConfigDA.cs" />
+    <Compile Include="DataAccess\CauHinhDA.cs" />
     <Compile Include="DataAccess\DonHangDA.cs" />
     <Compile Include="DataAccess\ChiTietDonHangDA.cs" />
     <Compile Include="DataAccess\SanPhamDA.cs" />
@@ -1326,6 +1326,7 @@
     <Folder Include="Service\SanPham\ViewModel\" />
     <Folder Include="Service\ThongSoKiThuat\ViewModel\" />
     <Folder Include="Service\ThongSoSanPham\ViewModel\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

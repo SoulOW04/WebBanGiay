@@ -15,7 +15,7 @@ namespace WebBanGiayMVC.Business
     }
     public class CauHinhService : ICauHinhService
     {
-        ConfigDA _cauHinhDA = new ConfigDA();
+        CauHinhDA _cauHinhDA = new CauHinhDA();
         
         public CauHinh GetCauHinhByMaCauHinh(string code)
         {

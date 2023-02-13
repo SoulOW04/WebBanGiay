@@ -6,7 +6,9 @@
     var logo = ViewBag.Logo as string;
 
     var banner = ViewBag.Banner as int?;
-    var tenBanner = ViewBag.TenBanner as int?;
+
+    var womenB = ViewBag.WomenBanner as string;
+    var menB = ViewBag.MenBanner as string;
 }
 
 <!DOCTYPE HTML>
@@ -95,18 +97,18 @@
         <aside id="colorlib-hero">
             <div class="flexslider">
                 <ul class="slides">
-                    @for (int i = 0; i < 3; i++)
+                    @foreach (var list in @ViewBag.Banner)
                     {
-                        <li>
-                            <div>
-                                <img src="@ViewBag.Banner">
-                            </div>
+                        <li style="background-image: url('@list.GiaTriCauHinh')">
                             <div class="overlay"></div>
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-sm-6 offset-sm-3 text-center slider-text">
                                         <div class="slider-text-inner">
-                                            <h1 class="head-1">@ViewBag.TenBanner</h1>
+                                            <div class="desc">
+                                                <h1 class="head-1">@list.TenCauHinh</h1>
+                                                <p><a href="@Url.Action("Product_Detail", "TrangChu") " class="btn btn-primary">Shop Collection</a></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -132,17 +134,18 @@
                 <div class="row">
                     <div class="col-sm-6 text-center">
                         <div class="featured">
-                            <a href="#" class="featured-img" style="background-image: url(images/men.jpg);"></a>
+                            <a href="@Url.Action("Men", "TrangChu")" class="featured-img" style="background-image: url('@menB')"></a>
                             <div class="desc">
-                                <h2><a href="#">Shop Men's Collection</a></h2>
+                                <h2><a href="@Url.Action("Men", "TrangChu")">Shop Men's Collection</a></h2>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 text-center">
                         <div class="featured">
-                            <a href="#" class="featured-img" style="background-image: url(images/women.jpg);"></a>
+                            <a href="@Url.Action("Women", "TrangChu")" class="featured-img" style="background-image: url('@womenB')"></a>
                             <div class="desc">
-                                <h2><a href="#">Shop Women's Collection</a></h2>
+                                
+                                <h2><a href="@Url.Action("Women", "TrangChu")">Shop Women's Collection</a></h2>
                             </div>
                         </div>
                     </div>
@@ -160,14 +163,14 @@
                 <div class="row row-pb-md">
                     @foreach (var item in Model)
                     {
-                       
+
                         <div class="col-lg-3 mb-4 text-center">
-                            
+
                             <div class="product-entry border">
 
                                 <a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })" class="prod-img">
                                     <img src="@Html.DisplayFor(modelItem => item.AvatarSanPham)" width="120" height="120" />
-                                    
+
                                 </a>
                                 <div class="desc">
                                     <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })">@Html.DisplayFor(modelItem => item.TenSanPham)</a></h2>
@@ -195,19 +198,19 @@
                 </div>
                 <div class="row">
                     <div class="col partner-col text-center">
-                        <img src="images/brand-1.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+                        <img src="~/footwear-master/images/brand-1.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
                     </div>
                     <div class="col partner-col text-center">
-                        <img src="images/brand-2.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+                        <img src="~/footwear-master/images/brand-2.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
                     </div>
                     <div class="col partner-col text-center">
-                        <img src="images/brand-3.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+                        <img src="~/footwear-master/images/brand-3.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
                     </div>
                     <div class="col partner-col text-center">
-                        <img src="images/brand-4.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+                        <img src="~/footwear-master/images/brand-4.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
                     </div>
                     <div class="col partner-col text-center">
-                        <img src="images/brand-5.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+                        <img src="~/footwear-master/images/brand-5.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
                     </div>
                 </div>
             </div>
