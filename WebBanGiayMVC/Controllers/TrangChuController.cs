@@ -78,10 +78,15 @@ namespace WebBanGiayMVC.Controllers
         {
             return View();
         }
-        public ActionResult Product_Detail(int id)
+        public ActionResult Product_Detail(int id,int kichThuoc)
         {
             var product = new ThongSoSanPhamDA().GetThongTinSanPhamById(id);
-            
+            //lay cau hinh logo
+            var thongTinSp  = thongSoSanPhamService.GetKichThuongSanPhamByKichThuoc(kichThuoc);
+            if (thongTinSp != null)
+            {
+                ViewBag.KichThuocSp = thongTinSp.ThongSoKiThuatId;
+            }
 
             //SanPham sanPham = db.SanPhams.Find(id);
             //var sanPhamId = sanPham.Id;
@@ -89,8 +94,8 @@ namespace WebBanGiayMVC.Controllers
             //{
             //    var chitTietDonHang = thongSoSanPhamService.GetThongTinSanPhamById(sanPhamId);
             //}
-          
-            
+
+
             return View(product);
         }
     }

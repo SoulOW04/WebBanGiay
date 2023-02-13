@@ -40,6 +40,34 @@ namespace WebBanGiayMVC.DataAccess
 
 
         }
+
+        public ThongSoSanPham GetKichThuongSanPhamByKichThuoc(int kichThuoc)
+        {
+            try
+            {
+                using (var conn = new SqlConnection(cs))
+                {
+                    var storeName = "GetKichThuongSanPhamByKichThuoc";//ten proc
+
+                    //Add param
+                    DynamicParameters dp = new DynamicParameters();
+                    dp.Add("kichThuoc", kichThuoc);
+                    conn.Open();
+                    var result = conn.QueryFirst<ThongSoSanPham>(storeName, dp, commandType: System.Data.CommandType.StoredProcedure);
+                    conn.Close();
+
+                    return result;
+                }
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                return null;
+            }
+
+
+        }
     }
 
     
