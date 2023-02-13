@@ -130,6 +130,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\SanPhamsController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Service\DanhMuc\IDanhMucService.cs" />
@@ -1306,7 +1307,7 @@
     <Content Include="Views\TrangChu\Index.cshtml" />
     <Content Include="Views\TrangChu\About.cshtml" />
     <Content Include="Views\TrangChu\Add_To_Wishlist.cshtml" />
-    <Content Include="Views\TrangChu\Cart.cshtml" />
+    <Content Include="Views\GioHang\Cart.cshtml" />
     <Content Include="Views\TrangChu\Checkout.cshtml" />
     <Content Include="Views\TrangChu\Contact.cshtml" />
     <Content Include="Views\TrangChu\Men.cshtml" />

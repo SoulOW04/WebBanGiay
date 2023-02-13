@@ -21,5 +21,10 @@ namespace WebBanGiayMVC.Business
         {
             return _chiTietSanPhamDA.GetThongTinSanPhamById(id);
         }
+
+        public ThongSoSanPham GetKichThuongSanPhamByKichThuoc(int kichThuoc)
+        {
+            return _chiTietSanPhamDA.GetKichThuongSanPhamByKichThuoc(kichThuoc);
+        }
     }
 }
