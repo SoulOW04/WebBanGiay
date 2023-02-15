@@ -144,15 +144,15 @@ namespace WebBanGiayMVC.Controllers
         {
             return View();
         }
-        public ActionResult Product_Detail(int id,int kichThuoc)
+        public ActionResult Product_Detail(int id)
         {
             var product = new ThongSoSanPhamDA().GetThongTinSanPhamById(id);
             //lay cau hinh logo
-            var thongTinSp  = thongSoSanPhamService.GetKichThuongSanPhamByKichThuoc(kichThuoc);
-            if (thongTinSp != null)
-            {
-                ViewBag.KichThuocSp = thongTinSp.ThongSoKiThuatId;
-            }
+            //var thongTinSp  = thongSoSanPhamService.GetKichThuongSanPhamByKichThuoc(kichThuoc);
+            //if (thongTinSp != null)
+            //{
+            //    ViewBag.KichThuocSp = thongTinSp.ThongSoKiThuatId;
+            //}
 
             //SanPham sanPham = db.SanPhams.Find(id);
             //var sanPhamId = sanPham.Id;

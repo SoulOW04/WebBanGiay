@@ -133,6 +133,7 @@
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\SanPhamsController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
+    <Compile Include="Service\CauHinh\ViewModel\CauHinhViewModel.cs" />
     <Compile Include="Service\DanhMuc\IDanhMucService.cs" />
     <Compile Include="Service\CauHinh\ICauHinhService.cs" />
     <Compile Include="Service\ChiTietDonHang\IChiTietDonHangService.cs" />
@@ -1318,7 +1319,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Service\BaseService\" />
-    <Folder Include="Service\CauHinh\ViewModel\" />
     <Folder Include="Service\ChiTietDonHang\ViewModel\" />
     <Folder Include="Service\DanhMuc\ViewModel\" />
     <Folder Include="Service\DonHang\ViewModel\" />
