@@ -1,4 +1,4 @@
-﻿@model List<WebBanGiayMVC.Models.ChiTietDonHang>
+﻿@model List<WebBanGiayMVC.Service.ChiTietDonHang.ViewModel.ChiTietDonHangViewModel>
 @{
     ViewBag.Title = "Cart";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
@@ -145,15 +145,15 @@
                         {
                             <div class="product-cart d-flex">
                                 <div class="one-forth">
-                                    <div class="product-img" style="background-image: url(@item.) ;">
+                                    <div class="product-img" style="background-image: url(@item.AvatarSanPham) ;">
                                     </div>
                                     <div class="display-tc">
-                                        <h3>Product Name</h3>
+                                        <h3>@item.TenSanPham</h3>
                                     </div>
                                 </div>
                                 <div class="one-eight text-center">
                                     <div class="display-tc">
-                                        <span class="price">$68.00</span>
+                                        <span class="price">@item.GiaBan</span>
                                     </div>
                                 </div>
                                 <div class="one-eight text-center">
