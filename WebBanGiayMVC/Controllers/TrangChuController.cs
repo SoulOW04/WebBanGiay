@@ -43,7 +43,7 @@ namespace WebBanGiayMVC.Controllers
             {
                 ViewBag.MenBanner = cauHinhMenBanner.GiaTriCauHinh;
             }
-            
+
             //lay cau hinh banner
             var cauHinhBanner = cauHinhService.GetCauHinhByLoai(1);
             if (cauHinhBanner != null)
@@ -77,7 +77,7 @@ namespace WebBanGiayMVC.Controllers
         }
         public ActionResult Contact()
         {
-            return View();  
+            return View();
         }
         public ActionResult Men()
         {
@@ -93,7 +93,7 @@ namespace WebBanGiayMVC.Controllers
             {
                 ViewBag.AnhCH1 = CauHinhBanner1.GiaTriCauHinh;
                 ViewBag.TenCH1 = CauHinhBanner1.TenCauHinh;
-                
+
             }
             var CauHinhBanner2 = cauHinhService.GetCauHinhByMaCauHinh("SecondBanner");
             if (CauHinhBanner2 != null)
@@ -147,18 +147,22 @@ namespace WebBanGiayMVC.Controllers
         public ActionResult Product_Detail(int id)
         {
             var product = new ThongSoSanPhamDA().GetThongTinSanPhamById(id);
+<<<<<<< HEAD
             //lay cau hinh logo
             //var thongTinSp  = thongSoSanPhamService.GetKichThuongSanPhamByKichThuoc(kichThuoc);
             //if (thongTinSp != null)
             //{
             //    ViewBag.KichThuocSp = thongTinSp.ThongSoKiThuatId;
             //}
+=======
+>>>>>>> main
 
-            //SanPham sanPham = db.SanPhams.Find(id);
-            //var sanPhamId = sanPham.Id;
-            //if (sanPhamId != null)
+
+            //lay cau hinh logo
+            //var thongTinSp = thongSoSanPhamService.GetKichThuongSanPhamByKichThuoc(kichThuoc);
+            //if (thongTinSp != null)
             //{
-            //    var chitTietDonHang = thongSoSanPhamService.GetThongTinSanPhamById(sanPhamId);
+            //    ViewBag.KichThuocSp = thongTinSp.ThongSoKiThuatId;
             //}
 
 
