@@ -11,6 +11,8 @@
     var tenCH2 = ViewBag.TenCH2 as string;
     var anhCH3 = ViewBag.AnhCH3 as string;
     var tenCH3 = ViewBag.TenCH3 as string;
+    //
+    var SanPham = ViewBag.SanPham as string;
 }
 
 <!DOCTYPE HTML>
@@ -245,20 +247,20 @@
                     </div>
                     <div class="col-lg-9 col-xl-9">
                         <div class="row row-pb-md">
-                            @foreach (var item in Model)
+                            @foreach (var item in ViewBag.SanPham)
                             {
 
                                 <div class="col-lg-3 mb-4 text-center">
 
                                     <div class="product-entry border">
 
-                                        <a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })" class="prod-img">
-                                            <img src="@Html.DisplayFor(modelItem => item.AvatarSanPham)" width="120" height="120" />
+                                        <a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.SanPhamId })" class="prod-img">
+                                            <img src="@item.AvatarSanPham " width="120" height="120" />
 
                                         </a>
                                         <div class="desc">
-                                            <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })">@Html.DisplayFor(modelItem => item.TenSanPham)</a></h2>
-                                            <span class="price"><a href="#">@Html.DisplayFor(modelItem => item.GiaSanPham)</a></span>
+                                            <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.SanPhamId })">@item.TenSanPham</a></h2>
+                                            <span class="price"><a href="#">@item.GiaSanPham</a></span>
                                         </div>
 
                                     </div>

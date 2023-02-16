@@ -12,14 +12,18 @@ namespace WebBanGiayMVC.Controllers
 {
     public class TrangChuController : Controller
     {
+        //service
+        SanPhamTrongDanhMucService sanPhamTrongDanhMucService;
         CauHinhService cauHinhService;
-        DanhMucService danhMucService;
         ThongSoSanPhamService thongSoSanPhamService;
+        //data_context
         Model_Context db = new Model_Context();
+        //Cau Hinh
         CauHinh cauHinh = new CauHinh();
         public TrangChuController()
         {
             cauHinhService = new CauHinhService();
+            sanPhamTrongDanhMucService = new SanPhamTrongDanhMucService();
             thongSoSanPhamService = new ThongSoSanPhamService();
         }
         // GET: TrangChu
@@ -50,6 +54,8 @@ namespace WebBanGiayMVC.Controllers
             {
                 ViewBag.Banner = cauHinhBanner.ToList();
             }
+
+            
             return View(db.SanPhams.ToList());
         }
         public ActionResult About()
@@ -107,6 +113,11 @@ namespace WebBanGiayMVC.Controllers
                 ViewBag.AnhCH3 = CauHinhBanner3.GiaTriCauHinh;
                 ViewBag.TenCH3 = CauHinhBanner3.TenCauHinh;
             }
+            var cauHinhSanPhamTheoDanhMuc = sanPhamTrongDanhMucService.GetSanPhamTrongDanhMucByDanhMucId(1);
+            if (cauHinhSanPhamTheoDanhMuc != null)
+            {
+                ViewBag.SanPham = cauHinhSanPhamTheoDanhMuc.ToList();
+            }
 
             return View(db.SanPhams.ToList());
         }
@@ -138,6 +149,12 @@ namespace WebBanGiayMVC.Controllers
                 ViewBag.AnhCH3 = CauHinhBanner3.GiaTriCauHinh;
                 ViewBag.TenCH3 = CauHinhBanner3.TenCauHinh;
             }
+            var cauHinhSanPhamTheoDanhMuc = sanPhamTrongDanhMucService.GetSanPhamTrongDanhMucByDanhMucId(4);
+            if (cauHinhSanPhamTheoDanhMuc != null)
+            {
+                ViewBag.SanPham = cauHinhSanPhamTheoDanhMuc.ToList();
+            }
+
             return View(db.SanPhams.ToList());
         }
         public ActionResult Order_Complete()
