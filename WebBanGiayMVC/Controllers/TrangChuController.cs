@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
@@ -14,6 +17,8 @@ namespace WebBanGiayMVC.Controllers
     {
         CauHinhService cauHinhService;
         DanhMucService danhMucService;
+        SanPhamService sanPhamService;
+        SanPham sp;
         ThongSoSanPhamService thongSoSanPhamService;
         Model_Context db = new Model_Context();
         CauHinh cauHinh = new CauHinh();
@@ -21,16 +26,30 @@ namespace WebBanGiayMVC.Controllers
         {
             cauHinhService = new CauHinhService();
             thongSoSanPhamService = new ThongSoSanPhamService();
+            sanPhamService = new SanPhamService();
+            sp = new SanPham();
         }
         // GET: TrangChu
         public ActionResult Index()
         {
+
+            //lay giaSpFOrmat
+            var giaSanPham = sanPhamService.GetAllGiaSanPhamFormat();
+
+            if (giaSanPham != null)
+            {
+                ViewBag.SanPham = giaSanPham;
+            }
+
             //lay cau hinh logo
             var cauHinhLogo = cauHinhService.GetCauHinhByMaCauHinh("Logo");
             if (cauHinhLogo != null)
             {
                 ViewBag.Logo = cauHinhLogo.GiaTriCauHinh;
             }
+
+            
+
             //cau hinh cua women
             var cauHinhWomenBanner = cauHinhService.GetCauHinhByMaCauHinh("IndexWomenBanner");
             if (cauHinhWomenBanner != null)
@@ -50,6 +69,9 @@ namespace WebBanGiayMVC.Controllers
             {
                 ViewBag.Banner = cauHinhBanner.ToList();
             }
+
+
+
             return View(db.SanPhams.ToList());
         }
         public ActionResult About()
