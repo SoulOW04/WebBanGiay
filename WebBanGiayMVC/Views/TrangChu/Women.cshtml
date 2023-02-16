@@ -1,4 +1,6 @@
-﻿@model IEnumerable<WebBanGiayMVC.Models.SanPham>
+﻿@model PagedList.IPagedList<WebBanGiayMVC.Models.SanPham>
+    @using PagedList;
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Women";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
@@ -11,6 +13,8 @@
     var tenCH2 = ViewBag.TenCH2 as string;
     var anhCH3 = ViewBag.AnhCH3 as string;
     var tenCH3 = ViewBag.TenCH3 as string;
+    //
+    var SanPham = ViewBag.SanPham as string;
 }
 
 <!DOCTYPE HTML>
@@ -34,12 +38,15 @@
                             <div id="colorlib-logo"><a href="index.html">Footwear</a></div>
                         </div>
                         <div class="col-sm-5 col-md-3">
-                            <form action="#" class="search-wrap">
-                                <div class="form-group">
-                                    <input type="search" class="form-control search" placeholder="Search">
-                                    <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
-                                </div>
-                            </form>
+                            @using (Html.BeginForm("Men", "TrangChu", FormMethod.Get))
+                            {
+                                <form action="#" class="search-wrap">
+                                    <div class="form-group">
+                                        @Html.TextBox("searchSanPhamByName", ViewBag.CurrentFilter as string)
+                                        <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
+                                    </div>
+                                </form>
+                            }
                         </div>
                     </div>
                     <div class="row">
@@ -245,20 +252,20 @@
                     </div>
                     <div class="col-lg-9 col-xl-9">
                         <div class="row row-pb-md">
-                            @foreach (var item in Model)
+                            @foreach (var item in ViewBag.SanPham)
                             {
 
                                 <div class="col-lg-3 mb-4 text-center">
 
                                     <div class="product-entry border">
 
-                                        <a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })" class="prod-img">
-                                            <img src="@Html.DisplayFor(modelItem => item.AvatarSanPham)" width="120" height="120" />
+                                        <a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.SanPhamId })" class="prod-img">
+                                            <img src="@item.AvatarSanPham " width="120" height="120" />
 
                                         </a>
                                         <div class="desc">
-                                            <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })">@Html.DisplayFor(modelItem => item.TenSanPham)</a></h2>
-                                            <span class="price"><a href="#">@Html.DisplayFor(modelItem => item.GiaSanPham)</a></span>
+                                            <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.SanPhamId })">@item.TenSanPham</a></h2>
+                                            <span class="price"><a href="#">@item.GiaSanPham</a></span>
                                         </div>
 
                                     </div>
@@ -267,17 +274,19 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                <div class="block-27">
-                                    <ul>
-                                        <li><a href="#"><i class="ion-ios-arrow-back"></i></a></li>
-                                        <li class="active"><span>1</span></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#"><i class="ion-ios-arrow-forward"></i></a></li>
-                                    </ul>
-                                </div>
+                                @*<div class="block-27">
+            <ul>
+                <li><a href="#"><i class="ion-ios-arrow-back"></i></a></li>
+                <li class="active"><span>1</span></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#"><i class="ion-ios-arrow-forward"></i></a></li>
+            </ul>
+        </div>*@
+                                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                                @Html.PagedListPager(Model, page => Url.Action("Men", new { page }))
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,7 @@
-﻿@model IEnumerable<WebBanGiayMVC.Models.SanPham>
+﻿@model  PagedList.IPagedList<WebBanGiayMVC.Models.SanPham>
+@using PagedList;
+@using PagedList.Mvc;
+
 
 @{
     ViewBag.Title = "Index";
@@ -9,6 +12,11 @@
 
     var womenB = ViewBag.WomenBanner as string;
     var menB = ViewBag.MenBanner as string;
+
+    //var giaSanPham = Model.GiaSanPham;
+    //var gia = string.Format("{0:n0}", giaSanPham)
+    var gia = ViewBag.Gia;
+
 }
 
 <!DOCTYPE HTML>
@@ -40,12 +48,15 @@
                             </div>
                         </div>
                         <div class="col-sm-5 col-md-3">
-                            <form action="#" class="search-wrap">
-                                <div class="form-group">
-                                    <input type="search" class="form-control search" placeholder="Search">
-                                    <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
-                                </div>
-                            </form>
+                            @using (Html.BeginForm("Index", "TrangChu", FormMethod.Get))
+                            {
+                                <form action="#" class="search-wrap">
+                                    <div class="form-group">
+                                        @Html.TextBox("searchSanPhamByName", ViewBag.CurrentFilter as string)
+                                        <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
+                                    </div>
+                                </form>
+                            }
                         </div>
                     </div>
                     <div class="row">
@@ -56,10 +67,10 @@
                                     <a href="men.html">Men</a>
                                     <ul class="dropdown">
                                         <li><a href="product-detail.html">Product Detail</a></li>
-                                        <li><a href="cart.html">Shopping Cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="order-complete.html">Order Complete</a></li>
-                                        <li><a href="add-to-wishlist.html">Wishlist</a></li>
+                                        <li><a href="@Url.Action("Cart", "GioHang")">Shopping Cart</a></li>
+                                        <li><a href="@Url.Action("Product_Detail", "TrangChu")">Checkout</a></li>
+                                        <li><a href="@Url.Action("Product_Detail", "TrangChu")">Order Complete</a></li>
+                                        <li><a href="@Url.Action("Add_To_Wishlist", "TrangChu")">Wishlist</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="women.html">Women</a></li>
@@ -102,7 +113,7 @@
                         <li style="background-image: url('@list.GiaTriCauHinh')">
                             <div class="overlay"></div>
                             <div class="container-fluid">
-                                <div class="row">
+                                <div class="row">                   
                                     <div class="col-sm-6 offset-sm-3 text-center slider-text">
                                         <div class="slider-text-inner">
                                             <div class="desc">
@@ -144,7 +155,7 @@
                         <div class="featured">
                             <a href="@Url.Action("Women", "TrangChu")" class="featured-img" style="background-image: url('@womenB')"></a>
                             <div class="desc">
-                                
+
                                 <h2><a href="@Url.Action("Women", "TrangChu")">Shop Women's Collection</a></h2>
                             </div>
                         </div>
@@ -161,20 +172,20 @@
                     </div>
                 </div>
                 <div class="row row-pb-md">
-                    @foreach (var item in Model)
+                    @foreach (var item in ViewBag.SanPham)
                     {
-
+                        var price = @item.GiaSanPham.ToString("N0");
                         <div class="col-lg-3 mb-4 text-center">
 
                             <div class="product-entry border">
 
                                 <a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })" class="prod-img">
-                                    <img src="@Html.DisplayFor(modelItem => item.AvatarSanPham)" width="120" height="120" />
+                                    <img src="@item.AvatarSanPham" width="120" height="120" />
 
                                 </a>
                                 <div class="desc">
-                                    <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })">@Html.DisplayFor(modelItem => item.TenSanPham)</a></h2>
-                                    <span class="price"><a href="#">@Html.DisplayFor(modelItem => item.GiaSanPham)</a></span>
+                                    <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })">@item.TenSanPham</a></h2>
+                                    <span class="price"><a href="#"></a>@price</span>
                                 </div>
 
                             </div>
@@ -187,6 +198,8 @@
                     </div>
                 </div>
             </div>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
         </div>
 
         <div class="colorlib-partner">
