@@ -1,9 +1,11 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using WebBanGiayMVC.Business;
 using WebBanGiayMVC.DataAccess;
 using WebBanGiayMVC.Models;
@@ -23,7 +25,7 @@ namespace WebBanGiayMVC.Controllers
             thongSoSanPhamService = new ThongSoSanPhamService();
         }
         // GET: TrangChu
-        public ActionResult Index()
+        public ActionResult Index(int? page,string searchSanPhamByName,string currentFilter)
         {
             //lay cau hinh logo
             var cauHinhLogo = cauHinhService.GetCauHinhByMaCauHinh("Logo");
@@ -43,14 +45,36 @@ namespace WebBanGiayMVC.Controllers
             {
                 ViewBag.MenBanner = cauHinhMenBanner.GiaTriCauHinh;
             }
-
             //lay cau hinh banner
             var cauHinhBanner = cauHinhService.GetCauHinhByLoai(1);
             if (cauHinhBanner != null)
             {
                 ViewBag.Banner = cauHinhBanner.ToList();
             }
-            return View(db.SanPhams.ToList());
+
+            var sp = from s in db.SanPhams
+                          select s;
+
+            if (searchSanPhamByName != null)
+                page = 1;
+            else
+                searchSanPhamByName = currentFilter;
+
+            ViewBag.CurrentFilter = searchSanPhamByName;
+
+            //search san pham by name
+            if (!String.IsNullOrEmpty(searchSanPhamByName))
+                sp = sp.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
+
+            //so san pham tren 1 page
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            
+
+            sp = sp.OrderBy(s=> s.TenSanPham);
+                
+            return View(sp.ToPagedList(pageNumber,pageSize));
         }
         public ActionResult About()
         {
@@ -79,7 +103,7 @@ namespace WebBanGiayMVC.Controllers
         {
             return View();
         }
-        public ActionResult Men()
+        public ActionResult Men(int? page, string searchSanPhamByName, string currentFilter)
         {
             var CauHinhBanner = cauHinhService.GetCauHinhByMaCauHinh("MenBanner");
             if (CauHinhBanner != null)
@@ -108,9 +132,29 @@ namespace WebBanGiayMVC.Controllers
                 ViewBag.TenCH3 = CauHinhBanner3.TenCauHinh;
             }
 
-            return View(db.SanPhams.ToList());
+            var sp = from s in db.SanPhams
+                     select s;
+
+            if (searchSanPhamByName != null)
+                page = 1;
+            else
+                searchSanPhamByName = currentFilter;
+
+            ViewBag.CurrentFilter = searchSanPhamByName;
+
+            //search san pham by name
+            if (!String.IsNullOrEmpty(searchSanPhamByName))
+                sp = sp.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
+
+            //so san pham tren 1 page
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            sp = sp.OrderBy(s => s.TenSanPham);
+
+            return View(sp.ToPagedList(pageNumber, pageSize));
         }
-        public ActionResult Women()
+        public ActionResult Women(int? page, string searchSanPhamByName, string currentFilter)
         {
             //loai 2 = muc Casual
             var CauHinhBanner = cauHinhService.GetCauHinhByMaCauHinh("WomenBanner");
@@ -138,7 +182,27 @@ namespace WebBanGiayMVC.Controllers
                 ViewBag.AnhCH3 = CauHinhBanner3.GiaTriCauHinh;
                 ViewBag.TenCH3 = CauHinhBanner3.TenCauHinh;
             }
-            return View(db.SanPhams.ToList());
+            var sp = from s in db.SanPhams
+                     select s;
+
+            if (searchSanPhamByName != null)
+                page = 1;
+            else
+                searchSanPhamByName = currentFilter;
+
+            ViewBag.CurrentFilter = searchSanPhamByName;
+
+            //search san pham by name
+            if (!String.IsNullOrEmpty(searchSanPhamByName))
+                sp = sp.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
+
+            //so san pham tren 1 page
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            sp = sp.OrderBy(s => s.TenSanPham);
+
+            return View(sp.ToPagedList(pageNumber, pageSize));
         }
         public ActionResult Order_Complete()
         {
