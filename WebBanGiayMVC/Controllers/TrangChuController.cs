@@ -165,15 +165,6 @@ namespace WebBanGiayMVC.Controllers
         {
             var product = new ThongSoSanPhamDA().GetThongTinSanPhamById(id);
 
-
-            //lay cau hinh logo
-            //var thongTinSp = thongSoSanPhamService.GetKichThuongSanPhamByKichThuoc(kichThuoc);
-            //if (thongTinSp != null)
-            //{
-            //    ViewBag.KichThuocSp = thongTinSp.ThongSoKiThuatId;
-            //}
-
-
             return View(product);
         }
     }
