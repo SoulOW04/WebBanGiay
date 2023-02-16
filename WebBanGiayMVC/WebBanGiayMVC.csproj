@@ -133,12 +133,17 @@
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\SanPhamsController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
+
+    <Compile Include="Service\CauHinh\ViewModel\CauHinhViewModel.cs" />
+
     <Compile Include="Service\ChiTietDonHang\ViewModel\ChiTietDonHangViewModel.cs" />
+
     <Compile Include="Service\DanhMuc\IDanhMucService.cs" />
     <Compile Include="Service\CauHinh\ICauHinhService.cs" />
     <Compile Include="Service\ChiTietDonHang\IChiTietDonHangService.cs" />
     <Compile Include="Service\DonHang\IDonHangService.cs" />
     <Compile Include="Service\SanPhamTrongDanhMuc\ISanPhamTrongDanhMucService.cs" />
+    <Compile Include="Service\SanPhamTrongDanhMuc\ViewModel\SanPhamtTrongDanhMucViewModel.cs" />
     <Compile Include="Service\SanPham\ISanPhamService.cs" />
     <Compile Include="Service\SanPham\ViewModel\SanPhamViewModel.cs" />
     <Compile Include="Service\ThongSoSanPham\IThongSoSanPhamService.cs" />
@@ -1321,6 +1326,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Service\BaseService\" />
+
+    <Folder Include="Service\ChiTietDonHang\ViewModel\" />
+    <Folder Include="Service\DanhMuc\ViewModel\" />
+
     <Folder Include="Service\DonHang\ViewModel\" />
     <Folder Include="Views\Test\" />
   </ItemGroup>

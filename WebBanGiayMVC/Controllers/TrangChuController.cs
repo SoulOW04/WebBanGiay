@@ -15,16 +15,21 @@ namespace WebBanGiayMVC.Controllers
 {
     public class TrangChuController : Controller
     {
+        //service
+        SanPhamTrongDanhMucService sanPhamTrongDanhMucService;
         CauHinhService cauHinhService;
         DanhMucService danhMucService;
         SanPhamService sanPhamService;
         SanPham sp;
         ThongSoSanPhamService thongSoSanPhamService;
+        //data_context
         Model_Context db = new Model_Context();
+        //Cau Hinh
         CauHinh cauHinh = new CauHinh();
         public TrangChuController()
         {
             cauHinhService = new CauHinhService();
+            sanPhamTrongDanhMucService = new SanPhamTrongDanhMucService();
             thongSoSanPhamService = new ThongSoSanPhamService();
             sanPhamService = new SanPhamService();
             sp = new SanPham();
@@ -69,9 +74,6 @@ namespace WebBanGiayMVC.Controllers
             {
                 ViewBag.Banner = cauHinhBanner.ToList();
             }
-
-
-
             return View(db.SanPhams.ToList());
         }
         public ActionResult About()
@@ -129,6 +131,11 @@ namespace WebBanGiayMVC.Controllers
                 ViewBag.AnhCH3 = CauHinhBanner3.GiaTriCauHinh;
                 ViewBag.TenCH3 = CauHinhBanner3.TenCauHinh;
             }
+            var cauHinhSanPhamTheoDanhMuc = sanPhamTrongDanhMucService.GetSanPhamTrongDanhMucByDanhMucId(1);
+            if (cauHinhSanPhamTheoDanhMuc != null)
+            {
+                ViewBag.SanPham = cauHinhSanPhamTheoDanhMuc.ToList();
+            }
 
             return View(db.SanPhams.ToList());
         }
@@ -160,6 +167,12 @@ namespace WebBanGiayMVC.Controllers
                 ViewBag.AnhCH3 = CauHinhBanner3.GiaTriCauHinh;
                 ViewBag.TenCH3 = CauHinhBanner3.TenCauHinh;
             }
+            var cauHinhSanPhamTheoDanhMuc = sanPhamTrongDanhMucService.GetSanPhamTrongDanhMucByDanhMucId(4);
+            if (cauHinhSanPhamTheoDanhMuc != null)
+            {
+                ViewBag.SanPham = cauHinhSanPhamTheoDanhMuc.ToList();
+            }
+
             return View(db.SanPhams.ToList());
         }
         public ActionResult Order_Complete()
@@ -169,15 +182,6 @@ namespace WebBanGiayMVC.Controllers
         public ActionResult Product_Detail(int id)
         {
             var product = new ThongSoSanPhamDA().GetThongTinSanPhamById(id);
-
-
-            //lay cau hinh logo
-            //var thongTinSp = thongSoSanPhamService.GetKichThuongSanPhamByKichThuoc(kichThuoc);
-            //if (thongTinSp != null)
-            //{
-            //    ViewBag.KichThuocSp = thongTinSp.ThongSoKiThuatId;
-            //}
-
 
             return View(product);
         }
