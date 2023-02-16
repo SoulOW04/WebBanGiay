@@ -12,6 +12,11 @@
 
     var womenB = ViewBag.WomenBanner as string;
     var menB = ViewBag.MenBanner as string;
+
+    //var giaSanPham = Model.GiaSanPham;
+    //var gia = string.Format("{0:n0}", giaSanPham)
+    var gia = ViewBag.Gia;
+
 }
 
 <!DOCTYPE HTML>
@@ -62,10 +67,10 @@
                                     <a href="men.html">Men</a>
                                     <ul class="dropdown">
                                         <li><a href="product-detail.html">Product Detail</a></li>
-                                        <li><a href="cart.html">Shopping Cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="order-complete.html">Order Complete</a></li>
-                                        <li><a href="add-to-wishlist.html">Wishlist</a></li>
+                                        <li><a href="@Url.Action("Cart", "GioHang")">Shopping Cart</a></li>
+                                        <li><a href="@Url.Action("Product_Detail", "TrangChu")">Checkout</a></li>
+                                        <li><a href="@Url.Action("Product_Detail", "TrangChu")">Order Complete</a></li>
+                                        <li><a href="@Url.Action("Add_To_Wishlist", "TrangChu")">Wishlist</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="women.html">Women</a></li>
@@ -108,7 +113,7 @@
                         <li style="background-image: url('@list.GiaTriCauHinh')">
                             <div class="overlay"></div>
                             <div class="container-fluid">
-                                <div class="row">
+                                <div class="row">                   
                                     <div class="col-sm-6 offset-sm-3 text-center slider-text">
                                         <div class="slider-text-inner">
                                             <div class="desc">
@@ -167,20 +172,20 @@
                     </div>
                 </div>
                 <div class="row row-pb-md">
-                    @foreach (var item in Model)
+                    @foreach (var item in ViewBag.SanPham)
                     {
-
+                        var price = @item.GiaSanPham.ToString("N0");
                         <div class="col-lg-3 mb-4 text-center">
 
                             <div class="product-entry border">
 
                                 <a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })" class="prod-img">
-                                    <img src="@Html.DisplayFor(modelItem => item.AvatarSanPham)" width="120" height="120" />
+                                    <img src="@item.AvatarSanPham" width="120" height="120" />
 
                                 </a>
                                 <div class="desc">
-                                    <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })">@Html.DisplayFor(modelItem => item.TenSanPham)</a></h2>
-                                    <span class="price"><a href="#">@Html.DisplayFor(modelItem => item.GiaSanPham)</a></span>
+                                    <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })">@item.TenSanPham</a></h2>
+                                    <span class="price"><a href="#"></a>@price</span>
                                 </div>
 
                             </div>

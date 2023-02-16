@@ -1,6 +1,9 @@
 ﻿using PagedList;
+using Microsoft.Ajax.Utilities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
@@ -14,25 +17,46 @@ namespace WebBanGiayMVC.Controllers
 {
     public class TrangChuController : Controller
     {
+        //service
+        SanPhamTrongDanhMucService sanPhamTrongDanhMucService;
         CauHinhService cauHinhService;
         DanhMucService danhMucService;
+        SanPhamService sanPhamService;
+        SanPham sp;
         ThongSoSanPhamService thongSoSanPhamService;
+        //data_context
         Model_Context db = new Model_Context();
+        //Cau Hinh
         CauHinh cauHinh = new CauHinh();
         public TrangChuController()
         {
             cauHinhService = new CauHinhService();
+            sanPhamTrongDanhMucService = new SanPhamTrongDanhMucService();
             thongSoSanPhamService = new ThongSoSanPhamService();
+            sanPhamService = new SanPhamService();
+            sp = new SanPham();
         }
         // GET: TrangChu
         public ActionResult Index(int? page,string searchSanPhamByName,string currentFilter)
         {
+
+            //lay giaSpFOrmat
+            var giaSanPham = sanPhamService.GetAllGiaSanPhamFormat();
+
+            if (giaSanPham != null)
+            {
+                ViewBag.SanPham = giaSanPham;
+            }
+
             //lay cau hinh logo
             var cauHinhLogo = cauHinhService.GetCauHinhByMaCauHinh("Logo");
             if (cauHinhLogo != null)
             {
                 ViewBag.Logo = cauHinhLogo.GiaTriCauHinh;
             }
+
+            
+
             //cau hinh cua women
             var cauHinhWomenBanner = cauHinhService.GetCauHinhByMaCauHinh("IndexWomenBanner");
             if (cauHinhWomenBanner != null)
@@ -131,6 +155,11 @@ namespace WebBanGiayMVC.Controllers
                 ViewBag.AnhCH3 = CauHinhBanner3.GiaTriCauHinh;
                 ViewBag.TenCH3 = CauHinhBanner3.TenCauHinh;
             }
+            var cauHinhSanPhamTheoDanhMuc = sanPhamTrongDanhMucService.GetSanPhamTrongDanhMucByDanhMucId(1);
+            if (cauHinhSanPhamTheoDanhMuc != null)
+            {
+                ViewBag.SanPham = cauHinhSanPhamTheoDanhMuc.ToList();
+            }
 
             var sp = from s in db.SanPhams
                      select s;
@@ -201,7 +230,16 @@ namespace WebBanGiayMVC.Controllers
             int pageNumber = (page ?? 1);
 
             sp = sp.OrderBy(s => s.TenSanPham);
-
+            var cauHinhSanPhamTheoDanhMuc = sanPhamTrongDanhMucService.GetSanPhamTrongDanhMucByDanhMucId(4);
+            if (cauHinhSanPhamTheoDanhMuc != null)
+            {
+                ViewBag.SanPham = cauHinhSanPhamTheoDanhMuc.ToList();
+            }
+            var cauHinhSanPhamTheoDanhMuc = sanPhamTrongDanhMucService.GetSanPhamTrongDanhMucByDanhMucId(4);
+            if (cauHinhSanPhamTheoDanhMuc != null)
+            {
+                ViewBag.SanPham = cauHinhSanPhamTheoDanhMuc.ToList();
+            }
             return View(sp.ToPagedList(pageNumber, pageSize));
         }
         public ActionResult Order_Complete()
@@ -211,15 +249,6 @@ namespace WebBanGiayMVC.Controllers
         public ActionResult Product_Detail(int id)
         {
             var product = new ThongSoSanPhamDA().GetThongTinSanPhamById(id);
-
-
-            //lay cau hinh logo
-            //var thongTinSp = thongSoSanPhamService.GetKichThuongSanPhamByKichThuoc(kichThuoc);
-            //if (thongTinSp != null)
-            //{
-            //    ViewBag.KichThuocSp = thongTinSp.ThongSoKiThuatId;
-            //}
-
 
             return View(product);
         }
