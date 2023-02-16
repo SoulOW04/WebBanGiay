@@ -145,6 +145,7 @@
     <Compile Include="Service\SanPhamTrongDanhMuc\ISanPhamTrongDanhMucService.cs" />
     <Compile Include="Service\SanPhamTrongDanhMuc\ViewModel\SanPhamtTrongDanhMucViewModel.cs" />
     <Compile Include="Service\SanPham\ISanPhamService.cs" />
+    <Compile Include="Service\SanPham\ViewModel\SanPhamViewModel.cs" />
     <Compile Include="Service\ThongSoSanPham\IThongSoSanPhamService.cs" />
     <Compile Include="Service\ThongSoKiThuat\IThongSoKiThuatService.cs" />
     <Compile Include="Controllers\HomeController.cs" />
