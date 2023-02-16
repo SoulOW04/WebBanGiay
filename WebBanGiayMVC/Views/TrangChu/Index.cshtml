@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebBanGiayMVC.Models.SanPham>
+﻿@model  IEnumerable<WebBanGiayMVC.Models.SanPham>
 
 @{
     ViewBag.Title = "Index";
@@ -9,6 +9,11 @@
 
     var womenB = ViewBag.WomenBanner as string;
     var menB = ViewBag.MenBanner as string;
+
+    //var giaSanPham = Model.GiaSanPham;
+    //var gia = string.Format("{0:n0}", giaSanPham)
+    var gia = ViewBag.Gia;
+
 }
 
 <!DOCTYPE HTML>
@@ -161,20 +166,20 @@
                     </div>
                 </div>
                 <div class="row row-pb-md">
-                    @foreach (var item in Model)
+                    @foreach (var item in ViewBag.SanPham)
                     {
-
+                        var price = @item.GiaSanPham.ToString("N0");
                         <div class="col-lg-3 mb-4 text-center">
 
                             <div class="product-entry border">
 
                                 <a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })" class="prod-img">
-                                    <img src="@Html.DisplayFor(modelItem => item.AvatarSanPham)" width="120" height="120" />
+                                    <img src="@item.AvatarSanPham" width="120" height="120" />
 
                                 </a>
                                 <div class="desc">
-                                    <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })">@Html.DisplayFor(modelItem => item.TenSanPham)</a></h2>
-                                    <span class="price"><a href="#">@Html.DisplayFor(modelItem => item.GiaSanPham)</a></span>
+                                    <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })">@item.TenSanPham</a></h2>
+                                    <span class="price"><a href="#"></a>@price</span>
                                 </div>
 
                             </div>
