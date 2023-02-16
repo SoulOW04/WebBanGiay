@@ -1,8 +1,11 @@
 ﻿@model WebBanGiayMVC.Service.ThongSoSanPham.ViewModel.ThongSoSanPhamViewModel
 @{
+
     ViewBag.Title = "Product_Detail";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
     var kichThuoc = ViewBag.KichThuocSp;
+    var giaSanPham = Model.GiaSanPham;
+    var gia = string.Format("{0:n0}", giaSanPham);
 }
 
 <!DOCTYPE HTML>
@@ -130,7 +133,7 @@
                         <div class="product-desc">
                             <h3>@Html.DisplayFor(model => model.TenSanPham)</h3>
                             <p class="price">
-                                <span>@Html.DisplayFor(model => model.GiaSanPham)</span>
+                                <span>@gia</span>
                                 <span class="rate">
                                     <i class="icon-star-full"></i>
                                     <i class="icon-star-full"></i>
