@@ -1,6 +1,7 @@
 ﻿@model PagedList.IPagedList<WebBanGiayMVC.Models.SanPham>
-@using PagedList;
+@using PagedList;   
 @using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Men";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
@@ -43,21 +44,12 @@
                     <div class="row">
                         <div class="col-sm-12 text-left menu-1">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li class="has-dropdown active">
-                                    <a href="men.html">Men</a>
-                                    <ul class="dropdown">
-                                        <li><a href="product-detail.html">Product Detail</a></li>
-                                        <li><a href="cart.html">Shopping Cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="order-complete.html">Order Complete</a></li>
-                                        <li><a href="add-to-wishlist.html">Wishlist</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="women.html">Women</a></li>
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                                <li class="cart"><a href="cart.html"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+                                <li><a href="@Url.Action("Index","TrangChu")">Home</a></li>
+                                <li class="active"><a href="@Url.Action("Men","TrangChu")">Men</a></li>
+                                <li><a href="@Url.Action("Women","TrangChu")">Women</a></li>
+                                <li><a href="@Url.Action("About","TrangChu")">About</a></li>
+                                <li><a href="@Url.Action("Contact","TrangChu")">Contact</a></li>
+                                <li class="cart"><a href="@Url.Action("Cart","GioHang")"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
                             </ul>
                         </div>
                     </div>
@@ -91,7 +83,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <p class="bread"><span><a href="index.html">Home</a></span> / <span>Men</span></p>
+                        <p class="bread"><span><a href="index.html">Home</a></span><span>Men</span></p>
                     </div>
                 </div>
             </div>

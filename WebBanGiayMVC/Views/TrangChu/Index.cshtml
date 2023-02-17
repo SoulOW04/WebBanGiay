@@ -56,21 +56,12 @@
                     <div class="row">
                         <div class="col-sm-12 text-left menu-1">
                             <ul>
-                                <li class="active"><a href="index.html">Home</a></li>
-                                <li class="has-dropdown">
-                                    <a href="@Url.Action("Men", "TrangChu")">Men</a>
-                                    <ul class="dropdown">
-                                        <li><a href="product-detail.html">Product Detail</a></li>
-                                        <li><a href="@Url.Action("Cart", "GioHang")">Shopping Cart</a></li>
-                                        <li><a href="@Url.Action("Product_Detail", "TrangChu")">Checkout</a></li>
-                                        <li><a href="@Url.Action("Product_Detail", "TrangChu")">Order Complete</a></li>
-                                        <li><a href="@Url.Action("Add_To_Wishlist", "TrangChu")">Wishlist</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="@Url.Action("Women", "TrangChu")">Women</a></li>
-                                <li><a href="@Url.Action("About", "TrangChu")">About</a></li>
-                                <li><a href="@Url.Action("Contact", "TrangChu")">Contact</a></li>
-                                <li class="cart"><@Url.Action("Cart", "GioHang")"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+                                <li class="active"><a href="@Url.Action("Index","TrangChu")">Home</a></li>
+                                <li><a href="@Url.Action("Men","TrangChu")">Men</a></li>
+                                <li><a href="@Url.Action("Women","TrangChu")">Women</a></li>
+                                <li><a href="@Url.Action("About","TrangChu")">About</a></li>
+                                <li><a href="@Url.Action("Contact","TrangChu")">Contact</a></li>
+                                <li class="cart"><a href="@Url.Action("Cart","GioHang")"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
                             </ul>
                         </div>
                     </div>
@@ -209,7 +200,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <p><a href="@Url.Action("Index", "TrangChu")" class="btn btn-primary btn-lg">Shop All Products</a></p>
+                        <p><a href="@Url.Action("Index", "SanPhams")" class="btn btn-primary btn-lg">Shop All Products</a></p>
                     </div>
                 </div>
             </div>

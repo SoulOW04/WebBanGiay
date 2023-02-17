@@ -156,7 +156,24 @@ namespace WebBanGiayMVC.Controllers
                 ViewBag.SanPham = cauHinhSanPhamTheoDanhMuc.ToList();
             }
 
-            return View(db.SanPhams.ToList());
+            var sanpham = from s in db.SanPhams
+                          select s;
+            if (searchSanPhamByName != null)
+                page = 1;
+            else
+                searchSanPhamByName = currentFilter;
+
+            ViewBag.CurrentFilter = searchSanPhamByName;
+
+            if (!String.IsNullOrEmpty(searchSanPhamByName))
+                sanpham = sanpham.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
+
+            sanpham = sanpham.OrderBy(s => s.TenSanPham);
+
+            int pageSize = 5;
+            int No_Of_Page = (page ?? 1);
+
+            return View(sanpham.ToPagedList(No_Of_Page, pageSize));
         }
         public ActionResult Women(int? page, string searchSanPhamByName, string currentFilter)
         {
