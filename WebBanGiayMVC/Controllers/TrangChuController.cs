@@ -1,4 +1,5 @@
-﻿using Microsoft.Ajax.Utilities;
+﻿using PagedList;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using WebBanGiayMVC.Business;
 using WebBanGiayMVC.DataAccess;
 using WebBanGiayMVC.Models;
@@ -35,7 +37,7 @@ namespace WebBanGiayMVC.Controllers
             sp = new SanPham();
         }
         // GET: TrangChu
-        public ActionResult Index()
+        public ActionResult Index(int? page,string searchSanPhamByName,string currentFilter)
         {
 
             //lay giaSpFOrmat
@@ -67,14 +69,31 @@ namespace WebBanGiayMVC.Controllers
             {
                 ViewBag.MenBanner = cauHinhMenBanner.GiaTriCauHinh;
             }
-
             //lay cau hinh banner
             var cauHinhBanner = cauHinhService.GetCauHinhByLoai(1);
             if (cauHinhBanner != null)
             {
                 ViewBag.Banner = cauHinhBanner.ToList();
             }
-            return View(db.SanPhams.ToList());
+
+            var sanpham = from s in db.SanPhams
+                          select s;
+            if (searchSanPhamByName != null)
+                page = 1;
+            else
+                searchSanPhamByName = currentFilter;
+
+            ViewBag.CurrentFilter = searchSanPhamByName;
+
+            if (!String.IsNullOrEmpty(searchSanPhamByName))
+                sanpham = sanpham.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
+
+            sanpham = sanpham.OrderBy(s => s.TenSanPham);
+
+            int pageSize = 5;
+            int No_Of_Page = (page ?? 1); 
+
+            return View(sanpham.ToPagedList(No_Of_Page,pageSize));
         }
         public ActionResult About()
         {
@@ -103,7 +122,7 @@ namespace WebBanGiayMVC.Controllers
         {
             return View();
         }
-        public ActionResult Men()
+        public ActionResult Men(int? page, string searchSanPhamByName, string currentFilter)
         {
             var CauHinhBanner = cauHinhService.GetCauHinhByMaCauHinh("MenBanner");
             if (CauHinhBanner != null)
@@ -139,7 +158,7 @@ namespace WebBanGiayMVC.Controllers
 
             return View(db.SanPhams.ToList());
         }
-        public ActionResult Women()
+        public ActionResult Women(int? page, string searchSanPhamByName, string currentFilter)
         {
             //loai 2 = muc Casual
             var CauHinhBanner = cauHinhService.GetCauHinhByMaCauHinh("WomenBanner");
@@ -167,13 +186,32 @@ namespace WebBanGiayMVC.Controllers
                 ViewBag.AnhCH3 = CauHinhBanner3.GiaTriCauHinh;
                 ViewBag.TenCH3 = CauHinhBanner3.TenCauHinh;
             }
+            var sp = from s in db.SanPhams
+                     select s;
+
+            if (searchSanPhamByName != null)
+                page = 1;
+            else
+                searchSanPhamByName = currentFilter;
+
+            ViewBag.CurrentFilter = searchSanPhamByName;
+
+            //search san pham by name
+            if (!String.IsNullOrEmpty(searchSanPhamByName))
+                sp = sp.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
+
+            //so san pham tren 1 page
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            sp = sp.OrderBy(s => s.TenSanPham);
             var cauHinhSanPhamTheoDanhMuc = sanPhamTrongDanhMucService.GetSanPhamTrongDanhMucByDanhMucId(4);
             if (cauHinhSanPhamTheoDanhMuc != null)
             {
                 ViewBag.SanPham = cauHinhSanPhamTheoDanhMuc.ToList();
             }
 
-            return View(db.SanPhams.ToList());
+            return View(sp.ToPagedList(pageNumber, pageSize));
         }
         public ActionResult Order_Complete()
         {

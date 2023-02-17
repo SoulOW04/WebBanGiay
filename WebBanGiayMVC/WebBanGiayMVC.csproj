@@ -59,6 +59,12 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -130,14 +136,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\SanPhamsController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
-
     <Compile Include="Service\CauHinh\ViewModel\CauHinhViewModel.cs" />
-
     <Compile Include="Service\ChiTietDonHang\ViewModel\ChiTietDonHangViewModel.cs" />
-
     <Compile Include="Service\DanhMuc\IDanhMucService.cs" />
     <Compile Include="Service\CauHinh\ICauHinhService.cs" />
     <Compile Include="Service\ChiTietDonHang\IChiTietDonHangService.cs" />
@@ -174,10 +178,78 @@
     <Compile Include="Service\ThongSoSanPham\ViewModel\ThongSoSanPhamViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin-design-dashboard-web\css\animate.css" />
+    <Content Include="admin-design-dashboard-web\css\bootstrap.css" />
+    <Content Include="admin-design-dashboard-web\css\custom.css" />
+    <Content Include="admin-design-dashboard-web\css\export.css" />
+    <Content Include="admin-design-dashboard-web\css\font-awesome.css" />
+    <Content Include="admin-design-dashboard-web\css\graph.css" />
+    <Content Include="admin-design-dashboard-web\css\jqcandlestick.css" />
+    <Content Include="admin-design-dashboard-web\css\monthly.css" />
+    <Content Include="admin-design-dashboard-web\css\owl.carousel.css" />
+    <Content Include="admin-design-dashboard-web\css\SidebarNav.min.css" />
+    <Content Include="admin-design-dashboard-web\css\style.css" />
+    <Content Include="admin-design-dashboard-web\fonts\fontawesome-webfont.svg" />
+    <Content Include="admin-design-dashboard-web\images\1.jpg" />
+    <Content Include="admin-design-dashboard-web\images\2.jpg" />
+    <Content Include="admin-design-dashboard-web\images\3.jpg" />
+    <Content Include="admin-design-dashboard-web\images\4.jpg" />
+    <Content Include="admin-design-dashboard-web\images\a.png" />
+    <Content Include="admin-design-dashboard-web\images\i1.png" />
+    <Content Include="admin-design-dashboard-web\images\i2.png" />
+    <Content Include="admin-design-dashboard-web\images\i3.png" />
+    <Content Include="admin-design-dashboard-web\images\i4.png" />
+    <Content Include="admin-design-dashboard-web\images\img-sprite.png" />
+    <Content Include="admin-design-dashboard-web\images\img1.png" />
+    <Content Include="admin-design-dashboard-web\images\lock.png" />
+    <Content Include="admin-design-dashboard-web\images\mail.png" />
+    <Content Include="admin-design-dashboard-web\images\search-icon.png" />
+    <Content Include="admin-design-dashboard-web\images\slider1.jpg" />
+    <Content Include="admin-design-dashboard-web\images\slider2.jpg" />
+    <Content Include="admin-design-dashboard-web\images\slider3.jpg" />
+    <Content Include="admin-design-dashboard-web\images\slider4.jpg" />
+    <Content Include="admin-design-dashboard-web\images\slider5.jpg" />
+    <Content Include="admin-design-dashboard-web\images\slider6.jpg" />
+    <Content Include="admin-design-dashboard-web\images\slider7.jpg" />
+    <Content Include="admin-design-dashboard-web\images\tick.png" />
+    <Content Include="admin-design-dashboard-web\images\user.png" />
+    <Content Include="admin-design-dashboard-web\images\weather.jpg" />
+    <Content Include="admin-design-dashboard-web\js\amcharts.js" />
+    <Content Include="admin-design-dashboard-web\js\bootstrap.js" />
+    <Content Include="admin-design-dashboard-web\js\Chart.bundle.js" />
+    <Content Include="admin-design-dashboard-web\js\Chart.js" />
+    <Content Include="admin-design-dashboard-web\js\Chart.min.js" />
+    <Content Include="admin-design-dashboard-web\js\chartinator.js" />
+    <Content Include="admin-design-dashboard-web\js\classie.js" />
+    <Content Include="admin-design-dashboard-web\js\custom.js" />
+    <Content Include="admin-design-dashboard-web\js\export.min.js" />
+    <Content Include="admin-design-dashboard-web\js\images\dragIconRoundBig.svg" />
+    <Content Include="admin-design-dashboard-web\js\images\lens.svg" />
+    <Content Include="admin-design-dashboard-web\js\index.js" />
+    <Content Include="admin-design-dashboard-web\js\index1.js" />
+    <Content Include="admin-design-dashboard-web\js\index2.js" />
+    <Content Include="admin-design-dashboard-web\js\jquery-1.11.1.min.js" />
+    <Content Include="admin-design-dashboard-web\js\jquery.flot.js" />
+    <Content Include="admin-design-dashboard-web\js\jquery.jqcandlestick.min.js" />
+    <Content Include="admin-design-dashboard-web\js\jquery.nicescroll.js" />
+    <Content Include="admin-design-dashboard-web\js\light.js" />
+    <Content Include="admin-design-dashboard-web\js\metisMenu.min.js" />
+    <Content Include="admin-design-dashboard-web\js\modernizr.custom.js" />
+    <Content Include="admin-design-dashboard-web\js\monthly.js" />
+    <Content Include="admin-design-dashboard-web\js\owl.carousel.js" />
+    <Content Include="admin-design-dashboard-web\js\pie-chart.js" />
+    <Content Include="admin-design-dashboard-web\js\scripts.js" />
+    <Content Include="admin-design-dashboard-web\js\serial.js" />
+    <Content Include="admin-design-dashboard-web\js\SidebarNav.min.js" />
+    <Content Include="admin-design-dashboard-web\js\SimpleChart.js" />
+    <Content Include="admin-design-dashboard-web\js\utils.js" />
+    <Content Include="admin-design-dashboard-web\js\validator.min.js" />
+    <Content Include="admin-design-dashboard-web\w3layouts-License.txt" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="footwear-master\css\animate.css" />
@@ -1284,6 +1356,15 @@
     <Content Include="footwear-master\sass\bootstrap\_utilities.scss" />
     <Content Include="footwear-master\sass\bootstrap\_variables.scss" />
     <Content Include="footwear-master\sass\style.scss" />
+    <Content Include="admin-design-dashboard-web\fonts\fontawesome-webfont.eot" />
+    <Content Include="admin-design-dashboard-web\fonts\fontawesome-webfont.ttf" />
+    <Content Include="admin-design-dashboard-web\fonts\fontawesome-webfont.woff" />
+    <Content Include="admin-design-dashboard-web\fonts\fontawesome-webfont.woff2" />
+    <Content Include="admin-design-dashboard-web\fonts\FontAwesome.otf" />
+    <Content Include="admin-design-dashboard-web\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="admin-design-dashboard-web\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="admin-design-dashboard-web\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="admin-design-dashboard-web\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1322,14 +1403,13 @@
     <Content Include="Views\TrangChu\Women.cshtml" />
     <Content Include="Views\TrangChu\Order_Complete.cshtml" />
     <Content Include="Views\TrangChu\Product_Detail.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Service\BaseService\" />
-
-    <Folder Include="Service\ChiTietDonHang\ViewModel\" />
     <Folder Include="Service\DanhMuc\ViewModel\" />
-
     <Folder Include="Service\DonHang\ViewModel\" />
     <Folder Include="Views\Test\" />
   </ItemGroup>
