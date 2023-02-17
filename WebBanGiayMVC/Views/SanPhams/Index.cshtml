@@ -41,41 +41,84 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenSanPham)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MoTaSanPham)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GiaSanPham)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AvatarSanPham)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DanhSachAnhSanPham)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NoiDungSanPham)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HangSanPham)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Loai)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TrangThai)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoTaSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AvatarSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DanhSachAnhSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoiDungSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HangSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Loai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrangThai)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Tính giá sản phẩm</title>
+    </head>
+    <body>
+        <label for="price">Giá sản phẩm:</label>
+        <input type="number" id="price" value="10" min="0">
+        <br>
+        <label for="quantity">Số lượng:</label>
+        <input type="number" id="quantity" value="2" min="1">
+        <br>
+        <p id="result"></p>
+
+        <script>
+            // Lấy tham chiếu đến các ô nhập liệu
+            var priceInput = document.getElementById("price");
+            var quantityInput = document.getElementById("quantity");
+            // Lấy tham chiếu đến phần tử hiển thị kết quả
+            var resultElement = document.getElementById("result");
+
+            // Định nghĩa hàm tính giá sản phẩm
+            function calculateTotalPrice() {
+                // Lấy giá trị của giá sản phẩm và số lượng từ các ô nhập liệu
+                var price = parseFloat(priceInput.value);
+                var quantity = parseInt(quantityInput.value);
+                // Tính giá sản phẩm
+                var totalPrice = price * quantity;
+                // Hiển thị kết quả
+                resultElement.innerHTML = "Giá sản phẩm: " + totalPrice;
+            }
+
+            // Thêm trình xử lý sự kiện cho sự kiện "input" của các ô nhập liệu
+            priceInput.addEventListener("input", calculateTotalPrice);
+            quantityInput.addEventListener("input", calculateTotalPrice);
+
+            // Tính giá sản phẩm lần đầu tiên khi trang web được tải
+            calculateTotalPrice();
+        </script>
+    </body>
+</html>
 
 </table>

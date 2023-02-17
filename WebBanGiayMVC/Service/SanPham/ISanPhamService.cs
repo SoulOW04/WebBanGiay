@@ -11,14 +11,14 @@ namespace WebBanGiayMVC.Business
 {
     internal interface ISanPhamService
     {
-
-
         List<SanPham> GetAllGiaSanPhamFormat();
     }
 
     public class SanPhamService : ISanPhamService
     {
         Model_Context model_Contextmodel;
+
+        
         //public List<Product> GetProducts()
         //{
         //    model_Contextmodel= new Model_Context();
@@ -34,6 +34,10 @@ namespace WebBanGiayMVC.Business
         {
             return spDa.GetAllGiaSanPhamFormat();
         }
+
+    
+        
+
 
 
 

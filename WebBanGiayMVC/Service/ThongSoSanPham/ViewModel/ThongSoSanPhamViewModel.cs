@@ -9,6 +9,8 @@ namespace WebBanGiayMVC.Service.ThongSoSanPham.ViewModel
     {
         public int Id { get; set; }
 
+        public int SanPhamId { get; set; }
+
         public string AvatarSanPham { get; set; }
 
         public string TenSanPham { get; set; }

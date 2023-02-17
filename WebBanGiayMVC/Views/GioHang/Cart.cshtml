@@ -3,6 +3,10 @@
     ViewBag.Title = "Cart";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
     var logo = ViewBag.Logo as string;
+    var sanPham = ViewBag.SanPham;
+    var sp = ViewBag.Sp as string;
+    var gia = string.Format("{0:n0}", sanPham);
+    
 }
 
 <!DOCTYPE HTML>
@@ -143,17 +147,18 @@
                         </div>
                         @foreach (var item in Model)
                         {
+                            var price = Convert.ToString(item.GiaBan);
                             <div class="product-cart d-flex">
                                 <div class="one-forth">
-                                    <div class="product-img" style="background-image: url(@item.AvatarSanPham) ;">
+                                    <div class="product-img" style="background-image: url(@item.AvatarSanPham);">
                                     </div>
-                                    <div class="display-tc">
-                                        <h3>@item.TenSanPham</h3>
+                                    <div class="display-tc">2
+                                        <h3>@Html.DisplayFor(modelItem => item.TenSanPham)</h3>
                                     </div>
                                 </div>
                                 <div class="one-eight text-center">
                                     <div class="display-tc">
-                                        <span class="price">@item.GiaBan</span>
+                                        <span class="price" id="price" value="@gia">@gia</span>
                                     </div>
                                 </div>
                                 <div class="one-eight text-center">
@@ -163,7 +168,7 @@
                                 </div>
                                 <div class="one-eight text-center">
                                     <div class="display-tc">
-                                        <span class="price">$120.00</span>
+                                        <span class="price" id="result"></span>
                                     </div>
                                 </div>
                                 <div class="one-eight text-center">
@@ -173,7 +178,33 @@
                                 </div>
                             </div>
 
+                            <script>
+                                // Lấy tham chiếu đến các ô nhập liệu
+                                var priceInput = document.getElementById("price");
+                                var quantityInput = document.getElementById("quantity");
+                                // Lấy tham chiếu đến phần tử hiển thị kết quả
+                                var resultElement = document.getElementById("result");
+
+                                // Định nghĩa hàm tính giá sản phẩm
+                                function calculateTotalPrice() {
+                                    // Lấy giá trị của giá sản phẩm và số lượng từ các ô nhập liệu
+                                    var price = parseFloat(priceInput.value);
+                                    var quantity = parseInt(quantityInput.value);
+                                    // Tính giá sản phẩm
+                                    var totalPrice = price * quantity;
+                                    // Hiển thị kết quả
+                                    resultElement.innerHTML = "Giá sản phẩm: " + totalPrice;
+                                }
+
+                                // Thêm trình xử lý sự kiện cho sự kiện "input" của các ô nhập liệu
+                                priceInput.addEventListener("input", calculateTotalPrice);
+                                quantityInput.addEventListener("input", calculateTotalPrice);
+
+                                // Tính giá sản phẩm lần đầu tiên khi trang web được tải
+                                calculateTotalPrice();
+                            </script>
                         }
+
 
                     </div>
                 </div>
