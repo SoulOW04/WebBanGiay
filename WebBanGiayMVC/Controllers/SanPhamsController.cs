@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,6 +7,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WebBanGiayMVC.Business;
+using WebBanGiayMVC.DataAccess;
 using WebBanGiayMVC.Models;
 
 namespace WebBanGiayMVC.Controllers
@@ -13,115 +16,97 @@ namespace WebBanGiayMVC.Controllers
     public class SanPhamsController : Controller
     {
         private Model_Context db = new Model_Context();
+        SanPhamTrongDanhMucService sanPhamTrongDanhMucService;
+        CauHinhService cauHinhService;
+        DanhMucService danhMucService;
+        SanPhamService sanPhamService;
+        SanPham sp;
+        ThongSoSanPhamService thongSoSanPhamService;
+
+        CauHinh cauHinh = new CauHinh();
 
         // GET: SanPhams
-        public ActionResult Index()
-        {
-            return View(db.SanPhams.ToList());
+        public SanPhamsController() {
+            cauHinhService = new CauHinhService();
+            sanPhamTrongDanhMucService = new SanPhamTrongDanhMucService();
+            thongSoSanPhamService = new ThongSoSanPhamService();
+            sanPhamService = new SanPhamService();
+            sp = new SanPham();
         }
 
-        // GET: SanPhams/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Index(int? page, string searchSanPhamByName, string currentFilter)
         {
-            if (id == null)
+            var giaSanPham = sanPhamService.GetAllGiaSanPhamFormat();
+
+            if (giaSanPham != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ViewBag.SanPham = giaSanPham;
             }
-            SanPham sanPham = db.SanPhams.Find(id);
-            if (sanPham == null)
+
+            //lay cau hinh logo
+            var cauHinhLogo = cauHinhService.GetCauHinhByMaCauHinh("Logo");
+            if (cauHinhLogo != null)
             {
-                return HttpNotFound();
+                ViewBag.Logo = cauHinhLogo.GiaTriCauHinh;
             }
-            return View(sanPham);
+
+            var sanpham = from s in db.SanPhams
+                          select s;
+            if (searchSanPhamByName != null)
+                page = 1;
+            else
+                searchSanPhamByName = currentFilter;
+
+            ViewBag.CurrentFilter = searchSanPhamByName;
+
+            if (!String.IsNullOrEmpty(searchSanPhamByName))
+                sanpham = sanpham.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
+
+            sanpham = sanpham.OrderBy(s => s.TenSanPham);
+
+            int pageSize = 5;
+            int No_Of_Page = (page ?? 1);
+
+            return View(sanpham.ToPagedList(No_Of_Page, pageSize));
         }
 
-        // GET: SanPhams/Create
-        public ActionResult Create()
+        public ActionResult About()
+        {
+            var cauHinhProc = cauHinhService.GetCauHinhByMaCauHinh("About");
+            if (cauHinhProc != null)
+            {
+                ViewBag.Anh = cauHinhProc.GiaTriCauHinh;
+                ViewBag.TieuDe = cauHinhProc.TenCauHinh;
+                ViewBag.MoTa = cauHinhProc.MoTa;
+            }
+            return View();
+        }
+        public ActionResult Add_To_Wishlist()
+        {
+            return View();
+        }
+        public ActionResult Cart()
+        {
+            return View();
+        }
+        public ActionResult Checkout()
+        {
+            return View();
+        }
+        public ActionResult Contact()
         {
             return View();
         }
 
-        // POST: SanPhams/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TenSanPham,MoTaSanPham,GiaSanPham,AvatarSanPham,DanhSachAnhSanPham,NoiDungSanPham,HangSanPham,Loai,TrangThai")] SanPham sanPham)
+        public ActionResult Order_Complete()
         {
-            if (ModelState.IsValid)
-            {
-                db.SanPhams.Add(sanPham);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(sanPham);
+            return View();
         }
-
-        // GET: SanPhams/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Product_Detail(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SanPham sanPham = db.SanPhams.Find(id);
-            if (sanPham == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sanPham);
-        }
+            var product = new ThongSoSanPhamDA().GetThongTinSanPhamById(id);
 
-        // POST: SanPhams/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TenSanPham,MoTaSanPham,GiaSanPham,AvatarSanPham,DanhSachAnhSanPham,NoiDungSanPham,HangSanPham,Loai,TrangThai")] SanPham sanPham)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(sanPham).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(sanPham);
-        }
-
-        // GET: SanPhams/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SanPham sanPham = db.SanPhams.Find(id);
-            if (sanPham == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sanPham);
-        }
-
-        // POST: SanPhams/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            SanPham sanPham = db.SanPhams.Find(id);
-            db.SanPhams.Remove(sanPham);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            return View(product);
         }
     }
 }
