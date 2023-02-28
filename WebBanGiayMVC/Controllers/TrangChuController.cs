@@ -20,7 +20,7 @@ namespace WebBanGiayMVC.Controllers
         //service
         SanPhamTrongDanhMucService sanPhamTrongDanhMucService;
         CauHinhService cauHinhService;
-        DanhMucService danhMucService;
+        //DanhMucService danhMucService;
         SanPhamService sanPhamService;
         SanPham sp;
         ThongSoSanPhamService thongSoSanPhamService;
@@ -86,6 +86,14 @@ namespace WebBanGiayMVC.Controllers
             ViewBag.CurrentFilter = searchSanPhamByName;
 
             if (!String.IsNullOrEmpty(searchSanPhamByName))
+<<<<<<< HEAD
+                sp = sp.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
+                sp = sp.OrderBy(s => s.TenSanPham);
+            //so san pham tren 1 page
+            int pageSize = 4;
+            int pageNumber = (page ?? 1);
+            return View(sp.ToPagedList(pageNumber,pageSize));
+=======
                 sanpham = sanpham.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
 
             sanpham = sanpham.OrderBy(s => s.TenSanPham);
@@ -94,6 +102,7 @@ namespace WebBanGiayMVC.Controllers
             int No_Of_Page = (page ?? 1); 
 
             return View(sanpham.ToPagedList(No_Of_Page,pageSize));
+>>>>>>> Cminh
         }
         public ActionResult About()
         {
@@ -227,7 +236,11 @@ namespace WebBanGiayMVC.Controllers
             {
                 ViewBag.SanPham = cauHinhSanPhamTheoDanhMuc.ToList();
             }
+<<<<<<< HEAD
+            
+=======
 
+>>>>>>> Cminh
             return View(sp.ToPagedList(pageNumber, pageSize));
         }
         public ActionResult Order_Complete()
