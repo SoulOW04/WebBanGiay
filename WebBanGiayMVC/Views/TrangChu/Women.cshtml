@@ -1,4 +1,7 @@
-﻿@model IEnumerable<WebBanGiayMVC.Models.SanPham>
+﻿@model PagedList.IPagedList<WebBanGiayMVC.Models.SanPham>
+    @using PagedList;
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Women";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
@@ -11,17 +14,9 @@
     var tenCH2 = ViewBag.TenCH2 as string;
     var anhCH3 = ViewBag.AnhCH3 as string;
     var tenCH3 = ViewBag.TenCH3 as string;
+    //
+    var SanPham = ViewBag.SanPham as string;
 }
-
-<!DOCTYPE HTML>
-<html>
-<head>
-    <title>Footwear - Free Bootstrap 4 Template by Colorlib</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-</head>
-<body>
 
     <div class="colorlib-loader"></div>
 
@@ -34,28 +29,26 @@
                             <div id="colorlib-logo"><a href="index.html">Footwear</a></div>
                         </div>
                         <div class="col-sm-5 col-md-3">
-                            <form action="#" class="search-wrap">
-                                <div class="form-group">
-                                    <input type="search" class="form-control search" placeholder="Search">
-                                    <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
-                                </div>
-                            </form>
+                            @using (Html.BeginForm("Women", "TrangChu", FormMethod.Get))
+                            {
+                                <form action="#" class="search-wrap">
+                                    <div class="form-group">
+                                        @Html.TextBox("searchSanPhamByName", ViewBag.CurrentFilter as string)
+                                        <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
+                                    </div>
+                                </form>
+                            }
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 text-left menu-1">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li class="has-dropdown">
-                                    <a href="men.html">Men</a>
-                                    <ul class="dropdown">
-                                        <li><a href="product-detail.html">Product Detail</a></li>
-                                        <li><a href="cart.html">Shopping Cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="order-complete.html">Order Complete</a></li>
-                                        <li><a href="add-to-wishlist.html">Wishlist</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="@Url.Action("Index","TrangChu")">Home</a></li>
+                                <li><a href="@Url.Action("Men","TrangChu")">Men</a></li>
+                                <li class="active"><a href="@Url.Action("Women","TrangChu")">Women</a></li>
+                                <li><a href="@Url.Action("About","TrangChu")">About</a></li>
+                                <li><a href="@Url.Action("Contact","TrangChu")">Contact</a></li>
+                                <li class="cart"><a href="@Url.Action("Cart","GioHang")"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
                                 <li class="active"><a href="women.html">Women</a></li>
                                 <li><a href="about.html">About</a></li>
                                 <li><a href="contact.html">Contact</a></li>
@@ -247,6 +240,8 @@
                         <div class="row row-pb-md">
                             @foreach (var item in Model)
                             {
+                                string price = Convert.ToDecimal(item.GiaSanPham).ToString("N0");
+
 
                                 <div class="col-lg-3 mb-4 text-center">
 
@@ -258,7 +253,7 @@
                                         </a>
                                         <div class="desc">
                                             <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })">@Html.DisplayFor(modelItem => item.TenSanPham)</a></h2>
-                                            <span class="price"><a href="#">@Html.DisplayFor(modelItem => item.GiaSanPham)</a></span>
+                                            <span class="price"><a href="#">@price</a></span>
                                         </div>
 
                                     </div>
@@ -267,17 +262,19 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                <div class="block-27">
-                                    <ul>
-                                        <li><a href="#"><i class="ion-ios-arrow-back"></i></a></li>
-                                        <li class="active"><span>1</span></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#"><i class="ion-ios-arrow-forward"></i></a></li>
-                                    </ul>
-                                </div>
+                                @*<div class="block-27">
+            <ul>
+                <li><a href="#"><i class="ion-ios-arrow-back"></i></a></li>
+                <li class="active"><span>1</span></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#"><i class="ion-ios-arrow-forward"></i></a></li>
+            </ul>
+        </div>*@
+                                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                                @Html.PagedListPager(Model, page => Url.Action("Women", new { page }))
                             </div>
                         </div>
                     </div>
@@ -319,10 +316,6 @@
         <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
     </div>
 
-
-
-</body>
-</html>
 
 
 
