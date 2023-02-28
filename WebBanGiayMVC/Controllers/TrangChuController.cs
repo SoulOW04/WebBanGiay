@@ -12,11 +12,14 @@ using System.Web.UI;
 using WebBanGiayMVC.Business;
 using WebBanGiayMVC.DataAccess;
 using WebBanGiayMVC.Models;
+using WebBanGiayMVC.Service.ThongSoSanPham.ViewModel;
 
 namespace WebBanGiayMVC.Controllers
 {
     public class TrangChuController : Controller
     {
+        private const string gioHang = "gioHang";//key
+
         //service
         SanPhamTrongDanhMucService sanPhamTrongDanhMucService;
         CauHinhService cauHinhService;
@@ -85,15 +88,15 @@ namespace WebBanGiayMVC.Controllers
 
             ViewBag.CurrentFilter = searchSanPhamByName;
 
-            if (!String.IsNullOrEmpty(searchSanPhamByName))
-<<<<<<< HEAD
-                sp = sp.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
-                sp = sp.OrderBy(s => s.TenSanPham);
-            //so san pham tren 1 page
-            int pageSize = 4;
-            int pageNumber = (page ?? 1);
-            return View(sp.ToPagedList(pageNumber,pageSize));
-=======
+            //if (!String.IsNullOrEmpty(searchSanPhamByName))
+
+            //    sp = sp.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
+            //    sp = sp.OrderBy(s => s.TenSanPham);
+            ////so san pham tren 1 page
+            //int pageSize = 4;
+            //int pageNumber = (page ?? 1);
+            //return View(sp.ToPagedList(pageNumber,pageSize));
+
                 sanpham = sanpham.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
 
             sanpham = sanpham.OrderBy(s => s.TenSanPham);
@@ -102,7 +105,7 @@ namespace WebBanGiayMVC.Controllers
             int No_Of_Page = (page ?? 1); 
 
             return View(sanpham.ToPagedList(No_Of_Page,pageSize));
->>>>>>> Cminh
+
         }
         public ActionResult About()
         {
@@ -123,6 +126,19 @@ namespace WebBanGiayMVC.Controllers
         {
             return View();
         }
+
+        public PartialViewResult HeaderCart()
+        {
+            var cart = Session[gioHang];
+            var list = new List<ThongSoSanPhamViewModel>();
+            if (cart != null)
+            {
+                list = (List<ThongSoSanPhamViewModel>)cart;//ep kieu cart sang list 
+            }
+
+            return PartialView(list);
+        }
+
         public ActionResult Checkout()
         {
             return View();
@@ -236,11 +252,7 @@ namespace WebBanGiayMVC.Controllers
             {
                 ViewBag.SanPham = cauHinhSanPhamTheoDanhMuc.ToList();
             }
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> Cminh
             return View(sp.ToPagedList(pageNumber, pageSize));
         }
         public ActionResult Order_Complete()
