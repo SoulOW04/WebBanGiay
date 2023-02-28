@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebBanGiayMVC.Business;
+using WebBanGiayMVC.DataAccess;
 using WebBanGiayMVC.Models;
 using WebBanGiayMVC.Service.ChiTietDonHang.ViewModel;
 using WebBanGiayMVC.Service.ThongSoSanPham.ViewModel;
@@ -28,12 +29,11 @@ namespace WebBanGiayMVC.Controllers
         public ActionResult Cart()
         {
             var cart = Session[gioHang];
-            var list = new List<ChiTietDonHangViewModel>();
+            var list = new List<ThongSoSanPhamViewModel>();
             if (cart != null)
             {
-                list = (List<ChiTietDonHangViewModel>)cart;//ep kieu cart sang list 
+                list = (List<ThongSoSanPhamViewModel>)cart;//ep kieu cart sang list 
             }
-
 
             //lay giaSpFOrmat
             var giaSanPham = sanPhamService.GetAllGiaSanPhamFormat();
@@ -55,11 +55,11 @@ namespace WebBanGiayMVC.Controllers
 
         public ActionResult AddItem(int productId, int quantity)
         {
-
+            var product = new ThongSoSanPhamDA().GetThongTinSanPhamById(productId);
             var cart = Session[gioHang];
             if (cart != null)
             {
-                var list = (List<ChiTietDonHangViewModel>)cart;
+                var list = (List<ThongSoSanPhamViewModel>)cart;
                 if (list.Exists(x => x.SanPhamId == productId))
                 {
                     foreach (var item in list)
@@ -73,9 +73,13 @@ namespace WebBanGiayMVC.Controllers
                 else
                 {
                     //Tạo mới đối tượng Chi Tiet Don Hang 
-                    var item = new ChiTietDonHangViewModel();
-                    item.SanPhamId = productId;
+                    var item = new ThongSoSanPhamViewModel();
+                    item.SanPhamId = product.SanPhamId; 
                     item.SoLuong = quantity;
+                    item.AvatarSanPham = product.AvatarSanPham;
+                    item.GiaSanPham = product.GiaSanPham;
+                    item.TenSanPham = product.TenSanPham;
+                    
                     list.Add(item);
                 }
                 //Gán vào session
@@ -85,10 +89,14 @@ namespace WebBanGiayMVC.Controllers
             {
 
                 //Tạo mới đối tượng Chi Tiet Don Hang 
-                var item = new ChiTietDonHangViewModel();
-                item.SanPhamId = productId;
+                var item = new ThongSoSanPhamViewModel();
+                item.SanPhamId = product.SanPhamId;
                 item.SoLuong = quantity;
-                var list = new List<ChiTietDonHangViewModel>();
+                item.AvatarSanPham = product.AvatarSanPham;
+                item.GiaSanPham = product.GiaSanPham;
+                item.TenSanPham = product.TenSanPham;
+
+                var list = new List<ThongSoSanPhamViewModel>();
                 list.Add(item);
 
                 //Gán vào session
@@ -96,6 +104,7 @@ namespace WebBanGiayMVC.Controllers
 
             }
             return RedirectToAction("Cart");
+            //return View(product);
         }
     }
 }

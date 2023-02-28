@@ -241,6 +241,7 @@
     <Content Include="footwear-master\js\aos.js" />
     <Content Include="footwear-master\js\bootstrap-datepicker.js" />
     <Content Include="footwear-master\js\bootstrap.min.js" />
+    <Content Include="footwear-master\js\Controller\cartController.js" />
     <Content Include="footwear-master\js\GioHangJs\site.js" />
     <Content Include="footwear-master\js\google_map.js" />
     <Content Include="footwear-master\js\jquery-3.2.1.min.js" />
