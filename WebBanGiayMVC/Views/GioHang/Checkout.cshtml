@@ -1,0 +1,168 @@
+﻿@model List<WebBanGiayMVC.Service.ThongSoSanPham.ViewModel.ThongSoSanPhamViewModel>
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_FooterLayout.cshtml";
+}
+
+
+<div class="colorlib-loader"></div>
+
+<div id="page">
+
+
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="bread"><span><a href="index.html">Home</a></span> / <span>Checkout</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="colorlib-product">
+        <div class="container">
+            <div class="row row-pb-lg">
+                <div class="col-sm-10 offset-md-1">
+                    <div class="process-wrap">
+                        <div class="process text-center active">
+                            <p><span>01</span></p>
+                            <h3>Shopping Cart</h3>
+                        </div>
+                        <div class="process text-center active">
+                            <p><span>02</span></p>
+                            <h3>Checkout</h3>
+                        </div>
+                        <div class="process text-center">
+                            <p><span>03</span></p>
+                            <h3>Order Complete</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <form method="post" class="colorlib-form">
+                        <h2>Billing Details</h2>
+                        <div class="row">
+
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="fname">Họ Tên</label>
+                                    <input type="text" id="fname" class="form-control" placeholder="Your Name">
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="fname">Địa Chỉ</label>
+                                    <input type="text" id="address" class="form-control" placeholder="Điền địa chỉ của bạn">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="stateprovince">Tỉnh/Thành Phố</label>
+                                    <input type="text" id="fname" class="form-control" placeholder="Tỉnh hoặc Thành Phố">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="lname">Ngày Đặt Hàng</label>
+                                    <input type="text" id="zippostalcode" class="form-control" placeholder="Ngày đặt hàng">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">Địa chỉ Email</label>
+                                    <input type="text" id="email" class="form-control" placeholder="Điền Email">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Phone">Số Điện Thoại Liên Lạc</label>
+                                    <input type="text" id="zippostalcode" class="form-control" placeholder="Điền số điện thoại của bạn">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="cart-detail">
+                                <h2>Cart Total</h2>
+                                <ul>
+                                    <li>
+                                        <span>Subtotal</span> <span>$100.00</span>
+                                        <ul>
+                                            <li><span>1 x Product Name</span> <span>$99.00</span></li>
+                                            <li><span>1 x Product Name</span> <span>$78.00</span></li>
+                                        </ul>
+                                    </li>
+                                    <li><span>Shipping</span> <span>$0.00</span></li>
+                                    <li><span>Order Total</span> <span>$180.00</span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="w-100"></div>
+
+                        <div class="col-md-12">
+                            <div class="cart-detail">
+                                <h2>Payment Method</h2>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="radio">
+                                            <label><input type="radio" name="optradio"> Direct Bank Tranfer</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="radio">
+                                            <label><input type="radio" name="optradio"> Check Payment</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="radio">
+                                            <label><input type="radio" name="optradio"> Paypal</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value=""> I have read and accept the terms and conditions</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <p><a href="#" class="btn btn-primary">Place an order</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+</div>
+
+
+

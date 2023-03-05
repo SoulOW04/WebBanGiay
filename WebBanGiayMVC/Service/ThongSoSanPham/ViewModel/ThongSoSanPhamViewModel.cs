@@ -10,6 +10,7 @@ namespace WebBanGiayMVC.Service.ThongSoSanPham.ViewModel
         public int Id { get; set; }
 
         public int SanPhamId { get; set; }
+        public int ThongSoKiThuatId { get; set; }
 
         public string AvatarSanPham { get; set; }
 

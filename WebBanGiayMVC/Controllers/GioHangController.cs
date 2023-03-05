@@ -53,6 +53,18 @@ namespace WebBanGiayMVC.Controllers
             return View(list);
         }
 
+        public JsonResult Delete(int id)
+        {
+            var sessionCart = (List<ThongSoSanPhamViewModel>)Session[gioHang];
+            sessionCart.RemoveAll(x => x.SanPhamId == id);
+            Session[gioHang] = sessionCart; 
+            return Json(new { 
+            
+                status = true
+            });
+
+        }
+
         public ActionResult AddItem(int productId, int quantity)
         {
             var product = new ThongSoSanPhamDA().GetThongTinSanPhamById(productId);
@@ -76,6 +88,7 @@ namespace WebBanGiayMVC.Controllers
                     var item = new ThongSoSanPhamViewModel();
                     item.SanPhamId = product.SanPhamId; 
                     item.SoLuong = quantity;
+                    item.KichThuocSanPham = product.KichThuocSanPham;
                     item.AvatarSanPham = product.AvatarSanPham;
                     item.GiaSanPham = product.GiaSanPham;
                     item.TenSanPham = product.TenSanPham;
@@ -92,6 +105,7 @@ namespace WebBanGiayMVC.Controllers
                 var item = new ThongSoSanPhamViewModel();
                 item.SanPhamId = product.SanPhamId;
                 item.SoLuong = quantity;
+                item.KichThuocSanPham = product.KichThuocSanPham;
                 item.AvatarSanPham = product.AvatarSanPham;
                 item.GiaSanPham = product.GiaSanPham;
                 item.TenSanPham = product.TenSanPham;
@@ -105,6 +119,38 @@ namespace WebBanGiayMVC.Controllers
             }
             return RedirectToAction("Cart");
             //return View(product);
+        }
+
+        [HttpGet]
+        public ActionResult Checkout()
+        {
+
+            var cart = Session[gioHang];
+            var list = new List<ThongSoSanPhamViewModel>();
+            if (cart != null)
+            {
+                list = (List<ThongSoSanPhamViewModel>)cart;//ep kieu cart sang list 
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Checkout(string HoTen,string DiaChi,string ThanhPho,string Email,string SoDienThoai,string NgayDatHang)
+        {
+            var order = new DonHang();
+            order.HoTen = HoTen;
+            order.DiaChi= DiaChi;
+            order.ThanhPho= ThanhPho;
+            order.Email= Email;
+            order.SoDienThoai= SoDienThoai;
+            order.NgayDatHang= NgayDatHang;
+            return Redirect("/GioHang/Order_Complete");
+            
+        }
+
+        public ActionResult Order_Complete()
+        {
+            return View();
         }
     }
 }

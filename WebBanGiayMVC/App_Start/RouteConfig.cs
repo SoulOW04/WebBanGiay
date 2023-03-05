@@ -24,6 +24,12 @@ namespace WebBanGiayMVC
                 url: "them-gio-hang",
                 defaults: new { controller = "GioHang", action = "AddItem", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Cart",
+                url: "GioHang",
+                defaults: new { controller = "GioHang", action = "AddItem", id = UrlParameter.Optional }
+            );
         }
     }
 }

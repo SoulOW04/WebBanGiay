@@ -40,7 +40,7 @@ namespace WebBanGiayMVC.Controllers
             sp = new SanPham();
         }
         // GET: TrangChu
-        public ActionResult Index(int? page,string searchSanPhamByName,string currentFilter)
+        public ActionResult Index(int? page, string searchSanPhamByName, string currentFilter)
         {
 
             //lay giaSpFOrmat
@@ -58,7 +58,7 @@ namespace WebBanGiayMVC.Controllers
                 ViewBag.Logo = cauHinhLogo.GiaTriCauHinh;
             }
 
-            
+
 
             //cau hinh cua women
             var cauHinhWomenBanner = cauHinhService.GetCauHinhByMaCauHinh("IndexWomenBanner");
@@ -88,23 +88,23 @@ namespace WebBanGiayMVC.Controllers
 
             ViewBag.CurrentFilter = searchSanPhamByName;
 
-            //if (!String.IsNullOrEmpty(searchSanPhamByName))
-
-            //    sp = sp.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
-            //    sp = sp.OrderBy(s => s.TenSanPham);
-            ////so san pham tren 1 page
-            //int pageSize = 4;
-            //int pageNumber = (page ?? 1);
-            //return View(sp.ToPagedList(pageNumber,pageSize));
+            if (!String.IsNullOrEmpty(searchSanPhamByName))
 
                 sanpham = sanpham.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
-
             sanpham = sanpham.OrderBy(s => s.TenSanPham);
+            //so san pham tren 1 page
+            int pageSize = 4;
+            int pageNumber = (page ?? 1);
+            return View(sanpham.ToPagedList(pageNumber, pageSize));
 
-            int pageSize = 5;
-            int No_Of_Page = (page ?? 1); 
+            //sanpham = sanpham.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
 
-            return View(sanpham.ToPagedList(No_Of_Page,pageSize));
+            //sanpham = sanpham.OrderBy(s => s.TenSanPham);
+
+            //int pageSize = 5;
+            //int No_Of_Page = (page ?? 1);
+
+            //return View(sanpham.ToPagedList(No_Of_Page, pageSize));
 
         }
         public ActionResult About()
@@ -139,10 +139,7 @@ namespace WebBanGiayMVC.Controllers
             return PartialView(list);
         }
 
-        public ActionResult Checkout()
-        {
-            return View();
-        }
+        
         public ActionResult Contact()
         {
             return View();
@@ -255,10 +252,7 @@ namespace WebBanGiayMVC.Controllers
 
             return View(sp.ToPagedList(pageNumber, pageSize));
         }
-        public ActionResult Order_Complete()
-        {
-            return View();
-        }
+        
         public ActionResult Product_Detail(int id)
         {
             var product = new ThongSoSanPhamDA().GetThongTinSanPhamById(id);
