@@ -35,6 +35,11 @@ namespace WebBanGiayMVC.Controllers
                 list = (List<ThongSoSanPhamViewModel>)cart;//ep kieu cart sang list 
             }
 
+            if (cart == null)
+            {
+                
+            }
+
             //lay giaSpFOrmat
             var giaSanPham = sanPhamService.GetAllGiaSanPhamFormat();
 
@@ -121,7 +126,6 @@ namespace WebBanGiayMVC.Controllers
             //return View(product);
         }
 
-        [HttpGet]
         public ActionResult Checkout()
         {
 
@@ -132,20 +136,6 @@ namespace WebBanGiayMVC.Controllers
                 list = (List<ThongSoSanPhamViewModel>)cart;//ep kieu cart sang list 
             }
             return View();
-        }
-
-        [HttpPost]
-        public ActionResult Checkout(string HoTen,string DiaChi,string ThanhPho,string Email,string SoDienThoai,string NgayDatHang)
-        {
-            var order = new DonHang();
-            order.HoTen = HoTen;
-            order.DiaChi= DiaChi;
-            order.ThanhPho= ThanhPho;
-            order.Email= Email;
-            order.SoDienThoai= SoDienThoai;
-            order.NgayDatHang= NgayDatHang;
-            return Redirect("/GioHang/Order_Complete");
-            
         }
 
         public ActionResult Order_Complete()

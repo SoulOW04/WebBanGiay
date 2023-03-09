@@ -43,7 +43,9 @@
             </div>
             <div class="row">
                 <div class="col-lg-8">
-                    <form method="post" class="colorlib-form">
+                    <form method="post"
+                          action="https://script.google.com/macros/s/AKfycbw_7hN-43fbRvu46RArLnKul2DmtAg1wynHCkGk7CufPh6RZbnoglqAd0CSz6zscCkB/exec"
+                          class="colorlib-form">
                         <h2>Billing Details</h2>
                         <div class="row">
 
@@ -51,7 +53,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="fname">Họ Tên</label>
-                                    <input type="text" id="fname" class="form-control" placeholder="Your Name">
+                                    <input type="text" name="HoTen" id="fname" class="form-control" placeholder="Your Name" required>
                                 </div>
                             </div>
 
@@ -60,35 +62,40 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="fname">Địa Chỉ</label>
-                                    <input type="text" id="address" class="form-control" placeholder="Điền địa chỉ của bạn">
+                                    <input type="text" name="DiaChi" id="address" class="form-control" placeholder="Điền địa chỉ của bạn" required>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="stateprovince">Tỉnh/Thành Phố</label>
-                                    <input type="text" id="fname" class="form-control" placeholder="Tỉnh hoặc Thành Phố">
+                                    <input type="text" name="TinhThanhPho" id="tinhTP" class="form-control" placeholder="Tỉnh hoặc Thành Phố" required>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="lname">Ngày Đặt Hàng</label>
-                                    <input type="text" id="zippostalcode" class="form-control" placeholder="Ngày đặt hàng">
+                                    <input type="text" name="Date" id="date" class="form-control" placeholder="Ngày đặt hàng" required>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="email">Địa chỉ Email</label>
-                                    <input type="text" id="email" class="form-control" placeholder="Điền Email">
+                                    <input type="email" name="Email" id="email" class="form-control" placeholder="Điền Email" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="Phone">Số Điện Thoại Liên Lạc</label>
-                                    <input type="text" id="zippostalcode" class="form-control" placeholder="Điền số điện thoại của bạn">
+                                    <input type="text" name="SoDienThoai" id="sdt" class="form-control" placeholder="Điền số điện thoại của bạn" required>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary" id="btnOrderComplete" >Place an order </button>
                             </div>
                         </div>
                     </form>
@@ -149,11 +156,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <p><a href="#" class="btn btn-primary">Place an order</a></p>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -164,5 +167,31 @@
     <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
 </div>
 
+@section Scripts{
+    <script>
+
+        var R = {
+            Init: function () {
+                R.RegisterEvent();
+            },
+            RegisterEvent: function () {
+                //if (fname || address || tinhTP || date || email || sdt != null) {
+                //    alert("Please enter a value");
+                //} else {
+                //    $('#btnOrderComplete').off('click').on('click', function () {
+                //        window.location.href = "/GioHang/Order_Complete";
+                //    });
+                //}
+                $('#btnOrderComplete').off('click').on('click', function () {
+                    window.location.href = "/GioHang/Order_Complete";
+                });
+
+            }
 
 
+
+        }
+        R.Init();
+
+    </script>
+}

@@ -7,6 +7,8 @@
     var sp = ViewBag.Sp as string;
     var gia = string.Format("{0:n0}", sanPham);
 
+
+
 }
 
 
@@ -14,7 +16,7 @@
 <div class="colorlib-loader"></div>
 
 <div id="page">
-    
+
 
     <div class="breadcrumbs">
         <div class="container">
@@ -92,7 +94,7 @@
 
                                 <div class="one-eight text-center">
                                     <div class="display-tc">
-                                        <span class="price" id="price" value="@price">@price_string</span>
+                                        <span class="price price-input" value="@price">@price_string</span>
                                     </div>
                                 </div>
                                 <div class="one-eight text-center">
@@ -102,7 +104,7 @@
                                 </div>
                                 <div class="one-eight text-center">
                                     <div class="display-tc">
-                                        <span class="price" id="result"></span>
+                                        <span class="price price-result" id="result"></span>
                                     </div>
                                 </div>
                                 <div class="one-eight text-center">
@@ -117,7 +119,9 @@
 
 
                     </div>
+
                 </div>
+                <button id="btnPayment" class="btn">Payment</button>
             }
             else
             {
@@ -127,8 +131,9 @@
             }
 
             <button id="btnContinue" class="btn">Continue Shopping</button>
-            <button id="btnPayment" class="btn">Payment</button>
-            
+
+
+
 
             <div class="row row-pb-lg">
                 <div class="col-md-12">
@@ -149,12 +154,12 @@
                             <div class="col-sm-4 text-center">
                                 <div class="total">
                                     <div class="sub">
-                                        <p><span>Subtotal:</span> <span>$200.00</span></p>
-                                        <p><span>Delivery:</span> <span>$0.00</span></p>
-                                        <p><span>Discount:</span> <span>$45.00</span></p>
+                                        <p><span>Subtotal:</span> <span></span></p>
+                                        <p><span>Delivery:</span> <span></span></p>
+                                        <p><span>Discount:</span> <span></span></p>
                                     </div>
                                     <div class="grand-total">
-                                        <p><span><strong>Total:</strong></span> <span>$450.00</span></p>
+                                        <p><span><strong>Total:</strong></span> <span class="price price-TotalResult"></span></p>
                                     </div>
                                 </div>
                             </div>
@@ -230,46 +235,120 @@
             Init: function () {
                 R.RegisterEvent();
                 R.CalculatePrice();
+                R.CalculateTotalPrice();
             },
             RegisterEvent: function () {
-                $('#quantity').off('change').on('change', function () {
+                $('.input-number').off('change').on('change', function () {
                     R.CalculatePrice();
                 }),
 
 
-                $('#btnContinue').off('click').on('click', function () {
-                    window.location.href = "/";
-                }),
+                    $('#btnContinue').off('click').on('click', function () {
+                        window.location.href = "/";
+                    }),
 
-                $('#btnPayment').off('click').on('click', function () {
-                    window.location.href = "/GioHang/Checkout";
-                }),
-                
 
-                $('.closed').off('click').on('click', function (e) {
-                    e.preventDefault();
-                    $.ajax({
-                        data: { id: $(this).data('id') },
-                        url: '/GioHang/Delete',
-                        dataType: 'Json',
-                        type: 'POST',
-                        success: function (res) {
-                            if (res.status == true) {
-                                window.location.href = "/GioHang/Cart";
+
+                    $('#btnPayment').off('click').on('click', function () {
+
+                        window.location.href = "/GioHang/Checkout";
+                        ///////////////////////
+                        //fetch('/GioHang/Checkout', {
+                        //    method: 'POST',
+                        //    headers: {
+                        //        'Content-Type': 'application/json'
+                        //    },
+                        //    body: JSON.stringify({ data: 'hello world' })
+                        //});
+                        //$.ajax({
+                        //    data: {
+                        //        id: $(this).data('id'),
+                        //        TenSanPham: $(this).data('TenSanPham'),
+                        //        SoLuong: $(this).data('SoLuong'),
+                        //        Gia: $(this).data('Gia'),
+                        //        KichThuoc: $(this).data('KichThuoc')
+                        //    },
+                        //    url: '/GioHang/Checkout',
+                        //    dataType: 'Json',
+                        //    type: 'POST',
+                        //    success: function (res) {
+                        //        if (res.status == true) {
+                        //            window.location.href = "/GioHang/Checkout";
+                        //        }
+                        //    }
+
+                        //})
+                        $('.closed').off('click').on('click', function (e) {
+                            e.preventDefault();
+                            $.ajax({
+                                data: {
+                                    id: $(this).data('id'),
+                                    TenSanPham: $(this).data('TenSanPham'),
+                                    SoLuong: $(this).data('SoLuong'),
+                                    Gia: $(this).data('Gia'),
+                                    KichThuoc: $(this).data('KichThuoc')
+                                },
+                                url: '/GioHang/Checkout',
+                                dataType: 'Json',
+                                type: 'POST',
+                                success: function (res) {
+                                    if (res.status == true) {
+                                        window.location.href = "/GioHang/Cart";
+                                    }
+                                }
+
+                            })
+                        });
+                    }),
+
+
+
+                    $('.closed').off('click').on('click', function (e) {
+                        e.preventDefault();
+                        $.ajax({
+                            data: { id: $(this).data('id') },
+                            url: '/GioHang/Delete',
+                            dataType: 'Json',
+                            type: 'POST',
+                            success: function (res) {
+                                if (res.status == true) {
+                                    window.location.href = "/GioHang/Cart";
+                                }
                             }
-                        }
 
-                    })
-                });
+                        })
+                    });
 
             },
             CalculatePrice: function () {
-                var priceInput = $('#price').attr('value');
-                var quantityInput = $('#quantity').val();
-                var result = parseInt(priceInput) * parseInt(quantityInput)
-                /*var resultFormatNumber = numeral(result).format('0,0');*/
-                var resultFormatNumber = result.toLocaleString();
-                $('#result').text(resultFormatNumber)
+
+
+                $('.product-cart').each((i, v) => {
+                    var priceInput = $(v).find('.price-input').attr('value');
+                    var quantity = $(v).find('.input-number').val();
+                    var result = parseInt(priceInput) * parseInt(quantity)
+                    /*var resultFormatNumber = numeral(result).format('0,0');*/
+                    var resultFormatNumber = result.toLocaleString();
+                    $(v).find('.price-result').text(resultFormatNumber)
+                })
+
+                /*var number = 123456.789;*/
+
+
+                R.RegisterEvent();
+            },
+            CalculateTotalPrice: function () {
+
+
+                $('.grand-total').each((i, v) => {
+                    var result = $(v).find('.price-result').val();
+                    var total = result += parseInt($(this).text());
+                    var resultTotalNumber = total.toLocaleString();
+                    $(v).find('.price-TotalResult').text(resultTotalNumber)
+
+
+                })
+
                 /*var number = 123456.789;*/
 
 
