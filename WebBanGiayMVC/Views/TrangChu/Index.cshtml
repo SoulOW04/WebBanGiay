@@ -1,6 +1,7 @@
 ﻿@model  PagedList.IPagedList<WebBanGiayMVC.Models.SanPham>
 @using PagedList.Mvc;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 
 @{
     ViewBag.Title = "Index";
@@ -9,7 +10,7 @@
 
     var banner = ViewBag.Banner as int?;
 
-    
+
 
     var womenB = ViewBag.WomenBanner as string;
     var menB = ViewBag.MenBanner as string;
@@ -20,83 +21,13 @@
     var sanpham = ViewBag.SanPham as string;
 }
 
-<!DOCTYPE HTML>
-<html>
-<head>
-    <title>Footwear - Free Bootstrap 4 Template by Colorlib</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-</head>
-<body>
 
-    <div class="colorlib-loader"></div>
+
+<div class="colorlib-loader"></div>
 
     <div id="page">
-        <nav class="colorlib-nav" role="navigation">
-            <div class="top-menu">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-7 col-md-9">
-                            <div id="colorlib-logo">
-                                @if (!string.IsNullOrEmpty(logo))
-                                {
-                                    <a href="index.html">
-                                        <img src="@logo" width="120" height="120" />
-                                    </a>
-
-                                }
-                            </div>
-                        </div>
-                        <div class="col-sm-5 col-md-3">
-                            @using (Html.BeginForm("Index", "TrangChu", FormMethod.Get))
-                            {
-                                <form action="#" class="search-wrap">
-                                    <div class="form-group">
-                                        @Html.TextBox("searchSanPhamByName", ViewBag.CurrentFilter as string)
-                                        <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
-                                    </div>
-                                </form>
-                            }
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 text-left menu-1">
-                            <ul>
-                                <li class="active"><a href="@Url.Action("Index","TrangChu")">Home</a></li>
-                                <li><a href="@Url.Action("Men","TrangChu")">Men</a></li>
-                                <li><a href="@Url.Action("Women","TrangChu")">Women</a></li>
-                                <li><a href="@Url.Action("About","TrangChu")">About</a></li>
-                                <li><a href="@Url.Action("Contact","TrangChu")">Contact</a></li>
-                                <li class="cart"><a href="@Url.Action("Cart","GioHang")"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="sale">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-8 offset-sm-2 text-center">
-                            <div class="row">
-                                <div class="owl-carousel2">
-                                    <div class="item">
-                                        <div class="col">
-                                            <h3><a href="#">25% off (Almost) Everything! Use Code: Summer Sale</a></h3>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="col">
-                                            <h3><a href="#">Our biggest sale yet 50% off all summer shoes</a></h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
+        
         <aside id="colorlib-hero">
             <div class="flexslider">
                 <ul class="slides">
@@ -120,86 +51,86 @@
                     }
 
 
-                </ul>
+            </ul>
+        </div>
+    </aside>
+    <div class="colorlib-intro">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <h2 class="intro">It started with a simple idea: Create quality, well-designed products that I wanted myself.</h2>
+                </div>
             </div>
-        </aside>
-        <div class="colorlib-intro">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 text-center">
-                        <h2 class="intro">It started with a simple idea: Create quality, well-designed products that I wanted myself.</h2>
+        </div>
+    </div>
+    <div class="colorlib-product">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6 text-center">
+                    <div class="featured">
+                        <a href="@Url.Action("Men", "TrangChu")" class="featured-img" style="background-image: url('@menB')"></a>
+                        <div class="desc">
+                            <h2><a href="@Url.Action("Men", "TrangChu")">Shop Men's Collection</a></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 text-center">
+                    <div class="featured">
+                        <a href="@Url.Action("Women", "TrangChu")" class="featured-img" style="background-image: url('@womenB')"></a>
+                        <div class="desc">
+
+                            <h2><a href="@Url.Action("Women", "TrangChu")">Shop Women's Collection</a></h2>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="colorlib-product">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-6 text-center">
-                        <div class="featured">
-                            <a href="@Url.Action("Men", "TrangChu")" class="featured-img" style="background-image: url('@menB')"></a>
-                            <div class="desc">
-                                <h2><a href="@Url.Action("Men", "TrangChu")">Shop Men's Collection</a></h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 text-center">
-                        <div class="featured">
-                            <a href="@Url.Action("Women", "TrangChu")" class="featured-img" style="background-image: url('@womenB')"></a>
-                            <div class="desc">
+    </div>
 
-                                <h2><a href="@Url.Action("Women", "TrangChu")">Shop Women's Collection</a></h2>
-                            </div>
-                        </div>
-                    </div>
+    <div class="colorlib-product">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
+                    <h2>Best Sellers</h2>
                 </div>
             </div>
-        </div>
+            <div class="row row-pb-md">
+                @foreach (var item in ViewBag.SanPham)
+                {
+                    var price = @item.GiaSanPham.ToString("N0");
+                    <div class="col-lg-3 mb-4 text-center">
 
-        <div class="colorlib-product">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
-                        <h2>Best Sellers</h2>
+                        <div class="product-entry border">
+
+                            <a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })" class="prod-img">
+                                <img src="@item.AvatarSanPham" width="120" height="120" />
+
+                            </a>
+                            <div class="desc">
+                                <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })">@item.TenSanPham</a></h2>
+                                <span class="price"><a href="#"></a>@price</span>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-                <div class="row row-pb-md">
-                    @*@foreach (var item in ViewBag.SanPham)
-        {
-            var price = @item.GiaSanPham.ToString("N0");
-            <div class="col-lg-3 mb-4 text-center">
+                }
+                @foreach (var item in Model)
+                {
+                    string price = Convert.ToDecimal(item.GiaSanPham).ToString("N0");
 
-                <div class="product-entry border">
 
-                    <a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })" class="prod-img">
-                        <img src="@item.AvatarSanPham" width="120" height="120" />
+                    <div class="col-lg-3 mb-4 text-center">
 
-                    </a>
-                    <div class="desc">
-                        <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })">@item.TenSanPham</a></h2>
-                        <span class="price"><a href="#"></a>@price</span>
-                    </div>
+                        <div class="product-entry border">
 
-                </div>
-            </div>
-        }*@
-                    @foreach (var item in Model)
-                    {
-                        string price = Convert.ToDecimal(item.GiaSanPham).ToString("N0");
-                        
+                            <a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })" class="prod-img">
+                                <img src="@Html.DisplayFor(modelItem => item.AvatarSanPham)" width="120" height="120" />
 
-                        <div class="col-lg-3 mb-4 text-center">
-
-                            <div class="product-entry border">
-
-                                <a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })" class="prod-img">
-                                    <img src="@Html.DisplayFor(modelItem => item.AvatarSanPham)" width="120" height="120" />
-
-                                </a>
-                                <div class="desc">
-                                    <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })">@Html.DisplayFor(modelItem => item.TenSanPham)</a></h2>
-                                    <span class="price"><a href="#">@price</a></span>
-                                </div>
+                            </a>
+                            <div class="desc">
+                                <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })">@Html.DisplayFor(modelItem => item.TenSanPham)</a></h2>
+                                <span class="price"><a href="#">@price</a></span>
+                            </div>
 
                             </div>
                         </div>
@@ -211,8 +142,11 @@
                     </div>
                 </div>
             </div>
-            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            <div class="" style="text-align:center ; margin-top:50px">
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            </div>
+            
         </div>
 
         <div class="colorlib-partner">
@@ -243,15 +177,12 @@
         </div>
 
 
-    </div>
+</div>
 
-    <div class="gototop js-top">
-        <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
-    </div>
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+</div>
 
-
-</body>
-</html>
 
 
 

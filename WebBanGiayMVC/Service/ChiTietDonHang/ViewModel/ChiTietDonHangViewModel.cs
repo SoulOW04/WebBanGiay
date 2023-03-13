@@ -10,6 +10,8 @@ namespace WebBanGiayMVC.Service.ChiTietDonHang.ViewModel
         //Product Name [s].AvatarSanPham, [s].TenSanPham,[s].GiaSanPham,,SoLuong,GiaSP
         public int Id { get; set; }
 
+        public int SanPhamId { get; set; }
+
         public string AvatarSanPham { get; set; }
 
         public string TenSanPham { get; set; }

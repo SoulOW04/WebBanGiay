@@ -1,0 +1,8 @@
+﻿@model List<WebBanGiayMVC.Service.ThongSoSanPham.ViewModel.ThongSoSanPhamViewModel>
+
+@{
+    ViewBag.Title = "HeaderCart";
+}
+
+<li class="cart"><a href="@Url.Action("Cart","GioHang")"><i class="icon-shopping-cart"></i> Cart[@Model.Count]</a></li>
+

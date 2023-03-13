@@ -50,6 +50,37 @@ namespace WebBanGiayMVC.DataAccess
         }
 
 
+        public List<SanPham> GetAllSanPham()
+        {
+            try
+            {
+                using (var conn = new SqlConnection(cs))
+                {
+                    var storeName = "usp_WEB_GetAllSanPham";//ten proc
+
+                    //Add param
+
+                    conn.Open();
+                    var result = conn.Query<SanPham>(storeName, commandType: System.Data.CommandType.StoredProcedure).ToList();
+                    conn.Close();
+
+                    return result;
+
+                }
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                return null;
+            }
+
+
+        }
+
+        
+
+
 
     }
 }
