@@ -1,7 +1,8 @@
-﻿@model WebBanGiayMVC.Models.SanPham
+﻿@model WebBanGiayMVC.Models.DonHang
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <div id="page-wrapper">
     <div class="main-page">
@@ -10,71 +11,63 @@
             <h2>Details</h2>
 
             <div>
-                <h4>SanPham</h4>
+                <h4>DonHang</h4>
                 <hr />
                 <dl class="dl-horizontal">
                     <dt>
-                        @Html.DisplayNameFor(model => model.TenSanPham)
+                        @Html.DisplayNameFor(model => model.MaDonHang)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.TenSanPham)
+                        @Html.DisplayFor(model => model.MaDonHang)
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.MoTaSanPham)
+                        @Html.DisplayNameFor(model => model.HoTen)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.MoTaSanPham)
+                        @Html.DisplayFor(model => model.HoTen)
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.GiaSanPham)
+                        @Html.DisplayNameFor(model => model.DiaChi)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.GiaSanPham)
+                        @Html.DisplayFor(model => model.DiaChi)
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.AvatarSanPham)
+                        @Html.DisplayNameFor(model => model.ThanhPho)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.AvatarSanPham)
+                        @Html.DisplayFor(model => model.ThanhPho)
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.DanhSachAnhSanPham)
+                        @Html.DisplayNameFor(model => model.Email)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.DanhSachAnhSanPham)
+                        @Html.DisplayFor(model => model.Email)
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.NoiDungSanPham)
+                        @Html.DisplayNameFor(model => model.SoDienThoai)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.NoiDungSanPham)
+                        @Html.DisplayFor(model => model.SoDienThoai)
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.HangSanPham)
+                        @Html.DisplayNameFor(model => model.NgayDatHang)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.HangSanPham)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Loai)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Loai)
+                        @Html.DisplayFor(model => model.NgayDatHang)
                     </dd>
 
                     <dt>
@@ -83,6 +76,14 @@
 
                     <dd>
                         @Html.DisplayFor(model => model.TrangThai)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Loai)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Loai)
                     </dd>
 
                 </dl>

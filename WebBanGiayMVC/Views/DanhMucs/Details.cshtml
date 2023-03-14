@@ -1,7 +1,8 @@
-﻿@model WebBanGiayMVC.Models.SanPham
+﻿@model WebBanGiayMVC.Models.DanhMuc
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <div id="page-wrapper">
     <div class="main-page">
@@ -10,63 +11,47 @@
             <h2>Details</h2>
 
             <div>
-                <h4>SanPham</h4>
+                <h4>DanhMuc</h4>
                 <hr />
                 <dl class="dl-horizontal">
                     <dt>
-                        @Html.DisplayNameFor(model => model.TenSanPham)
+                        @Html.DisplayNameFor(model => model.TenDanhMuc)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.TenSanPham)
+                        @Html.DisplayFor(model => model.TenDanhMuc)
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.MoTaSanPham)
+                        @Html.DisplayNameFor(model => model.MoTaDanhmuc)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.MoTaSanPham)
+                        @Html.DisplayFor(model => model.MoTaDanhmuc)
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.GiaSanPham)
+                        @Html.DisplayNameFor(model => model.BannerDanhMuc)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.GiaSanPham)
+                        @Html.DisplayFor(model => model.BannerDanhMuc)
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.AvatarSanPham)
+                        @Html.DisplayNameFor(model => model.AvatarDanhMuc)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.AvatarSanPham)
+                        @Html.DisplayFor(model => model.AvatarDanhMuc)
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.DanhSachAnhSanPham)
+                        @Html.DisplayNameFor(model => model.ParentId)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.DanhSachAnhSanPham)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.NoiDungSanPham)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.NoiDungSanPham)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.HangSanPham)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.HangSanPham)
+                        @Html.DisplayFor(model => model.ParentId)
                     </dd>
 
                     <dt>

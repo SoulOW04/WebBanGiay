@@ -8,6 +8,11 @@ using WebBanGiayMVC.DataAccess;
 using WebBanGiayMVC.Models;
 using WebBanGiayMVC.Service.ChiTietDonHang.ViewModel;
 using WebBanGiayMVC.Service.ThongSoSanPham.ViewModel;
+using OfficeOpenXml;
+using System.IO;
+using Newtonsoft.Json;
+using System.ComponentModel;
+using LicenseContext = OfficeOpenXml.LicenseContext;
 
 namespace WebBanGiayMVC.Controllers
 {
@@ -33,6 +38,13 @@ namespace WebBanGiayMVC.Controllers
             if (cart != null)
             {
                 list = (List<ThongSoSanPhamViewModel>)cart;//ep kieu cart sang list 
+                ////
+                //string json = JsonConvert.SerializeObject(list);
+                //ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+                //ExcelPackage excelPackage = new ExcelPackage();
+                //ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Data");
+                
             }
 
             if (cart == null)
@@ -126,7 +138,7 @@ namespace WebBanGiayMVC.Controllers
             //return View(product);
         }
 
-        public ActionResult Checkout()
+        public ActionResult Checkout(int id, string tenSanPham, string soLuong, int gia, int kichThuoc )
         {
 
             var cart = Session[gioHang];
