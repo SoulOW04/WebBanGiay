@@ -49,6 +49,35 @@ namespace WebBanGiayMVC.DataAccess
 
         }
 
+        public List<SanPham> GetAllGiaSanPhamByNameFormat(string name)
+        {
+            try
+            {
+                using (var conn = new SqlConnection(cs))
+                {
+                    var storeName = "usp_WEB_GetAllGiaSanPhamFormat";//ten proc
+
+                    //Add param
+
+                    conn.Open();
+
+                    var result = conn.Query<SanPham>(storeName, commandType: System.Data.CommandType.StoredProcedure).ToList();
+                    conn.Close();
+
+                    return result;
+
+                }
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                return null;
+            }
+
+
+        }
+
 
         public List<SanPham> GetAllSanPham()
         {

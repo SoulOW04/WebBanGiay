@@ -12,6 +12,7 @@ namespace WebBanGiayMVC.Business
     internal interface ISanPhamService
     {
         List<SanPham> GetAllGiaSanPhamFormat();
+        List<SanPham> GetAllGiaSanPhamByNameFormat();
     }
 
     public class SanPhamService : ISanPhamService
@@ -31,6 +32,10 @@ namespace WebBanGiayMVC.Business
         SanPhamDA spDa = new SanPhamDA();
 
         public List<SanPham> GetAllGiaSanPhamFormat()
+        {
+            return spDa.GetAllGiaSanPhamFormat();
+        }
+        public List<SanPham> GetAllGiaSanPhamByNameFormat()
         {
             return spDa.GetAllGiaSanPhamFormat();
         }
