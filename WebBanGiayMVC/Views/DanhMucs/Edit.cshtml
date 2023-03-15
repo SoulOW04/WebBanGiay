@@ -31,7 +31,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.MoTaDanhmuc, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.MoTaDanhmuc, new { htmlAttributes = new { @class = "form-control" } })
+                            <textarea name="ck-mo-ta-danhmuc">@Model.MoTaDanhmuc</textarea>
                             @Html.ValidationMessageFor(model => model.MoTaDanhmuc, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -90,3 +90,8 @@
         </div>
     </div>
 </div>
+@section scripts{
+    <script>
+        CKEDITOR.replace('ck-mo-ta-danhmuc');
+    </script>
+}

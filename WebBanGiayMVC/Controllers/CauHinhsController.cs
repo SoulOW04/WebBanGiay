@@ -44,8 +44,8 @@ namespace WebBanGiayMVC.Controllers
         // POST: CauHinhs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ValidateInput(false)]
+        //[ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,TenCauHinh,MaCauHinh,GiaTriCauHinh,Loai,TrangThai,MoTa")] CauHinh cauHinh)
         {
             if (ModelState.IsValid)
