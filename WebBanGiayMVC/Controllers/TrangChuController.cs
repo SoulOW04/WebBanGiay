@@ -51,6 +51,10 @@ namespace WebBanGiayMVC.Controllers
                 ViewBag.SanPham = giaSanPham;
             }
 
+            //search searchSanpham
+            var searchSanPham= sanPhamService.GetSanPhamByName(searchSanPhamByName);
+            
+
             //lay cau hinh logo
             var cauHinhLogo = cauHinhService.GetCauHinhByMaCauHinh("Logo");
             if (cauHinhLogo != null)
@@ -88,9 +92,9 @@ namespace WebBanGiayMVC.Controllers
 
             ViewBag.CurrentFilter = searchSanPhamByName;
 
-            if (!String.IsNullOrEmpty(searchSanPhamByName))
+            //if (!String.IsNullOrEmpty(searchSanPhamByName))
 
-                sanpham = sanpham.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
+            //    sanpham = sanpham.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
             sanpham = sanpham.OrderBy(s => s.TenSanPham);
             //so san pham tren 1 page
             int pageSize = 4;
@@ -177,6 +181,7 @@ namespace WebBanGiayMVC.Controllers
             {
                 ViewBag.SanPham = cauHinhSanPhamTheoDanhMuc.ToList();
             }
+            
 
             var sanpham = from s in db.SanPhams
                           select s;
