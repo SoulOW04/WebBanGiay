@@ -1,0 +1,73 @@
+﻿@model WebBanGiayMVC.Models.CauHinh
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div id="page-wrapper">
+    <div class="main-page">
+        <h2 class="title1">Blank Page</h2>
+        <div class="blank-page widget-shadow scroll" id="style-2 div1">
+            <h2>Details</h2>
+
+            <div>
+                <h4>CauHinh</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TenCauHinh)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.TenCauHinh)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MaCauHinh)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.MaCauHinh)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.GiaTriCauHinh)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.GiaTriCauHinh)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Loai)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Loai)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TrangThai)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.TrangThai)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MoTa)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.MoTa)
+                    </dd>
+
+                </dl>
+            </div>
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+    </div>
+</div>

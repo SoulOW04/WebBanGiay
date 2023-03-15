@@ -7,7 +7,7 @@
     var sp = ViewBag.Sp as string;
     var gia = string.Format("{0:n0}", sanPham);
 
-
+    Session["viewSanPham"] = Model.Count;
 
 }
 
@@ -251,7 +251,27 @@
 
                     $('#btnPayment').off('click').on('click', function () {
 
-                        window.location.href = "/GioHang/Checkout";
+                        /*window.location.href = "/GioHang/Checkout";*/
+                            e.preventDefault();
+                            $.ajax({
+                                data: {
+                                    id: $(this).data('id'),
+                                    TenSanPham: $(this).data('TenSanPham'),
+                                    SoLuong: $(this).data('SoLuong'),
+                                    Gia: $(this).data('Gia'),
+                                    KichThuoc: $(this).data('KichThuoc')
+                                },
+                                url: '/GioHang/Checkout',
+                                dataType: 'Json',
+                                type: 'POST',
+                                success: function (res) {
+                                    if (res.status == true) {
+                                        window.location.href = "/GioHang/Cart";
+                                    }
+                                }
+
+                            })
+                        
                         ///////////////////////
                         //fetch('/GioHang/Checkout', {
                         //    method: 'POST',
@@ -278,27 +298,7 @@
                         //    }
 
                         //})
-                        $('.closed').off('click').on('click', function (e) {
-                            e.preventDefault();
-                            $.ajax({
-                                data: {
-                                    id: $(this).data('id'),
-                                    TenSanPham: $(this).data('TenSanPham'),
-                                    SoLuong: $(this).data('SoLuong'),
-                                    Gia: $(this).data('Gia'),
-                                    KichThuoc: $(this).data('KichThuoc')
-                                },
-                                url: '/GioHang/Checkout',
-                                dataType: 'Json',
-                                type: 'POST',
-                                success: function (res) {
-                                    if (res.status == true) {
-                                        window.location.href = "/GioHang/Cart";
-                                    }
-                                }
-
-                            })
-                        });
+                        
                     }),
 
 
