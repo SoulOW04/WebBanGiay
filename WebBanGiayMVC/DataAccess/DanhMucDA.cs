@@ -56,15 +56,6 @@ namespace WebBanGiayMVC.DataAccess
             using (var conn = new SqlConnection(cs))
             {
                 conn.Open();
-
-                //Add param
-                //DynamicParameters dp = new DynamicParameters();
-                //dp.Add("keyword", keyword);
-                //dp.Add("pageIndex", pageIndex);
-                //dp.Add("pageSize", pageSize);
-                //dp.Add("total", dbType: DbType.Int32, direction: ParameterDirection.Output);
-                //conn.Close();
-
                 var result = conn.Query<DanhMuc>("web_FilterDanhMuc", commandType: CommandType.StoredProcedure).ToList();
                 //total = dp.Get<int>("total");
                 conn.Close();

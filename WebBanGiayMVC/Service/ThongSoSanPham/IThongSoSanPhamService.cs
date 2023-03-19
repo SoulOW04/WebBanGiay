@@ -11,14 +11,14 @@ namespace WebBanGiayMVC.Business
 {
     internal interface IThongSoSanPhamSerivce
     {
-        ThongSoSanPhamViewModel GetThongTinSanPhamById(int thongtinspId);
+        List <ThongSoSanPhamViewModel> GetThongTinSanPhamById(int thongtinspId);
     }
     public class ThongSoSanPhamService : IThongSoSanPhamSerivce
     {
         ThongSoSanPhamDA _chiTietSanPhamDA = new ThongSoSanPhamDA();
 
 
-        public ThongSoSanPhamViewModel GetThongTinSanPhamById(int thongtinspId)
+        public List< ThongSoSanPhamViewModel> GetThongTinSanPhamById(int thongtinspId)
         {
             return _chiTietSanPhamDA.GetThongTinSanPhamById(thongtinspId);
         }

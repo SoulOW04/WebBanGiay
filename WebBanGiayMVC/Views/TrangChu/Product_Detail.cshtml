@@ -1,58 +1,61 @@
-﻿@model WebBanGiayMVC.Service.ThongSoSanPham.ViewModel.ThongSoSanPhamViewModel
+﻿@model IEnumerable<WebBanGiayMVC.Service.ThongSoSanPham.ViewModel.ThongSoSanPhamViewModel>
 @{
 
     ViewBag.Title = "Product_Detail";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
     var kichThuoc = ViewBag.KichThuocSp;
-    var giaSanPham = Model.GiaSanPham;
-    var gia = string.Format("{0:n0}", giaSanPham);
+    //var giaSanPham = Model.GiaSanPham;
+    //var gia = string.Format("{0:n0}", giaSanPham);
+    var prod = ViewBag.Product as List<WebBanGiayMVC.Service.ThongSoSanPham.ViewModel.ThongSoSanPhamViewModel>;
 }
 
 
-    <div class="colorlib-loader"></div>
-    <div id="page">
-        
+<div class="colorlib-loader"></div>
+<div id="page">
 
-        <div class="breadcrumbs">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <p class="bread"><span><a href="index.html">Home</a></span> / <span>Product Details</span></p>
-                    </div>
+
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="bread"><span><a href="index.html">Home</a></span> / <span>Product Details</span></p>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="colorlib-product">
-            <div class="container">
+    <div class="colorlib-product">
+        <div class="container">
+            @foreach (var item in prod)
+            {
                 <div class="row row-pb-lg product-detail-wrap">
                     <div class="col-sm-8">
                         <div class="owl-carousel">
                             <div class="item">
                                 <div class="product-entry border">
                                     <a href="#" class="prod-img">
-                                        <img src="@Html.DisplayFor(model => model.AvatarSanPham)" class="img-fluid" alt="Free html5 bootstrap 4 template">
+                                        <img src="@item.AvatarSanPham" class="img-fluid" alt="Free html5 bootstrap 4 template">
                                     </a>
                                 </div>
                             </div>
                             <div class="item">
                                 <div class="product-entry border">
                                     <a href="#" class="prod-img">
-                                        <img src="@Html.DisplayFor(model => model.AvatarSanPham)" alt="Free html5 bootstrap 4 template">
+                                        <img src="@item.AvatarSanPham" alt="Free html5 bootstrap 4 template">
                                     </a>
                                 </div>
                             </div>
                             <div class="item">
                                 <div class="product-entry border">
                                     <a href="#" class="prod-img">
-                                        <img src="@Html.DisplayFor(model => model.AvatarSanPham)" alt="Free html5 bootstrap 4 template">
+                                        <img src="@item.AvatarSanPham" alt="Free html5 bootstrap 4 template">
                                     </a>
                                 </div>
                             </div>
                             <div class="item">
                                 <div class="product-entry border">
                                     <a href="#" class="prod-img">
-                                        <img src="@Html.DisplayFor(model => model.AvatarSanPham)" alt="Free html5 bootstrap 4 template">
+                                        <img src="@item.AvatarSanPham" alt="Free html5 bootstrap 4 template">
                                     </a>
                                 </div>
                             </div>
@@ -60,9 +63,10 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="product-desc">
-                            <h3>@Html.DisplayFor(model => model.TenSanPham)</h3>
+                            
+                            <h3>@item.TenSanPham</h3>
                             <p class="price">
-                                <span>@gia</span>
+                                <span>@item.GiaSanPham</span>
                                 <span class="rate">
                                     <i class="icon-star-full"></i>
                                     <i class="icon-star-full"></i>
@@ -72,12 +76,12 @@
                                     (74 Rating)
                                 </span>
                             </p>
-                            <p>@Html.DisplayFor(model => model.MoTaSanPham)</p>
+                            <p>@item.MoTaSanPham</p>
                             <div class="size-wrap">
                                 <div class="block-26 mb-2">
                                     <h4>Size</h4>
                                     <ul>
-                                        <li><a href="#">@Html.DisplayFor(model => model.KichThuocSanPham)</a></li>
+                                        @item.GiaTriSp
 
                                     </ul>
                                 </div>
@@ -97,7 +101,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12 text-center">
-                                    <p class="add-to-cart"><a href="@Url.Action("AddItem", "GioHang", new { productId = Model.SanPhamId,quantity = 1 })" class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Add to Cart</a></p>
+                                    <p class="add-to-cart"><a href="@Url.Action("AddItem", "GioHang", new { productId = item.SanPhamId,quantity = 1 })" class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Add to Cart</a></p>
                                 </div>
                             </div>
                         </div>
@@ -124,11 +128,11 @@
 
                                     <div class="tab-content" id="pills-tabContent">
                                         <div class="tab-pane border fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
-                                            @Html.DisplayFor(model => model.MoTaSanPham)
+                                            @item.MoTaSanPham
                                         </div>
 
                                         <div class="tab-pane border fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
-                                            @Html.DisplayFor(model => model.HangSanPham)
+                                            @item.HangSanPham
                                         </div>
 
                                         <div class="tab-pane border fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
@@ -266,50 +270,53 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            }
         </div>
+
     </div>
 
-    <div class="gototop js-top">
-        <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
-    </div>
+</div>
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+</div>
 
 
-    <script>
-        $(document).ready(function () {
+<script>
+    $(document).ready(function () {
 
-            var quantitiy = 0;
-            $('.quantity-right-plus').click(function (e) {
+        var quantitiy = 0;
+        $('.quantity-right-plus').click(function (e) {
 
-                // Stop acting like a button
-                e.preventDefault();
-                // Get the field name
-                var quantity = parseInt($('#quantity').val());
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            var quantity = parseInt($('#quantity').val());
 
-                // If is not undefined
+            // If is not undefined
 
-                $('#quantity').val(quantity + 1);
+            $('#quantity').val(quantity + 1);
 
 
-                // Increment
+            // Increment
 
-            });
+        });
 
-            $('.quantity-left-minus').click(function (e) {
-                // Stop acting like a button
-                e.preventDefault();
-                // Get the field name
-                var quantity = parseInt($('#quantity').val());
+        $('.quantity-left-minus').click(function (e) {
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            var quantity = parseInt($('#quantity').val());
 
-                // If is not undefined
+            // If is not undefined
 
-                // Increment
-                if (quantity > 0) {
-                    $('#quantity').val(quantity - 1);
-                }
-            });
+            // Increment
+            if (quantity > 0) {
+                $('#quantity').val(quantity - 1);
+            }
+        });
 
-        });</script>
+    });</script>
 
 
 

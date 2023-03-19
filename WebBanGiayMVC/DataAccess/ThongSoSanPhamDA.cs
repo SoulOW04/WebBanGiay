@@ -14,7 +14,7 @@ namespace WebBanGiayMVC.DataAccess
     {
         private string cs = ConfigurationManager.ConnectionStrings["Model_Context1"].ConnectionString;
         private Model_Context _context = new Model_Context();
-        public ThongSoSanPhamViewModel GetThongTinSanPhamById(int thongtinspId)
+        public List<ThongSoSanPhamViewModel> GetThongTinSanPhamById(int thongtinspId)
         {
             try
             {
@@ -26,7 +26,7 @@ namespace WebBanGiayMVC.DataAccess
                     DynamicParameters dp = new DynamicParameters();
                     dp.Add("thongtinspId", thongtinspId);
                     conn.Open();
-                    var result = conn.QueryFirst<ThongSoSanPhamViewModel>(storeName, dp, commandType: System.Data.CommandType.StoredProcedure);
+                    var result = conn.Query<ThongSoSanPhamViewModel>(storeName, dp, commandType: System.Data.CommandType.StoredProcedure).ToList();
                     conn.Close();
 
                     return result;

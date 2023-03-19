@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WebBanGiayMVC.DataAccess;
 using WebBanGiayMVC.Models;
 
 namespace WebBanGiayMVC.Controllers
@@ -17,7 +18,15 @@ namespace WebBanGiayMVC.Controllers
         // GET: CauHinhs
         public ActionResult Index()
         {
-            return View(db.CauHinhs.ToList());
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(db.CauHinhs.ToList());
+            }
+            
         }
 
         // GET: CauHinhs/Details/5
@@ -32,13 +41,28 @@ namespace WebBanGiayMVC.Controllers
             {
                 return HttpNotFound();
             }
-            return View(cauHinh);
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(cauHinh);
+            }
+            
         }
 
         // GET: CauHinhs/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         // POST: CauHinhs/Create
@@ -48,6 +72,7 @@ namespace WebBanGiayMVC.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,TenCauHinh,MaCauHinh,GiaTriCauHinh,Loai,TrangThai,MoTa")] CauHinh cauHinh)
         {
+
             if (ModelState.IsValid)
             {
                 db.CauHinhs.Add(cauHinh);
@@ -70,7 +95,14 @@ namespace WebBanGiayMVC.Controllers
             {
                 return HttpNotFound();
             }
-            return View(cauHinh);
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(cauHinh);
+            }
         }
 
         // POST: CauHinhs/Edit/5
@@ -101,7 +133,14 @@ namespace WebBanGiayMVC.Controllers
             {
                 return HttpNotFound();
             }
-            return View(cauHinh);
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(cauHinh);
+            }
         }
 
         // POST: CauHinhs/Delete/5

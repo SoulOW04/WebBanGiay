@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebBanGiayMVC.DataAccess;
 using WebBanGiayMVC.Models;
+using WebBanGiayMVC.Service.SanPham.ViewModel;
 using WebBanGiayMVC.Service.ThongSoSanPham.ViewModel;
 
 namespace WebBanGiayMVC.Business
@@ -16,7 +17,7 @@ namespace WebBanGiayMVC.Business
 
     public class SanPhamService : ISanPhamService
     {
-        Model_Context model_Contextmodel;
+       
 
         
         //public List<Product> GetProducts()
@@ -35,6 +36,10 @@ namespace WebBanGiayMVC.Business
             return spDa.GetAllGiaSanPhamFormat();
         }
 
+        public bool CreateSanPham(InsertSanPhamWithDanhMucs sp)
+        {
+            return spDa.CreateSanPham(sp);
+        }
     
         
 

@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.UI.WebControls;
 using WebBanGiayMVC.Business;
 using WebBanGiayMVC.Models;
+using WebBanGiayMVC.Service.SanPham.ViewModel;
 
 namespace WebBanGiayMVC.DataAccess
 {
@@ -20,7 +22,45 @@ namespace WebBanGiayMVC.DataAccess
             int a = 0;
             return new List<SanPham>();
         }
+        public bool CreateSanPham(InsertSanPhamWithDanhMucs sp)
+        {
+            //
+            try
+            {
+                using (var conn = new SqlConnection(cs))
+                {
+                    var storeName = "usp_CMS_CreateSanPham";//ten proc
 
+                    //Add param
+                    DynamicParameters parameters= new DynamicParameters();
+                    parameters.Add("Id", sp.Id);
+                    parameters.Add("TenSanPham", sp.TenSanPham);
+                    parameters.Add("MoTaSanPham", sp.MoTaSanPham);
+                    parameters.Add("GiaSanPham", sp.GiaSanPham);
+                    parameters.Add("AvatarSanPham", sp.AvatarSanPham);
+                    parameters.Add("DanhSachAnhSanPham", sp.DanhSachAnhSanPham);
+                    parameters.Add("NoiDungSanPham", sp.NoiDungSanPham);
+                    parameters.Add("HangSanPham", sp.HangSanPham);
+                    parameters.Add("Loai", sp.Loai);
+                    parameters.Add("TrangThai", sp.TrangThai);
+                    parameters.Add("DanhSachDanhMucs", sp.DanhSachDanhMucs);
+
+                    conn.Open();
+                    var result = conn.Execute(storeName, parameters, commandType: System.Data.CommandType.StoredProcedure);
+                    conn.Close();
+
+                    return true;
+
+                }
+                throw new Exception();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            
+        }
         public List<SanPham> GetAllGiaSanPhamFormat()
         {
             try

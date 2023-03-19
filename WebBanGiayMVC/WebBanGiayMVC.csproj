@@ -150,6 +150,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CauHinhsController.cs" />
     <Compile Include="Controllers\DanhMucsController.cs" />
     <Compile Include="Controllers\DonHangsController.cs" />
@@ -158,7 +159,9 @@
     <Compile Include="Controllers\ThongSoKiThuatsController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Controllers\UploadFilesController.cs" />
+    <Compile Include="DataAccess\AdminDA.cs" />
     <Compile Include="Models\Admin.cs" />
+    <Compile Include="Service\Admin\IAdminService.cs" />
     <Compile Include="Service\CauHinh\ViewModel\CauHinhViewModel.cs" />
     <Compile Include="Service\ChiTietDonHang\ViewModel\ChiTietDonHangViewModel.cs" />
     <Compile Include="Service\DanhMuc\IDanhMucService.cs" />
@@ -548,6 +551,7 @@
     <Content Include="admin-design-dashboard-web\jsCustom\cauHinh.js" />
     <Content Include="admin-design-dashboard-web\jsCustom\core.js" />
     <Content Include="admin-design-dashboard-web\jsCustom\danhMuc.js" />
+    <Content Include="admin-design-dashboard-web\jsCustom\sanPham.js" />
     <Content Include="admin-design-dashboard-web\js\amcharts.js" />
     <Content Include="admin-design-dashboard-web\js\bootstrap.js" />
     <Content Include="admin-design-dashboard-web\js\Chart.bundle.js" />
@@ -818,6 +822,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="snow-login-form-starter\css\style.css" />
+    <Content Include="snow-login-form-starter\images\bgimage.jpg" />
+    <Content Include="snow-login-form-starter\index.html" />
+    <Content Include="snow-login-form-starter\starter-license-W3Layouts.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -868,10 +876,11 @@
     <Content Include="Views\ThongSoKiThuats\Details.cshtml" />
     <Content Include="Views\ThongSoKiThuats\Edit.cshtml" />
     <Content Include="Views\ThongSoKiThuats\Index.cshtml" />
+    <Content Include="Views\SanPhams\AdminIndex.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Service\Admin\" />
     <Folder Include="Service\BaseService\" />
     <Folder Include="Service\DanhMuc\ViewModel\" />
     <Folder Include="Service\DonHang\ViewModel\" />
