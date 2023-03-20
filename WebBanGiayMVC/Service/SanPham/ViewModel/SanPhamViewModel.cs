@@ -47,4 +47,11 @@ namespace WebBanGiayMVC.Service.SanPham.ViewModel
     }
 
 
+    public class ThongSoSanPhamHT
+    {
+        public int ThongSo_Id { get; set; }
+        public string ThongSo_Ten { get; set; }
+        public string GiaTri { get; set; }
+    }
+
 }

@@ -256,9 +256,16 @@ namespace WebBanGiayMVC.Controllers
 
         public ActionResult Product_Detail(int id)
         {
-            var product = new ThongSoSanPhamDA().GetThongTinSanPhamById(id);
-            ViewBag.Product = product;
-            return View(product);
+            var product = sanPhamService.GetChiTietSanPham(id);
+            if(product != null)
+            {
+                var thongSoKyThuats = sanPhamService.GetThongSoSanPhams(id);
+                ViewBag.TSKT = thongSoKyThuats;
+                return View(product);
+            }
+            return null;
+            
+            
         }
     }
 }

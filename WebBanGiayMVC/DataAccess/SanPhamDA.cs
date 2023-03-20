@@ -18,6 +18,7 @@ namespace WebBanGiayMVC.DataAccess
     {
 
         private string cs = ConfigurationManager.ConnectionStrings["Model_Context1"].ConnectionString;
+        private Model_Context db = new Model_Context();
         public List<SanPham> GetProduct() 
         {
             int a = 0;
@@ -140,6 +141,35 @@ namespace WebBanGiayMVC.DataAccess
 
         }
 
+        public List<SanPham> GetAllGiaSanPhamByNameFormat(string name)
+        {
+            try
+            {
+                using (var conn = new SqlConnection(cs))
+                {
+                    var storeName = "usp_WEB_GetAllGiaSanPhamFormat";//ten proc
+
+                    //Add param
+
+                    conn.Open();
+
+                    var result = conn.Query<SanPham>(storeName, commandType: System.Data.CommandType.StoredProcedure).ToList();
+                    conn.Close();
+
+                    return result;
+
+                }
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                return null;
+            }
+
+
+        }
+
 
         public List<SanPham> GetAllSanPham()
         {
@@ -169,7 +199,36 @@ namespace WebBanGiayMVC.DataAccess
 
         }
 
-        
+        public SanPham GetChiTietSanPham(int id)
+        {
+            if(id > 0)
+            {
+                var result = db.SanPhams.Find(id);
+                return result;
+            }
+            return null;
+        }
+
+        public List<ThongSoSanPhamHT> GetThongSoSanPhams(int id)
+        {
+            if(id > 0)
+            {
+                var tskt = db.ThongSoKiThuats.AsQueryable();
+                var tssp = db.ThongSoSanPhams.AsQueryable();
+                var query = (from k in tskt
+                             join s in tssp on k.Id equals s.ThongSoKiThuatId
+                             where s.SanPhamId== id
+                             select new ThongSoSanPhamHT()
+                             {
+                                 ThongSo_Id = k.Id,
+                                 ThongSo_Ten = k.GiaTri,
+                                 GiaTri = s.GiaTriSp
+                             }).ToList();
+                return query;
+            }
+            return null;
+            
+        }
 
 
 
