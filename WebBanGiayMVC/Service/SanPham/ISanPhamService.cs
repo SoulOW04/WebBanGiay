@@ -40,8 +40,13 @@ namespace WebBanGiayMVC.Business
         {
             return spDa.CreateSanPham(sp);
         }
-    
-        
+
+        public bool SaveSP(InsertSanPhamFull sp)
+        {
+            return spDa.SaveSP(sp);
+        }
+
+
 
 
 

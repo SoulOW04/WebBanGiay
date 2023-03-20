@@ -11,10 +11,6 @@ namespace WebBanGiayMVC.Models
     {
         public int Id { get; set; }
 
-        public string StyleSanPham { get; set; }
-
-        public string Mau { get; set; }
-
-        public int? KichThuocSanPham { get; set; }
+        public string GiaTri { get; set; }
     }
 }

@@ -15,6 +15,6 @@ namespace WebBanGiayMVC.Models
 
         public int? ThongSoKiThuatId { get; set; }
 
-        public string GiaTri { get; set; }
+        public string GiaTriSp { get; set; }
     }
 }
