@@ -76,10 +76,17 @@
                             <div class="size-wrap">
                                 <div class="block-26 mb-2">
                                     <h4>Size</h4>
+                                       
                                     <ul>
-                                        <li><a href="#">@Html.DisplayFor(model => model.KichThuocSanPham)</a></li>
+                                        @foreach (var giaTri in Model.GiaTriSp)
+                                        {
+                                            <li><a href="#">@Html.DisplayFor(model => model.GiaTriSp)</a></li>
+                                        }
+
 
                                     </ul>
+                                    
+
                                 </div>
                             </div>
                             <div class="input-group mb-4">

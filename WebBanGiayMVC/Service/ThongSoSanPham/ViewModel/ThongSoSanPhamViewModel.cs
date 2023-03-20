@@ -10,7 +10,10 @@ namespace WebBanGiayMVC.Service.ThongSoSanPham.ViewModel
         public int Id { get; set; }
 
         public int SanPhamId { get; set; }
+
         public int ThongSoKiThuatId { get; set; }
+
+        public string GiaTriSp { get; set; }
 
         public string AvatarSanPham { get; set; }
 
@@ -25,11 +28,5 @@ namespace WebBanGiayMVC.Service.ThongSoSanPham.ViewModel
         public string NoiDungSanPham { get; set; }
 
         public string HangSanPham { get; set; }
-
-        public string StyleSanPham { get; set; }
-
-        public string Mau { get; set; }
-
-        public int KichThuocSanPham { get; set; }
     }
 }

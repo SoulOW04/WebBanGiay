@@ -1,0 +1,91 @@
+﻿@model IEnumerable<WebBanGiayMVC.Models.CauHinh>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="main-page">
+        <h2 class="title1">Blank Page</h2>
+        <div class="blank-page widget-shadow scroll" id="style-2 div1">
+            <h2>Index</h2>
+
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TenCauHinh)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaCauHinh)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.GiaTriCauHinh)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Loai)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TrangThai)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MoTa)
+                        </th>
+                        <th>
+                            Option
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TenCauHinh)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MaCauHinh)
+                            </td>
+                            <td>
+                                <img src="@item.GiaTriCauHinh" style="width:50px;height:50px" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Loai)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TrangThai)
+                            </td>
+                            <td>
+                                @Html.Raw(item.MoTa)
+
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        var R = {
+            Init: function () {
+                R.InitDataTable();
+            },
+            RegisterEvent: function () { },
+            InitDataTable: function () {
+                $('.table').DataTable()
+            }
+        }
+        R.Init()
+    </script>
+}

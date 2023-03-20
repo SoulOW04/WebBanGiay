@@ -1,0 +1,49 @@
+﻿@model WebBanGiayMVC.Models.ThongSoKiThuat
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div id="page-wrapper">
+    <div class="main-page">
+        <h2 class="title1">Blank Page</h2>
+        <div class="blank-page widget-shadow scroll" id="style-2 div1">
+            <h2>Details</h2>
+
+            <div>
+                <h4>ThongSoKiThuat</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.StyleSanPham)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.StyleSanPham)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Mau)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Mau)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.KichThuocSanPham)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.KichThuocSanPham)
+                    </dd>
+
+                </dl>
+            </div>
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿@model WebBanGiayMVC.Models.ThongSoKiThuat
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div id="page-wrapper">
+    <div class="main-page">
+        <h2 class="title1">Blank Page</h2>
+        <div class="blank-page widget-shadow scroll" id="style-2 div1">
+            <h2>Delete</h2>
+
+            <h3>Are you sure you want to delete this?</h3>
+            <div>
+                <h4>ThongSoKiThuat</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.StyleSanPham)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.StyleSanPham)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Mau)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Mau)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.KichThuocSanPham)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.KichThuocSanPham)
+                    </dd>
+
+                </dl>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Delete" class="btn btn-default" /> |
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
