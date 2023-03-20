@@ -5,7 +5,7 @@
     },
     RegisterEvent: function () {
         $('.create-danhmuc').off('click').on('click', function () {
-            debugger
+           
             var tenDanhMuc = $('#TenDanhMuc').val();
             //var moTaDanhmuc = $('#MoTaDanhmuc').val();
             var moTa = CKEDITOR.instances.ckMotaDanhMuc.getData();
