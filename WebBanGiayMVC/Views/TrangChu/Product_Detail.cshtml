@@ -7,6 +7,11 @@
     //var giaSanPham = Model.GiaSanPham;
     //var gia = string.Format("{0:n0}", giaSanPham);
     var prod = ViewBag.Product as List<WebBanGiayMVC.Service.ThongSoSanPham.ViewModel.ThongSoSanPhamViewModel>;
+    var sanpham = from p in prod
+                  select new WebBanGiayMVC.Models.SanPham()
+                  {
+                    
+                  }
 }
 
 

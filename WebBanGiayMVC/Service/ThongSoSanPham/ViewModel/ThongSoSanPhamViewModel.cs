@@ -33,8 +33,6 @@ namespace WebBanGiayMVC.Service.ThongSoSanPham.ViewModel
 
         public string GiaTri { get; set; }
 
-        public string GiaTriSp { get; set; }
-
 
     }
 }
