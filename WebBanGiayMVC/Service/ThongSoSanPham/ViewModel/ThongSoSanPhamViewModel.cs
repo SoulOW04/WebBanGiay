@@ -28,5 +28,13 @@ namespace WebBanGiayMVC.Service.ThongSoSanPham.ViewModel
         public string NoiDungSanPham { get; set; }
 
         public string HangSanPham { get; set; }
+
+        public string StyleSanPham { get; set; }
+
+        public string GiaTri { get; set; }
+
+        public string GiaTriSp { get; set; }
+
+
     }
 }

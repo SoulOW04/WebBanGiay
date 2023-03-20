@@ -103,12 +103,18 @@ namespace WebBanGiayMVC.Controllers
                 {
                     //Tạo mới đối tượng Chi Tiet Don Hang 
                     var item = new ThongSoSanPhamViewModel();
-                    item.SanPhamId = product.SanPhamId; 
-                    item.SoLuong = quantity;
-                    item.GiaTriSp = product.GiaTriSp;
-                    item.AvatarSanPham = product.AvatarSanPham;
-                    item.GiaSanPham = product.GiaSanPham;
-                    item.TenSanPham = product.TenSanPham;
+                    foreach (var prod in product)
+                    {
+                        item.GiaTri = prod.GiaTri  ;
+                        item.GiaSanPham = prod.GiaSanPham ;
+                        item.AvatarSanPham = prod.AvatarSanPham;
+                        item.SanPhamId = productId;
+                        item.TenSanPham = prod.TenSanPham;
+                        item.MoTaSanPham = prod.MoTaSanPham;
+                        item.SoLuong = quantity;
+
+
+                    }
                     
                     list.Add(item);
                 }
@@ -120,12 +126,18 @@ namespace WebBanGiayMVC.Controllers
 
                 //Tạo mới đối tượng Chi Tiet Don Hang 
                 var item = new ThongSoSanPhamViewModel();
-                item.SanPhamId = product.SanPhamId;
-                item.SoLuong = quantity;
-                item.GiaTriSp = product.GiaTriSp;
-                item.AvatarSanPham = product.AvatarSanPham;
-                item.GiaSanPham = product.GiaSanPham;
-                item.TenSanPham = product.TenSanPham;
+                foreach (var prod in product)
+                {
+                    item.GiaTri = prod.GiaTri;
+                    item.GiaSanPham = prod.GiaSanPham;
+                    item.AvatarSanPham = prod.AvatarSanPham;
+                    item.SanPhamId = productId;
+                    item.TenSanPham = prod.TenSanPham;
+                    item.MoTaSanPham = prod.MoTaSanPham;
+                    item.SoLuong = quantity;
+
+
+                }
 
                 var list = new List<ThongSoSanPhamViewModel>();
                 list.Add(item);

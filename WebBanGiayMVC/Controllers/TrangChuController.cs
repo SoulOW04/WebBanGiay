@@ -44,11 +44,11 @@ namespace WebBanGiayMVC.Controllers
         {
 
             //lay giaSpFOrmat
-            var giaSanPham = sanPhamService.GetAllGiaSanPhamFormat();
+            var sanPham = sanPhamService.GetAllGiaSanPhamFormat();
 
-            if (giaSanPham != null)
+            if (sanPham != null)
             {
-                ViewBag.SanPham = giaSanPham;
+                ViewBag.SanPham = sanPham;
             }
 
             //lay cau hinh logo
@@ -89,13 +89,14 @@ namespace WebBanGiayMVC.Controllers
             ViewBag.CurrentFilter = searchSanPhamByName;
 
             if (!String.IsNullOrEmpty(searchSanPhamByName))
+            {
 
                 sanpham = sanpham.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
-            sanpham = sanpham.OrderBy(s => s.TenSanPham);
+                sanpham = sanpham.OrderBy(s => s.TenSanPham);
+            }
             //so san pham tren 1 page
-            int pageSize = 4;
-            int pageNumber = (page ?? 1);
-            return View(sanpham.ToPagedList(pageNumber, pageSize));
+
+            return View();
 
             //sanpham = sanpham.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
 
@@ -139,7 +140,7 @@ namespace WebBanGiayMVC.Controllers
             return PartialView(list);
         }
 
-        
+
         public ActionResult Contact()
         {
             return View();
@@ -195,7 +196,7 @@ namespace WebBanGiayMVC.Controllers
             int pageSize = 5;
             int No_Of_Page = (page ?? 1);
 
-            return View(sanpham.ToPagedList(No_Of_Page, pageSize));
+            return View();
         }
         public ActionResult Women(int? page, string searchSanPhamByName, string currentFilter)
         {
@@ -252,11 +253,11 @@ namespace WebBanGiayMVC.Controllers
 
             return View(sp.ToPagedList(pageNumber, pageSize));
         }
-        
+
         public ActionResult Product_Detail(int id)
         {
             var product = new ThongSoSanPhamDA().GetThongTinSanPhamById(id);
-
+            ViewBag.Product = product;
             return View(product);
         }
     }

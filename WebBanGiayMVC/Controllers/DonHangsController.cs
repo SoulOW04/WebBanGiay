@@ -17,7 +17,14 @@ namespace WebBanGiayMVC.Controllers
         // GET: DonHangs
         public ActionResult Index()
         {
-            return View(db.DonHangs.ToList());
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(db.DonHangs.ToList());
+            }
         }
 
         // GET: DonHangs/Details/5
@@ -32,20 +39,34 @@ namespace WebBanGiayMVC.Controllers
             {
                 return HttpNotFound();
             }
-            return View(donHang);
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(donHang);
+            }
+            
         }
 
         // GET: DonHangs/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         // POST: DonHangs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ValidateInput(false)]
         public ActionResult Create([Bind(Include = "Id,MaDonHang,HoTen,DiaChi,ThanhPho,Email,SoDienThoai,NgayDatHang,TrangThai,Loai")] DonHang donHang)
         {
             if (ModelState.IsValid)
@@ -70,7 +91,14 @@ namespace WebBanGiayMVC.Controllers
             {
                 return HttpNotFound();
             }
-            return View(donHang);
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(donHang);
+            }
         }
 
         // POST: DonHangs/Edit/5
@@ -101,7 +129,14 @@ namespace WebBanGiayMVC.Controllers
             {
                 return HttpNotFound();
             }
-            return View(donHang);
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(donHang);
+            }
         }
 
         // POST: DonHangs/Delete/5

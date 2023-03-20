@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebBanGiayMVC.Models;
 
 namespace WebBanGiayMVC.Service.SanPham.ViewModel
 {
@@ -26,5 +27,10 @@ namespace WebBanGiayMVC.Service.SanPham.ViewModel
         public int? Loai { get; set; }
 
         public int? TrangThai { get; set; }
+    }
+
+    public class InsertSanPhamWithDanhMucs : WebBanGiayMVC.Service.SanPham.ViewModel.SanPhamViewModel
+    {
+        public string DanhSachDanhMucs { get; set; }
     }
 }

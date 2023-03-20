@@ -1,4 +1,8 @@
-﻿
+﻿@{
+    var name = Session["Name"];
+    
+            
+}
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -44,7 +48,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
     <!-- //requried-jsfiles-for owl -->
     <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" rel="stylesheet">
-    
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+
     @RenderSection("Styles", required: false)
 </head>
 <body class="cbp-spmenu-push">
@@ -72,13 +78,39 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             </li>
                             <li class="treeview">
                                 <a href="#">
-                                    <i class="fa fa-laptop"></i>
-                                    <span>Train</span>
+                                    <i class="fa-solid fa-gear"></i>
+                                    <span>Cấu Hình</span>
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li>@Html.ActionLink("Add Train", "Create", "Train_Details")</li>
-                                    <li>@Html.ActionLink("View Train Details", "Index", "Train_Details")</li>
+                                    <li>@Html.ActionLink("Thêm Cấu Hình", "Create", "CauHinhs")</li>
+                                    <li>@Html.ActionLink("Hiển Thị Cấu Hình", "Index", "CauHinhs")</li>
+                                    @*<li><a href="~/Views/Admin/Login.cshtml"><i class="fa fa-angle-right"></i> Add</a></li>*@
+
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa-solid fa-list-check"></i>
+                                    <span>Danh Mục</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li>@Html.ActionLink("Thêm Danh Mục", "Create", "DanhMucs")</li>
+                                    <li>@Html.ActionLink("Hiển Thị Danh Mục", "Index", "DanhMucs")</li>
+                                    @*<li><a href="~/Views/Admin/Login.cshtml"><i class="fa fa-angle-right"></i> Add</a></li>*@
+
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-bars" aria-hidden="true"></i>
+                                    <span>Đơn Hàng</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li>@Html.ActionLink("Thêm Đơn Hàng", "Create", "DonHangs")</li>
+                                    <li>@Html.ActionLink("Hiển Thị Đơn Hàng", "Index", "DonHangs")</li>
                                     @*<li><a href="~/Views/Admin/Login.cshtml"><i class="fa fa-angle-right"></i> Add</a></li>*@
 
                                 </ul>
@@ -86,27 +118,27 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
                             <li class="treeview">
                                 <a href="#">
-                                    <i class="fa fa-laptop"></i>
-                                    <span>Train Ticket</span>
+                                    <i class="fa fa-product-hunt" aria-hidden="true"></i>
+                                    <span>Sản Phẩm</span>
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li>@Html.ActionLink("Add Ticket", "Create", "Fare_Detail")</li>
-                                    <li>@Html.ActionLink("View Ticket Detail", "Index", "Fare_Detail")</li>
+                                    <li>@Html.ActionLink("Thêm Sản Phẩm", "Create", "SanPhams")</li>
+                                    <li>@Html.ActionLink("Hiển Thị Sản Phẩm", "AdminIndex", "SanPhams")</li>
                                 </ul>
                             </li>
-                            <li>
-                                <a href="widgets.html">
-                                    <i class="fa fa-list-alt"></i>
-                                    <span>User Book Ticket Info</span>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-laptop"></i>
+                                    <span>Thông Số Kĩ Thuật</span>
                                     <i class="fa fa-angle-left pull-right"></i>
-                                    <ul class="treeview-menu">
-                                        <li>@Html.ActionLink("User Ticket", "IndexForUser", "Admin")</li>
-                                        @*<li>@Html.ActionLink("View User Detail", "DetailForUserTicket", "Admin")</li>*@
-                                    </ul>
-
                                 </a>
+                                <ul class="treeview-menu">
+                                    <li>@Html.ActionLink("Thêm Thông Số Kĩ Thuật", "Create", "ThongSoKiThuats")</li>
+                                    <li>@Html.ActionLink("Hiển Thị Thông Số Kĩ Thuật", "Index", "ThongSoKiThuats")</li>
+                                </ul>
                             </li>
+
                             <li>
                                 <a href="widgets.html">
                                     <i class="fa fa-users"></i>
@@ -338,7 +370,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <div class="profile_img">
                                 <span class="prfil-img"><img src="images/2.jpg" alt=""> </span>
                                 <div class="user-name">
-                                    <p>Admin Name</p>
+                                    <p>@name</p>
                                     <span>Administrator</span>
                                 </div>
                                 <i class="fa fa-angle-down lnr"></i>
