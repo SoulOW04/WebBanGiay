@@ -1,9 +1,13 @@
 ﻿@model WebBanGiayMVC.Models.SanPham
-
+@using WebBanGiayMVC.Service.SanPham.ViewModel
 @{
-    ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     var dsDanhMuc = ViewBag.DsDanhMuc as List<WebBanGiayMVC.Models.DanhMuc>;
+    var title = (string)ViewBag.Title;
+    var submitButton = (string)ViewBag.SummitButton;
+    var dtDanhMuc = (List<int?>)ViewBag.DtDanhMuc ?? new List<int?>();
+    var thongSos = (List<ThongSoInsertUpdate>)ViewBag.ThongSo ?? new List<ThongSoInsertUpdate>();
+    var thongSoSelect = (List<WebBanGiayMVC.Models.ThongSoKiThuat>)ViewBag.ThongSoSelect;
 }
 @section styles{
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -12,11 +16,14 @@
     <div class="main-page">
         <h2 class="title1">Blank Page</h2>
         <div class="blank-page widget-shadow scroll" id="style-2 div1">
-            <h2>Create</h2>
+            <h2>@title</h2>
 
             <div class="form-horizontal">
                 <h4>SanPham</h4>
                 <hr />
+                <div>
+                    <input type="number" class="id-sp" disabled style="display:none"  value="@Model.Id"/>
+                </div>
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     @Html.LabelFor(model => model.TenSanPham, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -31,7 +38,7 @@
                     <div class="col-md-10">
                         @*@Html.EditorFor(model => model.MoTaSanPham, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.MoTaSanPham, "", new { @class = "text-danger" })*@
-                        <textarea name="ckMotaSanPham"></textarea>
+                        <textarea name="ckMotaSanPham">@Model.MoTaSanPham</textarea>
                         @Html.ValidationMessageFor(model => model.MoTaSanPham, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -50,7 +57,7 @@
                         @*@Html.EditorFor(model => model.AvatarSanPham, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.AvatarSanPham, "", new { @class = "text-danger" })*@
                         <input type="file" class="upload-single-input form-control" />
-                        <img src="" class="preview-picture" id="AvatarSanPham" style="width:70px; height:70px" />
+                        <img src="@Model.AvatarSanPham" class="preview-picture" id="AvatarSanPham" style="width:70px; height:70px" />
                     </div>
                 </div>
 
@@ -60,7 +67,7 @@
                         @*@Html.EditorFor(model => model.DanhSachAnhSanPham, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.DanhSachAnhSanPham, "", new { @class = "text-danger" })*@
                         <input type="file" class="upload-single-input form-control" />
-                        <img src="" class="preview-picture" id="DanhSachAnhSanPham" style="width:70px; height:70px" />
+                        <img src="@Model.DanhSachAnhSanPham" class="preview-picture" id="DanhSachAnhSanPham" style="width:70px; height:70px" />
                     </div>
                 </div>
 
@@ -97,9 +104,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="dsDanhMuc">Danh sách danh mục</label>
+                    <div class="col-md-2">
+                        <label for="dsDanhMuc">Danh sách danh mục</label>
+                    </div>
+
                     <div class="col-md-10">
-                        <select id="dsDanhMuc" name="dsDanhMuc" class="form-control dsDanhMuc" multiple="multiple">
+                        <select id="dsDanhMuc" name="dsDanhMuc" class="form-control dsDanhMuc" multiple="multiple" data-value="@string.Join(",", dtDanhMuc)" style="width:100%">
                             @foreach (var item in dsDanhMuc)
                             {
                                 <option value="@item.Id">@item.TenDanhMuc</option>
@@ -116,22 +126,44 @@
                     <div class="row template" style="display:none">
                         <div class="col-md-4">
                             <select class="form-control thong-so-sp">
-                                <option value="1">Màu sắc</option>
-                                <option value="2">Kích thước</option>
+                                @foreach (var ts in thongSoSelect)
+                                {
+                                    <option value="@ts.Id">@ts.GiaTri</option>
+                                }
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <input  type="text" class="form-control gia-tri" />
+                            <input type="text" class="form-control gia-tri" />
                         </div>
                         <div class="col-md-4">
                             <button class="btn btn-danger remove-thong-so">-</button>
                         </div>
                     </div>
+                    @foreach (var ts in thongSos)
+                    {
+                        <div class="row thong-so-item">
+                            <div class="col-md-4">
+                                <select class="form-control thong-so-sp" >
+                                     @foreach (var option in thongSoSelect)
+                                {
+                                    <option value="@option.Id" @(ts.ThongSoId == option.Id ? "selected" : "")>@option.GiaTri</option>
+                                }
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control gia-tri" value="@ts.GiaTri" />
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-danger remove-thong-so">-</button>
+                            </div>
+                        </div>
+                    }
+
                 </div>
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="button" value="Create" class="btn btn-default create-sanpham" />
+                        <input type="button" value="@submitButton" class="btn btn-default create-sanpham" />
                     </div>
                 </div>
 

@@ -14,6 +14,8 @@ namespace WebBanGiayMVC.Business
     {
         List<SanPham> GetAllGiaSanPhamFormat();
         List<SanPham> GetAllGiaSanPhamByNameFormat();
+        SanPham GetChiTietSanPham(int id);
+        List<ThongSoSanPhamHT> GetThongSoSanPhams(int id);
     }
 
     public class SanPhamService : ISanPhamService
@@ -21,14 +23,7 @@ namespace WebBanGiayMVC.Business
        
 
         
-        //public List<Product> GetProducts()
-        //{
-        //    model_Contextmodel= new Model_Context();
-        //    model_Contextmodel.SanPhams.ToList();
-
-        //    throw new NotImplementedException();
-
-        //}
+        
 
         SanPhamDA spDa = new SanPhamDA();
 
@@ -45,12 +40,21 @@ namespace WebBanGiayMVC.Business
         {
             return spDa.CreateSanPham(sp);
         }
-    
-        
 
+        public bool SaveSP(InsertSanPhamFull sp)
+        {
+            return spDa.SaveSP(sp);
+        }
 
+        public SanPham GetChiTietSanPham(int id)
+        {
+           return spDa.GetChiTietSanPham(id);
+        }
 
-
+        public List<ThongSoSanPhamHT> GetThongSoSanPhams(int id)
+        {
+            return spDa.GetThongSoSanPhams(id);
+        }
     }
 }
 

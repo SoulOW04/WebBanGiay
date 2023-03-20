@@ -129,7 +129,7 @@ namespace WebBanGiayMVC.Controllers
             }
         }
         // GET: CauHinhs/Create
-        public ActionResult Create()
+        public ActionResult InsertOrUpdate(int id = 0)
         {
             if (Session["Name"] == null)
             {
@@ -142,10 +142,34 @@ namespace WebBanGiayMVC.Controllers
                 {
                     ViewBag.DsDanhMuc = danhMucService.GetAllDanhMuc();
                 }
+                var sp = new SanPham();
+                var danhMucs = new List<SanPhamTrongDanhMuc>();
+                ViewBag.Title = "Create San Pham";
+                ViewBag.SummitButton = "Create";
+                if(id > 0)
+                {
+                    ViewBag.Title = "Edit San Pham";
+                    ViewBag.SummitButton = "Edit";
+                    sp = db.SanPhams.Find(id);
+                    danhMucs = db.SanPhamTrongDanhMucs.Where(r => r.SanPhamId == id).ToList();
+                    ViewBag.DtDanhMuc = danhMucs.Select(r => r.DanhMucId).ToList();
+                    var thongSos = from ts in db.ThongSoSanPhams.Where(r => r.SanPhamId == id).AsQueryable()
+                                  select new ThongSoInsertUpdate
+                                  {
+                                      ThongSoId = ts.ThongSoKiThuatId,
+                                      GiaTri = ts.GiaTriSp
+                                  };
+                    ViewBag.ThongSo = thongSos.ToList();
+
+                }
+
+                var thongSoKyThuat = db.ThongSoKiThuats.ToList();
+                ViewBag.ThongSoSelect = thongSoKyThuat;
                 
-                return View();
+                return View(sp);
             }
         }
+
 
         // POST: CauHinhs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -170,6 +194,14 @@ namespace WebBanGiayMVC.Controllers
         {
             //Viet gi do vao day
             var spResult = sanPhamService.CreateSanPham(sp);
+            return Content("OK");
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult SaveSP(InsertSanPhamFull sp)
+        {
+            //Viet gi do vao day
+            var spResult = sanPhamService.SaveSP(sp);
             return Content("OK");
         }
 

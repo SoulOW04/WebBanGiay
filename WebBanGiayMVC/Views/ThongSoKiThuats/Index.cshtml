@@ -18,14 +18,10 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.StyleSanPham)
+                            @Html.DisplayNameFor(model => model.GiaTri)
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Mau)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.KichThuocSanPham)
-                        </th>
+                        
+                        
                         <th></th>
                     </tr>
                 </thead>
@@ -34,14 +30,9 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.StyleSanPham)
+                                @Html.DisplayFor(modelItem => item.GiaTri)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Mau)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.KichThuocSanPham)
-                            </td>
+                            
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |

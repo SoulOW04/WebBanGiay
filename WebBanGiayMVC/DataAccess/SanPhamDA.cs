@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -17,6 +18,7 @@ namespace WebBanGiayMVC.DataAccess
     {
 
         private string cs = ConfigurationManager.ConnectionStrings["Model_Context1"].ConnectionString;
+        private Model_Context db = new Model_Context();
         public List<SanPham> GetProduct() 
         {
             int a = 0;
@@ -60,6 +62,56 @@ namespace WebBanGiayMVC.DataAccess
                 throw;
             }
             
+        }
+
+        public bool SaveSP(InsertSanPhamFull sp)
+        {
+            //
+            try
+            {
+                using (var conn = new SqlConnection(cs))
+                {
+                    var storeName = "usp_CMS_SaveSanPham";//ten proc
+
+                    //Add datatable ThongsoSanPham
+                    DataTable dt = new DataTable();
+                    dt.Columns.Add("ThongSoId", typeof(int));
+                    dt.Columns.Add("GiaTri", typeof(string));
+
+                    foreach(var ts in sp.ThongSoInsertUpdates)
+                    {
+                        dt.Rows.Add(ts.ThongSoId, ts.GiaTri);
+                    }
+                    //Add param
+                    DynamicParameters parameters = new DynamicParameters();
+                    parameters.Add("Id", sp.Id);
+                    parameters.Add("TenSanPham", sp.TenSanPham);
+                    parameters.Add("MoTaSanPham", sp.MoTaSanPham);
+                    parameters.Add("GiaSanPham", sp.GiaSanPham);
+                    parameters.Add("AvatarSanPham", sp.AvatarSanPham);
+                    parameters.Add("DanhSachAnhSanPham", sp.DanhSachAnhSanPham);
+                    parameters.Add("NoiDungSanPham", sp.NoiDungSanPham);
+                    parameters.Add("HangSanPham", sp.HangSanPham);
+                    parameters.Add("Loai", sp.Loai);
+                    parameters.Add("TrangThai", sp.TrangThai);
+                    parameters.Add("DanhSachDanhMucs", sp.DanhSachDanhMucs);
+                    parameters.Add("thongSos", dt.AsTableValuedParameter("insert_tssp"));
+
+                    conn.Open();
+                    var result = conn.Execute(storeName, parameters, commandType: System.Data.CommandType.StoredProcedure);
+                    conn.Close();
+
+                    return true;
+
+                }
+                throw new Exception();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
         }
         public List<SanPham> GetAllGiaSanPhamFormat()
         {
@@ -147,7 +199,36 @@ namespace WebBanGiayMVC.DataAccess
 
         }
 
-        
+        public SanPham GetChiTietSanPham(int id)
+        {
+            if(id > 0)
+            {
+                var result = db.SanPhams.Find(id);
+                return result;
+            }
+            return null;
+        }
+
+        public List<ThongSoSanPhamHT> GetThongSoSanPhams(int id)
+        {
+            if(id > 0)
+            {
+                var tskt = db.ThongSoKiThuats.AsQueryable();
+                var tssp = db.ThongSoSanPhams.AsQueryable();
+                var query = (from k in tskt
+                             join s in tssp on k.Id equals s.ThongSoKiThuatId
+                             where s.SanPhamId== id
+                             select new ThongSoSanPhamHT()
+                             {
+                                 ThongSo_Id = k.Id,
+                                 ThongSo_Ten = k.GiaTri,
+                                 GiaTri = s.GiaTriSp
+                             }).ToList();
+                return query;
+            }
+            return null;
+            
+        }
 
 
 

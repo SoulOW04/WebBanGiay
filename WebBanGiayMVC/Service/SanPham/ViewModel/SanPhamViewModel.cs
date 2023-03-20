@@ -32,5 +32,26 @@ namespace WebBanGiayMVC.Service.SanPham.ViewModel
     public class InsertSanPhamWithDanhMucs : WebBanGiayMVC.Service.SanPham.ViewModel.SanPhamViewModel
     {
         public string DanhSachDanhMucs { get; set; }
+        public List<ThongSoInsertUpdate> ThongSoInsertUpdates { get; set; }
     }
+    public class InsertSanPhamFull : WebBanGiayMVC.Service.SanPham.ViewModel.SanPhamViewModel
+    {
+        public string DanhSachDanhMucs { get; set; }
+        public List<ThongSoInsertUpdate> ThongSoInsertUpdates { get; set; }
+    }
+
+    public class ThongSoInsertUpdate
+    {
+        public int? ThongSoId { get; set; }
+        public string GiaTri { get; set; }
+    }
+
+
+    public class ThongSoSanPhamHT
+    {
+        public int ThongSo_Id { get; set; }
+        public string ThongSo_Ten { get; set; }
+        public string GiaTri { get; set; }
+    }
+
 }
