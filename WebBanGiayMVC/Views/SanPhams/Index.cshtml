@@ -1,4 +1,5 @@
 ﻿@model List<WebBanGiayMVC.Models.SanPham>
+@using WebBanGiayMVC.Models
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
@@ -6,8 +7,16 @@
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
     //
     var sanpham = ViewBag.SanPham as List<SanPham>;
+    var total = (int)ViewBag.Total;
+    var index = (int)ViewBag.Index ;
+    var size = (int)ViewBag.Size;
+    var keyword = (string)ViewBag.Keyword ;
+    var tongsotrang = total / size;
+    if (total % size > 0) {
+        tongsotrang = tongsotrang + 1;
+    }
 }
-
+    
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -143,17 +152,18 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                @*<div class="block-27">
+                                <div class="block-27">
                                         <ul>
                                             <li><a href="#"><i class="ion-ios-arrow-back"></i></a></li>
-                                            <li class="active"><span>1</span></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">5</a></li>
+                                            
+                                            @for (var i = 0; i < tongsotrang; i++) {
+                                                <li class="@(index == i + 1 ? "active": "")"><a href="@Url.Action("Index","SanPhams", new {keyword = keyword,index = i+1})">@(i+1)</a></li>
+                                            }
+                                            @*<li class="active"><span>1</span></li>*@
+                                           
                                             <li><a href="#"><i class="ion-ios-arrow-forward"></i></a></li>
                                         </ul>
-                                    </div>*@
+                                    </div>
                                 
                             </div>
                         </div>

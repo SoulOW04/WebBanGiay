@@ -218,7 +218,9 @@ namespace WebBanGiayMVC.DataAccess
             }
             catch (Exception e)
             {
-
+                return null;
+            }
+        }
         public List<SanPham> GetAllSanPham()
         {
             try

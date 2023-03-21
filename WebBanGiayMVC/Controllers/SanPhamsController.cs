@@ -41,7 +41,13 @@ namespace WebBanGiayMVC.Controllers
 
         public ActionResult Index(string keyword = "", int index = 1, int size = 5)
         {
-            var sanPham = sanPhamService.GetAllGiaSanPhamFormat();
+            var total = 0;
+            var sanPham = sanPhamService.FilterSanPham(out total, keyword, index, size);
+
+            ViewBag.Total = total;
+            ViewBag.Index = index;
+            ViewBag.Size = size;
+            ViewBag.Keyword = keyword;
 
             if (sanPham != null)
             {
@@ -54,9 +60,8 @@ namespace WebBanGiayMVC.Controllers
             {
                 ViewBag.Logo = cauHinhLogo.GiaTriCauHinh;
             }
-            var total = 0;
-            var sanphamFilter = sanPhamService.FilterSanPham(out total, keyword, index, size);
-            return View(sanphamFilter);
+            
+            return View(sanPham);
         }
 
         public ActionResult About()
