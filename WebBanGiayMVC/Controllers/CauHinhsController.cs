@@ -72,7 +72,11 @@ namespace WebBanGiayMVC.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,TenCauHinh,MaCauHinh,GiaTriCauHinh,Loai,TrangThai,MoTa")] CauHinh cauHinh)
         {
-
+            if(cauHinh == null)
+            {
+                Session["alert"] = "Phải điển đầy đủ thông tin !";
+                return View(cauHinh);
+            }
             if (ModelState.IsValid)
             {
                 db.CauHinhs.Add(cauHinh);

@@ -173,7 +173,7 @@ namespace WebBanGiayMVC.Controllers
                 ViewBag.AnhCH3 = CauHinhBanner3.GiaTriCauHinh;
                 ViewBag.TenCH3 = CauHinhBanner3.TenCauHinh;
             }
-            var cauHinhSanPhamTheoDanhMuc = sanPhamTrongDanhMucService.GetSanPhamTrongDanhMucByDanhMucId(1);
+            var cauHinhSanPhamTheoDanhMuc = sanPhamTrongDanhMucService.GetSanPhamTrongDanhMucByDanhMucId(21);
             if (cauHinhSanPhamTheoDanhMuc != null)
             {
                 ViewBag.SanPham = cauHinhSanPhamTheoDanhMuc.ToList();
@@ -245,7 +245,7 @@ namespace WebBanGiayMVC.Controllers
             int pageNumber = (page ?? 1);
 
             sp = sp.OrderBy(s => s.TenSanPham);
-            var cauHinhSanPhamTheoDanhMuc = sanPhamTrongDanhMucService.GetSanPhamTrongDanhMucByDanhMucId(4);
+            var cauHinhSanPhamTheoDanhMuc = sanPhamTrongDanhMucService.GetSanPhamTrongDanhMucByDanhMucId(20);
             if (cauHinhSanPhamTheoDanhMuc != null)
             {
                 ViewBag.SanPham = cauHinhSanPhamTheoDanhMuc.ToList();
