@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WebBanGiayMVC.DataAccess;
 using WebBanGiayMVC.Models;
 
 namespace WebBanGiayMVC.Controllers
@@ -17,7 +18,15 @@ namespace WebBanGiayMVC.Controllers
         // GET: DanhMucs
         public ActionResult Index()
         {
-            return View(db.DanhMucs.ToList());
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(db.DanhMucs.ToList());
+            }
+            
         }
 
         // GET: DanhMucs/Details/5
@@ -32,20 +41,33 @@ namespace WebBanGiayMVC.Controllers
             {
                 return HttpNotFound();
             }
-            return View(danhMuc);
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(danhMuc);
+            }
         }
 
         // GET: DanhMucs/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         // POST: DanhMucs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ValidateInput(false)]
         public ActionResult Create([Bind(Include = "Id,TenDanhMuc,MoTaDanhmuc,BannerDanhMuc,AvatarDanhMuc,ParentId,Loai,TrangThai")] DanhMuc danhMuc)
         {
             if (ModelState.IsValid)
@@ -70,7 +92,14 @@ namespace WebBanGiayMVC.Controllers
             {
                 return HttpNotFound();
             }
-            return View(danhMuc);
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(danhMuc);
+            }
         }
 
         // POST: DanhMucs/Edit/5
@@ -100,6 +129,14 @@ namespace WebBanGiayMVC.Controllers
             if (danhMuc == null)
             {
                 return HttpNotFound();
+            }
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(danhMuc);
             }
             return View(danhMuc);
         }

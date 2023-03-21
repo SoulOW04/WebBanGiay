@@ -17,7 +17,15 @@ namespace WebBanGiayMVC.Controllers
         // GET: ThongSoKiThuats
         public ActionResult Index()
         {
-            return View(db.ThongSoKiThuats.ToList());
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(db.ThongSoKiThuats.ToList());   
+            }
+
         }
 
         // GET: ThongSoKiThuats/Details/5
@@ -32,13 +40,28 @@ namespace WebBanGiayMVC.Controllers
             {
                 return HttpNotFound();
             }
-            return View(thongSoKiThuat);
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(thongSoKiThuat);
+            }
+            return View();
         }
 
         // GET: ThongSoKiThuats/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         // POST: ThongSoKiThuats/Create
@@ -70,7 +93,15 @@ namespace WebBanGiayMVC.Controllers
             {
                 return HttpNotFound();
             }
-            return View(thongSoKiThuat);
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(thongSoKiThuat);
+            }
+            
         }
 
         // POST: ThongSoKiThuats/Edit/5
@@ -101,7 +132,15 @@ namespace WebBanGiayMVC.Controllers
             {
                 return HttpNotFound();
             }
-            return View(thongSoKiThuat);
+            if (Session["Name"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(thongSoKiThuat);
+            }
+            
         }
 
         // POST: ThongSoKiThuats/Delete/5

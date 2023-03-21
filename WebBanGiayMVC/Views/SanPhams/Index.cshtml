@@ -5,7 +5,7 @@
     ViewBag.Title = "All Product";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
     //
-    var SanPham = ViewBag.SanPham as string;
+    var sanpham = ViewBag.SanPham as List<SanPham>;
 }
 
 <!DOCTYPE HTML>
@@ -121,23 +121,19 @@
                     </div>
                     <div class="col-lg-9 col-xl-9">
                         <div class="row row-pb-md">
-                            @foreach (var item in Model)
+                            @foreach (var item in sanpham)
                             {
                                 string price = Convert.ToDecimal(item.GiaSanPham).ToString("N0");
-
-
                                 <div class="col-lg-3 mb-4 text-center">
 
                                     <div class="product-entry border">
 
-                                        
-
                                         <a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })" class="prod-img">
-                                            <img src="@Html.DisplayFor(modelItem => item.AvatarSanPham)" width="120" height="120" />
+                                            <img src="@item.AvatarSanPham" width="120" height="120" />
 
                                         </a>
                                         <div class="desc">
-                                            <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })">@Html.DisplayFor(modelItem => item.TenSanPham)</a></h2>
+                                            <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })">@item.TenSanPham</a></h2>
                                             <span class="price"><a href="#">@price</a></span>
                                         </div>
 
@@ -158,9 +154,7 @@
                                             <li><a href="#"><i class="ion-ios-arrow-forward"></i></a></li>
                                         </ul>
                                     </div>*@
-                                @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
-
+                                
                             </div>
                         </div>
                     </div>

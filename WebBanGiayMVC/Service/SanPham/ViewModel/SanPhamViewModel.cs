@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebBanGiayMVC.Models;
 
 namespace WebBanGiayMVC.Service.SanPham.ViewModel
 {
@@ -27,4 +28,30 @@ namespace WebBanGiayMVC.Service.SanPham.ViewModel
 
         public int? TrangThai { get; set; }
     }
+
+    public class InsertSanPhamWithDanhMucs : WebBanGiayMVC.Service.SanPham.ViewModel.SanPhamViewModel
+    {
+        public string DanhSachDanhMucs { get; set; }
+        public List<ThongSoInsertUpdate> ThongSoInsertUpdates { get; set; }
+    }
+    public class InsertSanPhamFull : WebBanGiayMVC.Service.SanPham.ViewModel.SanPhamViewModel
+    {
+        public string DanhSachDanhMucs { get; set; }
+        public List<ThongSoInsertUpdate> ThongSoInsertUpdates { get; set; }
+    }
+
+    public class ThongSoInsertUpdate
+    {
+        public int? ThongSoId { get; set; }
+        public string GiaTri { get; set; }
+    }
+
+
+    public class ThongSoSanPhamHT
+    {
+        public int ThongSo_Id { get; set; }
+        public string ThongSo_Ten { get; set; }
+        public string GiaTri { get; set; }
+    }
+
 }

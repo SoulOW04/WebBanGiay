@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using System.Web.WebPages;
 using WebBanGiayMVC.DataAccess;
 using WebBanGiayMVC.Models;
+using WebBanGiayMVC.Service.SanPham.ViewModel;
 using WebBanGiayMVC.Service.ThongSoSanPham.ViewModel;
 
 namespace WebBanGiayMVC.Business
@@ -15,26 +16,26 @@ namespace WebBanGiayMVC.Business
     internal interface ISanPhamService
     {
         List<SanPham> GetAllGiaSanPhamFormat();
+        List<SanPham> GetAllGiaSanPhamByNameFormat();
+        SanPham GetChiTietSanPham(int id);
+        List<ThongSoSanPhamHT> GetThongSoSanPhams(int id);
         List<SanPham> GetSanPhamByName(string searchSanPhamByName);
     }
 
     public class SanPhamService : ISanPhamService
     {
-        Model_Context model_Contextmodel;
+       
 
         
-        //public List<Product> GetProducts()
-        //{
-        //    model_Contextmodel= new Model_Context();
-        //    model_Contextmodel.SanPhams.ToList();
-
-        //    throw new NotImplementedException();
-
-        //}
+        
 
         SanPhamDA spDa = new SanPhamDA();
 
         public List<SanPham> GetAllGiaSanPhamFormat()
+        {
+            return spDa.GetAllGiaSanPhamFormat();
+        }
+        public List<SanPham> GetAllGiaSanPhamByNameFormat()
         {
             return spDa.GetAllGiaSanPhamFormat();
         }
@@ -56,9 +57,25 @@ namespace WebBanGiayMVC.Business
             {
                 pageIndex = totalPages;
             }
+        public bool CreateSanPham(InsertSanPhamWithDanhMucs sp)
+        {
+            return spDa.CreateSanPham(sp);
+        }
 
-            
+        public bool SaveSP(InsertSanPhamFull sp)
+        {
+            return spDa.SaveSP(sp);
+        }
 
+        public SanPham GetChiTietSanPham(int id)
+        {
+           return spDa.GetChiTietSanPham(id);
+        }
+
+        public List<ThongSoSanPhamHT> GetThongSoSanPhams(int id)
+        {
+            return spDa.GetThongSoSanPhams(id);
+        }
             return spDa.FilterSanPham(out total, keyword, pageIndex, pageSize);
         }
     }

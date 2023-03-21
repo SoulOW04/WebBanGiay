@@ -1,8 +1,17 @@
 ﻿
 @{
+    var name = Session["Name"];
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h2>Index</h2>
+<div id="page-wrapper">
+    <div class="main-page">
+        <h2 class="title1">Blank Page</h2>
+        <div class="blank-page widget-shadow scroll" id="style-2 div1">
+            <h1>Hello @name</h1>
+        </div>
+    </div>
+</div>
 

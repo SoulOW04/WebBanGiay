@@ -44,6 +44,14 @@ namespace WebBanGiayMVC.Controllers
         public ActionResult Index(string keyword = "", int index = 1, int size = 4)
         {
 
+            //lay giaSpFOrmat
+            var sanPham = sanPhamService.GetAllGiaSanPhamFormat();
+
+            if (sanPham != null)
+            {
+                ViewBag.SanPham = sanPham;
+            }
+
             var total = 0;
             var sanphamFilter = sanPhamService.FilterSanPham(out total,  keyword, index, size);
             
@@ -86,12 +94,8 @@ namespace WebBanGiayMVC.Controllers
 
             //if (!String.IsNullOrEmpty(searchSanPhamByName))
 
-            //    sanpham = sanpham.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
             
-            //so san pham tren 1 page
-            //int pageSize = 4;
-            //int pageNumber = (page ?? 1);
-
+            return View(sanphamFilter);
 
             //sanpham = sanpham.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
 
@@ -135,7 +139,7 @@ namespace WebBanGiayMVC.Controllers
             return PartialView(list);
         }
 
-        
+
         public ActionResult Contact()
         {
             return View();
@@ -192,7 +196,7 @@ namespace WebBanGiayMVC.Controllers
             int pageSize = 5;
             int No_Of_Page = (page ?? 1);
 
-            return View(sanpham.ToPagedList(No_Of_Page, pageSize));
+            return View();
         }
         public ActionResult Women(int? page, string searchSanPhamByName, string currentFilter)
         {
@@ -249,12 +253,19 @@ namespace WebBanGiayMVC.Controllers
 
             return View(sp.ToPagedList(pageNumber, pageSize));
         }
-        
+
         public ActionResult Product_Detail(int id)
         {
-            var product = new ThongSoSanPhamDA().GetThongTinSanPhamById(id);
-
-            return View(product);
+            var product = sanPhamService.GetChiTietSanPham(id);
+            if(product != null)
+            {
+                var thongSoKyThuats = sanPhamService.GetThongSoSanPhams(id);
+                ViewBag.TSKT = thongSoKyThuats;
+                return View(product);
+            }
+            return null;
+            
+            
         }
     }
 }
