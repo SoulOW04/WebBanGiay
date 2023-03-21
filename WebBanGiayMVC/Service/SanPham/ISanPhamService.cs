@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
+using System.Web.WebPages;
 using WebBanGiayMVC.DataAccess;
 using WebBanGiayMVC.Models;
 using WebBanGiayMVC.Service.ThongSoSanPham.ViewModel;
@@ -38,7 +41,25 @@ namespace WebBanGiayMVC.Business
 
         public List<SanPham> GetSanPhamByName(string searchSanPhamByName)
         {
-            return spDa.GetSanPhamByName();
+            return spDa.GetSanPhamByName(searchSanPhamByName);
+        }
+        public List<SanPham> FilterSanPham(out int total,string keyword, int pageIndex, int pageSize)
+        {
+            total = 0;
+            int totalPages = (int)Math.Ceiling(total / (decimal)pageSize);
+            
+            if (pageIndex < 1)
+            {
+                pageIndex = 1;
+            }
+            else if (pageIndex > totalPages)
+            {
+                pageIndex = totalPages;
+            }
+
+            
+
+            return spDa.FilterSanPham(out total, keyword, pageIndex, pageSize);
         }
     }
 }

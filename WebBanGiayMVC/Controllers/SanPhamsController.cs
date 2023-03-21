@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using WebBanGiayMVC.Business;
@@ -34,7 +36,7 @@ namespace WebBanGiayMVC.Controllers
             sp = new SanPham();
         }
 
-        public ActionResult Index(int? page, string searchSanPhamByName, string currentFilter)
+        public ActionResult Index(string keyword = "", int index = 1, int size = 5)
         {
             var giaSanPham = sanPhamService.GetAllGiaSanPhamFormat();
 
@@ -49,25 +51,9 @@ namespace WebBanGiayMVC.Controllers
             {
                 ViewBag.Logo = cauHinhLogo.GiaTriCauHinh;
             }
-
-            var sanpham = from s in db.SanPhams
-                          select s;
-            if (searchSanPhamByName != null)
-                page = 1;
-            else
-                searchSanPhamByName = currentFilter;
-
-            ViewBag.CurrentFilter = searchSanPhamByName;
-
-            if (!String.IsNullOrEmpty(searchSanPhamByName))
-                sanpham = sanpham.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
-
-            sanpham = sanpham.OrderBy(s => s.TenSanPham);
-
-            int pageSize = 5;
-            int No_Of_Page = (page ?? 1);
-
-            return View(sanpham.ToPagedList(No_Of_Page, pageSize));
+            var total = 0;
+            var sanphamFilter = sanPhamService.FilterSanPham(out total, keyword, index, size);
+            return View(sanphamFilter);
         }
 
         public ActionResult About()

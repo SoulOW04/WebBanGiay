@@ -13,6 +13,7 @@ using WebBanGiayMVC.Business;
 using WebBanGiayMVC.DataAccess;
 using WebBanGiayMVC.Models;
 using WebBanGiayMVC.Service.ThongSoSanPham.ViewModel;
+using System.Xml.Linq;
 
 namespace WebBanGiayMVC.Controllers
 {
@@ -40,24 +41,15 @@ namespace WebBanGiayMVC.Controllers
             sp = new SanPham();
         }
         // GET: TrangChu
-        public ActionResult Index(int? page, string searchSanPhamByName, string currentFilter)
+        public ActionResult Index(string keyword = "", int index = 1, int size = 4)
         {
 
-            //lay giaSpFOrmat
-            var giaSanPham = sanPhamService.GetAllGiaSanPhamFormat();
-
-            if (giaSanPham != null)
-            {
-                ViewBag.SanPham = giaSanPham;
-            }
-
-            //search searchSanpham
-            var searchSanPham= sanPhamService.GetSanPhamByName(searchSanPhamByName);
-            if (searchSanPham != null)
-            {
-                return View(searchSanPham);
-            }
-                
+            var total = 0;
+            var sanphamFilter = sanPhamService.FilterSanPham(out total,  keyword, index, size);
+            
+            //search Sanpham
+            
+            
 
             //lay cau hinh logo
             var cauHinhLogo = cauHinhService.GetCauHinhByMaCauHinh("Logo");
@@ -88,20 +80,17 @@ namespace WebBanGiayMVC.Controllers
             }
 
            
-            if (searchSanPhamByName != null)
-                page = 1;
-            else
-                searchSanPhamByName = currentFilter;
+           
 
-            ViewBag.CurrentFilter = searchSanPham;
+            
 
             //if (!String.IsNullOrEmpty(searchSanPhamByName))
 
             //    sanpham = sanpham.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
             
             //so san pham tren 1 page
-            int pageSize = 4;
-            int pageNumber = (page ?? 1);
+            //int pageSize = 4;
+            //int pageNumber = (page ?? 1);
 
 
             //sanpham = sanpham.Where(s => s.TenSanPham.Contains(searchSanPhamByName));
@@ -112,7 +101,7 @@ namespace WebBanGiayMVC.Controllers
             //int No_Of_Page = (page ?? 1);
 
             //return View(sanpham.ToPagedList(No_Of_Page, pageSize));
-            return View(giaSanPham);
+            return View(sanphamFilter);
         }
         public ActionResult About()
         {

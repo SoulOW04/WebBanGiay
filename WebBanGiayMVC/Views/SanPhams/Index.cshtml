@@ -1,6 +1,4 @@
-﻿@model PagedList.IPagedList<WebBanGiayMVC.Models.SanPham>
-@using PagedList;
-@using PagedList.Mvc;
+﻿@model List<WebBanGiayMVC.Models.SanPham>
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
@@ -160,8 +158,9 @@
                                             <li><a href="#"><i class="ion-ios-arrow-forward"></i></a></li>
                                         </ul>
                                     </div>*@
-                                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                                @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
+
                             </div>
                         </div>
                     </div>
