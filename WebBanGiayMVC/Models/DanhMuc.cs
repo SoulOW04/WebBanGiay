@@ -10,19 +10,19 @@ namespace WebBanGiayMVC.Models
     public partial class DanhMuc
     {
         public int Id { get; set; }
-
+        [Required(ErrorMessage = "TenDanhMuc is required")]
         public string TenDanhMuc { get; set; }
-
+        [Required(ErrorMessage = "MoTaDanhmuc is required")]
         public string MoTaDanhmuc { get; set; }
-
+        [Required(ErrorMessage = "BannerDanhMuc is required")]
         public string BannerDanhMuc { get; set; }
-
+        [Required(ErrorMessage = "AvatarDanhMuc is required")]
         public string AvatarDanhMuc { get; set; }
-
+        [Required(ErrorMessage = "ParentId is required")]
         public int? ParentId { get; set; }
-
+        [Required(ErrorMessage = "ErrorMessage is required")]
         public int? Loai { get; set; }
-
+        [Required(ErrorMessage = "TrangThai is required")]
         public int? TrangThai { get; set; }
     }
 }

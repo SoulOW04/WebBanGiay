@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
+using System.Web.WebPages;
 using WebBanGiayMVC.DataAccess;
 using WebBanGiayMVC.Models;
 using WebBanGiayMVC.Service.SanPham.ViewModel;
@@ -16,15 +19,12 @@ namespace WebBanGiayMVC.Business
         List<SanPham> GetAllGiaSanPhamByNameFormat();
         SanPham GetChiTietSanPham(int id);
         List<ThongSoSanPhamHT> GetThongSoSanPhams(int id);
+        List<SanPham> GetSanPhamByName(string searchSanPhamByName);
     }
 
     public class SanPhamService : ISanPhamService
     {
        
-
-        
-        
-
         SanPhamDA spDa = new SanPhamDA();
 
         public List<SanPham> GetAllGiaSanPhamFormat()
@@ -36,6 +36,16 @@ namespace WebBanGiayMVC.Business
             return spDa.GetAllGiaSanPhamFormat();
         }
 
+        public List<SanPham> GetSanPhamByName(string searchSanPhamByName)
+        {
+            return spDa.GetSanPhamByName(searchSanPhamByName);
+        }
+        public List<SanPham> FilterSanPham(out int total, string keyword, int pageIndex, int pageSize)
+        {
+            total = 0;
+            
+            return spDa.FilterSanPham(out total, keyword, pageIndex, pageSize);
+        }
         public bool CreateSanPham(InsertSanPhamWithDanhMucs sp)
         {
             return spDa.CreateSanPham(sp);
@@ -55,6 +65,8 @@ namespace WebBanGiayMVC.Business
         {
             return spDa.GetThongSoSanPhams(id);
         }
+            
+        
     }
 }
 

@@ -1,6 +1,5 @@
-﻿@model PagedList.IPagedList<WebBanGiayMVC.Models.SanPham>
-    @using PagedList;
-@using PagedList.Mvc;
+﻿@model List<WebBanGiayMVC.Models.SanPham>
+
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Women";
@@ -15,7 +14,17 @@
     var anhCH3 = ViewBag.AnhCH3 as string;
     var tenCH3 = ViewBag.TenCH3 as string;
     //
-    var SanPham = ViewBag.SanPham as string;
+    var SanPham = ViewBag.SanPham as List<WebBanGiayMVC.Models.SanPham>;
+    var total = (int)ViewBag.Total;
+    var index = (int)ViewBag.Index;
+    var size = (int)ViewBag.Size;
+    var keyword = (string)ViewBag.Keyword;
+    var tongsotrang = total / size;
+    if (total % size > 0)
+    {
+        tongsotrang = tongsotrang + 1;
+    }
+
 }
 
     <div class="colorlib-loader"></div>
@@ -179,7 +188,7 @@
                     </div>
                     <div class="col-lg-9 col-xl-9">
                         <div class="row row-pb-md">
-                            @foreach (var item in Model)
+                            @foreach (var item in @ViewBag.SanPham)
                             {
                                 string price = Convert.ToDecimal(item.GiaSanPham).ToString("N0");
 
@@ -189,11 +198,11 @@
                                     <div class="product-entry border">
 
                                         <a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })" class="prod-img">
-                                            <img src="@Html.DisplayFor(modelItem => item.AvatarSanPham)" width="120" height="120" />
+                                            <img src="@item.AvatarSanPham" width="120" height="120" />
 
                                         </a>
                                         <div class="desc">
-                                            <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })">@Html.DisplayFor(modelItem => item.TenSanPham)</a></h2>
+                                            <h2><a href="@Url.Action("Product_Detail", "TrangChu", new { id = item.Id })">@item.TenSanPham</a></h2>
                                             <span class="price"><a href="#">@price</a></span>
                                         </div>
 
@@ -203,19 +212,19 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                @*<div class="block-27">
-            <ul>
-                <li><a href="#"><i class="ion-ios-arrow-back"></i></a></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#"><i class="ion-ios-arrow-forward"></i></a></li>
-            </ul>
-        </div>*@
-                                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-                                @Html.PagedListPager(Model, page => Url.Action("Women", new { page }))
+                                <div class="block-27">
+                                    <ul>
+                                        <li><a href="#"><i class="ion-ios-arrow-back"></i></a></li>
+
+                                        @for (var i = 0; i < tongsotrang; i++)
+                                        {
+                                            <li class="@(index == i + 1 ? "active": "")"><a href="@Url.Action("Women","TrangChu", new {keyword = keyword,index = i+1})">@(i+1)</a></li>
+                                        }
+                                        @*<li class="active"><span>1</span></li>*@
+
+                                        <li><a href="#"><i class="ion-ios-arrow-forward"></i></a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
