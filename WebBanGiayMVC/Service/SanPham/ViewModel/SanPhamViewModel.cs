@@ -54,4 +54,14 @@ namespace WebBanGiayMVC.Service.SanPham.ViewModel
         public string GiaTri { get; set; }
     }
 
+    public class GioHangItem
+    {
+        public WebBanGiayMVC.Models.SanPham SanPham { get; set; }
+        public int ThongSo_Id { get; set; }
+        public string ThongSo_GiaTri { get; set; }
+        public int SoLuong { get; set; }
+    }
+
+
+
 }

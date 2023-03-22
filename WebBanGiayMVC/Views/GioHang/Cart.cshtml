@@ -1,14 +1,13 @@
-﻿@model List<WebBanGiayMVC.Service.ThongSoSanPham.ViewModel.ThongSoSanPhamViewModel>
+﻿@model List<WebBanGiayMVC.Service.SanPham.ViewModel.GioHangItem>
 @{
     ViewBag.Title = "Cart";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
     var logo = ViewBag.Logo as string;
     var sanPham = ViewBag.SanPham;
-    var sp = ViewBag.Sp as string;
-    var gia = string.Format("{0:n0}", sanPham);
+
 
     Session["viewSanPham"] = Model.Count;
-
+    var listGioHang = @Session["gioHang"];
 }
 
 
@@ -58,7 +57,7 @@
                                 <span>Product Details</span>
                             </div>
                             <div class="one-eight text-center">
-                                <span>Size</span>
+                                <span>Spec Info</span>
                             </div>
                             <div class="one-eight text-center">
                                 <span>Price</span>
@@ -75,27 +74,31 @@
                         </div>
                         @foreach (var item in Model)
                         {
-                            var price = @item.GiaSanPham;
-                            var price_string = @item.GiaSanPham.ToString("N0");
+                            var price = item.SanPham.GiaSanPham;
+                            var price_string = price.Value.ToString("N0");
 
                             <div class="product-cart d-flex">
                                 <div class="one-forth">
-                                    <div class="product-img" style="background-image: url(@item.AvatarSanPham);">
+                                    <div id="thongTinSp-id" class="product-img" style="background-image: url(@item.SanPham.AvatarSanPham);">
                                     </div>
                                     <div class="display-tc">
-                                        <h3>@item.TenSanPham</h3>
+                                        <h3 id="thongTinSp-TenSp">@item.SanPham.TenSanPham</h3>
                                     </div>
                                 </div>
-                               
+                                <div class="one-eight text-center">
+                                    <div class="display-tc">
+                                        <span class="price price-input-1" id="thongTinSp-GiaTri" value="@item.ThongSo_Id">@item.ThongSo_GiaTri</span>
+                                    </div>
+                                </div>
 
                                 <div class="one-eight text-center">
                                     <div class="display-tc">
-                                        <span class="price price-input" value="@price">@price_string</span>
+                                        <span class="price price-input" id="thongTinSp-Gia" value="@price">@price_string</span>
                                     </div>
                                 </div>
                                 <div class="one-eight text-center">
                                     <div class="display-tc">
-                                        <input type="text" id="quantity" name="quantity" class="form-control input-number text-center" value="1" min="1" max="100">
+                                        <input type="text" id="quantity" name="quantity" class="form-control input-number text-center" value="@item.SoLuong" min="1" max="100">
                                     </div>
                                 </div>
                                 <div class="one-eight text-center">
@@ -105,7 +108,7 @@
                                 </div>
                                 <div class="one-eight text-center">
                                     <div class="display-tc">
-                                        <a href="#" data-id="@item.SanPhamId" class="closed"></a>
+                                        <a href="." data-id="@item.SanPham.Id" class="closed"></a>
                                     </div>
                                 </div>
                             </div>
@@ -128,41 +131,6 @@
 
             <button id="btnContinue" class="btn">Continue Shopping</button>
 
-
-
-
-            <div class="row row-pb-lg">
-                <div class="col-md-12">
-                    <div class="total-wrap">
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <form action="#">
-                                    <div class="row form-group">
-                                        <div class="col-sm-9">
-                                            <input type="text" name="quantity" class="form-control input-number" placeholder="Your Coupon Number...">
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <input type="submit" value="Apply Coupon" class="btn btn-primary">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-sm-4 text-center">
-                                <div class="total">
-                                    <div class="sub">
-                                        <p><span>Subtotal:</span> <span></span></p>
-                                        <p><span>Delivery:</span> <span></span></p>
-                                        <p><span>Discount:</span> <span></span></p>
-                                    </div>
-                                    <div class="grand-total">
-                                        <p><span><strong>Total:</strong></span> <span class="price price-TotalResult"></span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div class="row">
                 <div class="col-sm-8 offset-sm-2 text-center colorlib-heading colorlib-heading-sm">
@@ -232,6 +200,7 @@
                 R.RegisterEvent();
                 R.CalculatePrice();
                 R.CalculateTotalPrice();
+
             },
             RegisterEvent: function () {
                 $('.input-number').off('change').on('change', function () {
@@ -245,57 +214,17 @@
 
 
 
+
                     $('#btnPayment').off('click').on('click', function () {
-
                         /*window.location.href = "/GioHang/Checkout";*/
-                            e.preventDefault();
-                            $.ajax({
-                                data: {
-                                    id: $(this).data('id'),
-                                    TenSanPham: $(this).data('TenSanPham'),
-                                    SoLuong: $(this).data('SoLuong'),
-                                    Gia: $(this).data('Gia'),
-                                    KichThuoc: $(this).data('KichThuoc')
-                                },
-                                url: '/GioHang/Checkout',
-                                dataType: 'Json',
-                                type: 'POST',
-                                success: function (res) {
-                                    if (res.status == true) {
-                                        window.location.href = "/GioHang/Cart";
-                                    }
-                                }
 
-                            })
-                        
-                        ///////////////////////
-                        //fetch('/GioHang/Checkout', {
-                        //    method: 'POST',
-                        //    headers: {
-                        //        'Content-Type': 'application/json'
-                        //    },
-                        //    body: JSON.stringify({ data: 'hello world' })
-                        //});
-                        //$.ajax({
-                        //    data: {
-                        //        id: $(this).data('id'),
-                        //        TenSanPham: $(this).data('TenSanPham'),
-                        //        SoLuong: $(this).data('SoLuong'),
-                        //        Gia: $(this).data('Gia'),
-                        //        KichThuoc: $(this).data('KichThuoc')
-                        //    },
-                        //    url: '/GioHang/Checkout',
-                        //    dataType: 'Json',
-                        //    type: 'POST',
-                        //    success: function (res) {
-                        //        if (res.status == true) {
-                        //            window.location.href = "/GioHang/Checkout";
-                        //        }
-                        //    }
+                        debugger
+                        var listGioHang = '@listGioHang';
+                        R.SavePayment(listGioHang);
 
-                        //})
-                        
+
                     }),
+
 
 
 
@@ -307,12 +236,14 @@
                             dataType: 'Json',
                             type: 'POST',
                             success: function (res) {
+                                debugger
                                 if (res.status == true) {
                                     window.location.href = "/GioHang/Cart";
                                 }
                             }
 
                         })
+                        R.RegisterEvent();
                     });
 
             },
@@ -349,6 +280,13 @@
 
 
                 R.RegisterEvent();
+            },
+            SavePayment: function (params) {
+                $.post('/GioHang/SaveCartToCookie', params, function (response) {
+                    alert('Them moi thanh cong!');
+                    window.location.href = "/GioHang/Checkout"
+                    R.SanPham.RegisterEvent();
+                })
             }
 
 

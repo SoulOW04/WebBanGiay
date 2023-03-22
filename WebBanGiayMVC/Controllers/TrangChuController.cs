@@ -13,6 +13,7 @@ using WebBanGiayMVC.Business;
 using WebBanGiayMVC.DataAccess;
 using WebBanGiayMVC.Models;
 using WebBanGiayMVC.Service.ThongSoSanPham.ViewModel;
+using WebBanGiayMVC.Service.SanPham.ViewModel;
 
 namespace WebBanGiayMVC.Controllers
 {
@@ -131,10 +132,10 @@ namespace WebBanGiayMVC.Controllers
         public PartialViewResult HeaderCart()
         {
             var cart = Session[gioHang];
-            var list = new List<ThongSoSanPhamViewModel>();
+            var list = new List<GioHangItem>();
             if (cart != null)
             {
-                list = (List<ThongSoSanPhamViewModel>)cart;//ep kieu cart sang list 
+                list = (List<GioHangItem>)cart;//ep kieu cart sang list 
             }
 
             return PartialView(list);
