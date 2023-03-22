@@ -32,7 +32,7 @@
     },
     CreateDanhMuc: function (params) {
         $.post('/DanhMucs/Create', params, function (response) {
-            alert('Them moi thanh cong!');
+            
             window.location.href = "/DanhMucs/Index"
             R.DanhMuc.RegisterEvent();
         })

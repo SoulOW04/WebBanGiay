@@ -180,13 +180,13 @@ namespace WebBanGiayMVC.Controllers
         //    return View(sanPham);
         //}
 
-        //[HttpPost, ValidateInput(false)]
-        //public ActionResult CreateWithDanhMuc(InsertSanPhamWithDanhMucs sp)
-        //{
-        //    //Viet gi do vao day
-        //    var spResult = sanPhamService.CreateSanPham(sp);
-        //    return Content("OK");
-        //}
+        [HttpPost, ValidateInput(false)]
+        public ActionResult CreateWithDanhMuc(InsertSanPhamWithDanhMucs sp)
+        {
+            //Viet gi do vao day
+            var spResult = sanPhamService.CreateSanPham(sp);
+            return Content("OK");
+        }
 
         [HttpPost, ValidateInput(false)]
         public ActionResult SaveSP(InsertSanPhamFull sp)

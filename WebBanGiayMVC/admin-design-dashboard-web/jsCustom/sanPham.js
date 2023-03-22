@@ -70,7 +70,7 @@
     },
     SaveSanPham: function (params) {
         $.post('/SanPhams/SaveSP', params, function (response) {
-            alert('Them moi thanh cong!');
+            
             window.location.href = "/SanPhams/AdminIndex"
             R.SanPham.RegisterEvent();
         })
@@ -89,24 +89,25 @@
             arrSelected.push(parseInt(element))
         })
         $('.dsDanhMuc').val(arrSelected).change();
-    },
-    KiemTraDuLieuNhap: function () {
-        var tenSanPham = $('#TenSanPham').val();
-        //var moTaDanhmuc = $('#MoTaDanhmuc').val();
-        var moTaSanPham = CKEDITOR.instances.ckMotaSanPham.getData();
-        var giaSanPham = $('#GiaSanPham').val();
-        var avatarSanPham = $('#AvatarSanPham').attr('src');
-        var danhSachAnhSanPham = $('#DanhSachAnhSanPham').attr('src');
-        var noiDungSanPham = $('#NoiDungSanPham').val();
-        var hangSanPham = $('#HangSanPham').val();
-        var loai = $('#Loai').val();
-        var trangThai = $('#TrangThai').val();
-        var danhSachDanhMuc = $('.dsDanhMuc').val().toString();
-        if (tenSanPham == null || tenSanPham == "" || moTaSanPham == null || moTaSanPham == "" || ) {
-            alert("Vui lòng nhập giá trị đầu vào!");
-            return false;
-        }
+        R.SanPham.RegisterEvent();
     }
+    //KiemTraDuLieuNhap: function () {
+    //    var tenSanPham = $('#TenSanPham').val();
+    //    //var moTaDanhmuc = $('#MoTaDanhmuc').val();
+    //    var moTaSanPham = CKEDITOR.instances.ckMotaSanPham.getData();
+    //    var giaSanPham = $('#GiaSanPham').val();
+    //    var avatarSanPham = $('#AvatarSanPham').attr('src');
+    //    var danhSachAnhSanPham = $('#DanhSachAnhSanPham').attr('src');
+    //    var noiDungSanPham = $('#NoiDungSanPham').val();
+    //    var hangSanPham = $('#HangSanPham').val();
+    //    var loai = $('#Loai').val();
+    //    var trangThai = $('#TrangThai').val();
+    //    var danhSachDanhMuc = $('.dsDanhMuc').val().toString();
+    //    if (tenSanPham == null || tenSanPham == "" || moTaSanPham == null || moTaSanPham == "" || giaSanPham == null || giaSanPham == "" || avatarSanPham ) {
+    //        alert("Vui lòng nhập giá trị đầu vào!");
+    //        return false;
+    //    }
+    //}
 
 }
 R.SanPham.Init();

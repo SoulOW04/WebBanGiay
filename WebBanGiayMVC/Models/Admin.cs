@@ -12,7 +12,9 @@ namespace WebBanGiayMVC.Models
     public class Admin
     {
        public int Admmin_id { get; set; }
-       public string AdmUserName { get; set; }
-       public string AdmPassword { get; set; }
+        [Required(ErrorMessage = "Name is required")]
+        public string AdmUserName { get; set; }
+        [Required(ErrorMessage = "Password is required")]
+        public string AdmPassword { get; set; }
     }
 }

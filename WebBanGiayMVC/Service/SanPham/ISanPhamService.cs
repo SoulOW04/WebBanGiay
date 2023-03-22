@@ -25,10 +25,6 @@ namespace WebBanGiayMVC.Business
     public class SanPhamService : ISanPhamService
     {
        
-
-        
-        
-
         SanPhamDA spDa = new SanPhamDA();
 
         public List<SanPham> GetAllGiaSanPhamFormat()

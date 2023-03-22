@@ -226,7 +226,7 @@ namespace WebBanGiayMVC.Controllers
                 ViewBag.TenCH3 = CauHinhBanner3.TenCauHinh;
             }
            
-            var cauHinhSanPhamTheoDanhMuc = sanPhamTrongDanhMucService.GetSanPhamTrongDanhMucByDanhMucId(4);
+            var cauHinhSanPhamTheoDanhMuc = sanPhamTrongDanhMucService.GetSanPhamTrongDanhMucByDanhMucId(20);
             if (cauHinhSanPhamTheoDanhMuc != null)
             {
                 ViewBag.SanPham = cauHinhSanPhamTheoDanhMuc.ToList();

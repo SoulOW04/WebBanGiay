@@ -22,7 +22,7 @@
                 <h4>SanPham</h4>
                 <hr />
                 <div>
-                    <input type="number" class="id-sp" disabled style="display:none"  value="@Model.Id"/>
+                    <input type="number" class="id-sp" disabled style="display:none" value="@Model.Id" />
                 </div>
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
@@ -31,7 +31,7 @@
                         @Html.EditorFor(model => model.TenSanPham, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.TenSanPham, "", new { @class = "text-danger" })
                     </div>
-                </div>      
+                </div>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.MoTaSanPham, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -143,11 +143,11 @@
                     {
                         <div class="row thong-so-item">
                             <div class="col-md-4">
-                                <select class="form-control thong-so-sp" >
-                                     @foreach (var option in thongSoSelect)
-                                {
-                                    <option value="@option.Id" @(ts.ThongSoId == option.Id ? "selected" : "")>@option.GiaTri</option>
-                                }
+                                <select class="form-control thong-so-sp">
+                                    @foreach (var option in thongSoSelect)
+                                    {
+                                        <option value="@option.Id" @(ts.ThongSoId == option.Id ? "selected" : "")>@option.GiaTri</option>
+                                    }
                                 </select>
                             </div>
                             <div class="col-md-4">
@@ -181,4 +181,27 @@
     <script src="~/admin-design-dashboard-web/components/uploadFile.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="~/admin-design-dashboard-web/jsCustom/sanPham.js"></script>
+    <script>
+        function () {
+            var tenSanPham = $('#TenSanPham').val();
+            //var moTaDanhmuc = $('#MoTaDanhmuc').val();
+            var moTaSanPham = CKEDITOR.instances.ckMotaSanPham.getData();
+            var giaSanPham = $('#GiaSanPham').val();
+            var avatarSanPham = $('#AvatarSanPham').attr('src');
+            var danhSachAnhSanPham = $('#DanhSachAnhSanPham').attr('src');
+            var noiDungSanPham = $('#NoiDungSanPham').val();
+            var hangSanPham = $('#HangSanPham').val();
+            var loai = $('#Loai').val();
+            var trangThai = $('#TrangThai').val();
+            var danhSachDanhMuc = $('.dsDanhMuc').val().toString();
+            if (tenSanPham == null || tenSanPham == "" || moTaSanPham == null || moTaSanPham == ""
+                || giaSanPham == null || giaSanPham == "" || avatarSanPham == "" || avatarSanPham == null ||
+                danhSachAnhSanPham == null || danhSachAnhSanPham == "" || noiDungSanPham == null || noiDungSanPham == "" 
+                || hangSanPham == null || hangSanPham == "" || loai == null || loai == "" || trangThai == null || trangThai == "" || danhSachDanhMuc == null || danhSachDanhMuc == ""
+            ) {
+                alert("Vui lòng nhập giá trị đầu vào!");
+                return false;
+            }
+        }
+    </script>
 }

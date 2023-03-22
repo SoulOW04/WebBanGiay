@@ -10,7 +10,7 @@ namespace WebBanGiayMVC.Models
     public partial class ThongSoKiThuat
     {
         public int Id { get; set; }
-
+        [Required(ErrorMessage = "GiaTri is required")]
         public string GiaTri { get; set; }
     }
 }

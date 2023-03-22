@@ -25,7 +25,7 @@
             }
 
             $.post('/CauHinhs/Create', params, function (response) {
-                alert('Them moi thanh cong!');
+                
             window.location.href = "/CauHinhs/Index"
             })
 
