@@ -29,6 +29,32 @@
             window.location.href = "/CauHinhs/Index"
             })
 
+            })
+
+        $('.edit-cauhinh').off('click').on('click', function () {
+            var tenCauHinh = $('#TenCauHinh').val();
+            var maCauHinh = $('#MaCauHinh').val();
+            var giaTriCauHinh = $('#GiaTriCauHinh').attr('src');
+            var parentId = $('#ParentId').val();
+            var loai = $('#Loai').val();
+            var trangThai = $('#TrangThai').val();
+            var moTa = CKEDITOR.instances.ckMota.getData();
+            var params = {
+                Id: $('.id-sp').val(),
+                TenCauHinh: tenCauHinh,
+                MaCauhinh: maCauHinh,
+                GiaTriCauhinh: giaTriCauHinh,
+                Loai: loai,
+                TrangThai: trangThai,
+                MoTa: moTa,
+                ParentId: parentId
+            }
+
+            $.post(`/CauHinhs/Edit?id=${params.Id}`, params, function (response) {
+                alert('Chỉnh sửa thành công!');
+                window.location.href = "/CauHinhs/Index"
+            })
+
         })
         
     },

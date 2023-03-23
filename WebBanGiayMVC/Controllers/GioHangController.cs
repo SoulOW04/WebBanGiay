@@ -51,7 +51,9 @@ namespace WebBanGiayMVC.Controllers
 
             }
 
-            
+           
+
+
 
 
             return View(list);
@@ -128,31 +130,29 @@ namespace WebBanGiayMVC.Controllers
             //return View(product);
         }
 
-       
-        
+
+        public ActionResult Payment()
+        {
+
+            var cart = Session["gioHang"];
+            var list = new List<GioHangItem>();
+            if (cart != null)
+            {
+                list = (List<GioHangItem>)cart;//ep kieu cart sang list 
+            }
+            return View();
+        }
 
         public ActionResult Checkout()
         {
 
-            HttpCookie cookie = Request.Cookies["cart"];
-            if (cookie != null)
+            var cart = Session["gioHang"];
+            var list = new List<GioHangItem>();
+            if (cart != null)
             {
-                string cartJson = cookie.Value;
-                List<GioHangItem> cart = JsonConvert.DeserializeObject<List<GioHangItem>>(cartJson);
-                return View(cart);
+                list = (List<GioHangItem>)cart;//ep kieu cart sang list 
             }
-            else
-            {
-                return RedirectToAction("Order_Complete", "GioHang");
-            }
-
-            //var cart = Session["gioHang"];
-            //var list = new List<GioHangItem>();
-            //if (cart != null)
-            //{
-            //    list = (List<GioHangItem>)cart;//ep kieu cart sang list 
-            //}
-            //return View();
+            return View();
         }
 
         public ActionResult Order_Complete()

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebBanGiayMVC.DataAccess;
 using WebBanGiayMVC.Models;
+using WebBanGiayMVC.Service.SanPham.ViewModel;
 
 namespace WebBanGiayMVC.Controllers
 {

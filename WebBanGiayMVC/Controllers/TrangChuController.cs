@@ -14,6 +14,7 @@ using WebBanGiayMVC.DataAccess;
 using WebBanGiayMVC.Models;
 using WebBanGiayMVC.Service.ThongSoSanPham.ViewModel;
 using System.Xml.Linq;
+using WebBanGiayMVC.Service.SanPham.ViewModel;
 
 namespace WebBanGiayMVC.Controllers
 {
