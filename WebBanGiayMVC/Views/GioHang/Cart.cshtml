@@ -1,361 +1,303 @@
-﻿@model List<WebBanGiayMVC.Service.ThongSoSanPham.ViewModel.ThongSoSanPhamViewModel>
+﻿@model List<WebBanGiayMVC.Service.SanPham.ViewModel.GioHangItem>
+
 @{
     ViewBag.Title = "Cart";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
     var logo = ViewBag.Logo as string;
     var sanPham = ViewBag.SanPham;
-    var sp = ViewBag.Sp as string;
-    var gia = string.Format("{0:n0}", sanPham);
+
 
     Session["viewSanPham"] = Model.Count;
+    var listGioHang = @Session["gioHang"];
 
-}
-
-
-
-<div class="colorlib-loader"></div>
-
-<div id="page">
+    var listString = Newtonsoft.Json.JsonConvert.SerializeObject(listGioHang);
+    
+    
+    }
 
 
-    <div class="breadcrumbs">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <p class="bread"><span><a href="index.html">Home</a></span> / <span>Shopping Cart</span></p>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    <div class="colorlib-loader"></div>
+
+    <div id="page">
 
 
-    <div class="colorlib-product">
-        <div class="container">
-            <div class="row row-pb-lg">
-                <div class="col-md-10 offset-md-1">
-                    <div class="process-wrap">
-                        <div class="process text-center active">
-                            <p><span>01</span></p>
-                            <h3>Shopping Cart</h3>
-                        </div>
-                        <div class="process text-center">
-                            <p><span>02</span></p>
-                            <h3>Checkout</h3>
-                        </div>
-                        <div class="process text-center">
-                            <p><span>03</span></p>
-                            <h3>Order Complete</h3>
-                        </div>
+        <div class="breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <p class="bread"><span><a href="index.html">Home</a></span> / <span>Shopping Cart</span></p>
                     </div>
                 </div>
             </div>
-            @if (Model.Count > 0)
-            {
+        </div>
+
+
+        <div class="colorlib-product">
+            <div class="container">
                 <div class="row row-pb-lg">
-                    <div class="col-md-12">
-                        <div class="product-name d-flex">
-                            <div class="one-forth text-left px-4">
-                                <span>Product Details</span>
+                    <div class="col-md-10 offset-md-1">
+                        <div class="process-wrap">
+                            <div class="process text-center active">
+                                <p><span>01</span></p>
+                                <h3>Shopping Cart</h3>
                             </div>
-                            <div class="one-eight text-center">
-                                <span>Size</span>
+                            <div class="process text-center">
+                                <p><span>02</span></p>
+                                <h3>Checkout</h3>
                             </div>
-                            <div class="one-eight text-center">
-                                <span>Price</span>
-                            </div>
-                            <div class="one-eight text-center">
-                                <span>Quantity</span>
-                            </div>
-                            <div class="one-eight text-center">
-                                <span>Total</span>
-                            </div>
-                            <div class="one-eight text-center px-4">
-                                <span>Remove</span>
+                            <div class="process text-center">
+                                <p><span>03</span></p>
+                                <h3>Order Complete</h3>
                             </div>
                         </div>
-                        @foreach (var item in Model)
-                        {
-                            var price = @item.GiaSanPham;
-                            var price_string = @item.GiaSanPham.ToString("N0");
-
-                            <div class="product-cart d-flex">
-                                <div class="one-forth">
-                                    <div class="product-img" style="background-image: url(@item.AvatarSanPham);">
-                                    </div>
-                                    <div class="display-tc">
-                                        <h3>@item.TenSanPham</h3>
-                                    </div>
-                                </div>
-                               
-
-                                <div class="one-eight text-center">
-                                    <div class="display-tc">
-                                        <span class="price price-input" value="@price">@price_string</span>
-                                    </div>
+                    </div>
+                </div>
+                @if (Model.Count > 0)
+                {
+                    <div class="row row-pb-lg">
+                        <div class="col-md-12">
+                            <div class="product-name d-flex">
+                                <div class="one-forth text-left px-4">
+                                    <span>Product Details</span>
                                 </div>
                                 <div class="one-eight text-center">
-                                    <div class="display-tc">
-                                        <input type="text" id="quantity" name="quantity" class="form-control input-number text-center" value="1" min="1" max="100">
-                                    </div>
+                                    <span>Spec Info</span>
                                 </div>
                                 <div class="one-eight text-center">
-                                    <div class="display-tc">
-                                        <span class="price price-result" id="result"></span>
-                                    </div>
+                                    <span>Price</span>
                                 </div>
                                 <div class="one-eight text-center">
-                                    <div class="display-tc">
-                                        <a href="#" data-id="@item.SanPhamId" class="closed"></a>
-                                    </div>
+                                    <span>Quantity</span>
+                                </div>
+                                <div class="one-eight text-center">
+                                    <span>Total</span>
+                                </div>
+                                <div class="one-eight text-center px-4">
+                                    <span>Remove</span>
                                 </div>
                             </div>
+                            @foreach (var item in Model)
+                            {
 
 
-                        }
+                                var price = item.SanPham.GiaSanPham;
+                                var price_string = price.Value.ToString("N0");
 
+                                <div class="product-cart d-flex">
 
-                    </div>
-
-                </div>
-                <button id="btnPayment" class="btn">Payment</button>
-            }
-            else
-            {
-
-                <span class="alert alert-danger " style="margin-bottom: 20px;">CHƯA CÓ SẢN PHẨM NÀO TRONG GIỎ HÀNG</span>
-
-            }
-
-            <button id="btnContinue" class="btn">Continue Shopping</button>
-
-
-
-
-            <div class="row row-pb-lg">
-                <div class="col-md-12">
-                    <div class="total-wrap">
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <form action="#">
-                                    <div class="row form-group">
-                                        <div class="col-sm-9">
-                                            <input type="text" name="quantity" class="form-control input-number" placeholder="Your Coupon Number...">
+                                    <div class="one-forth">
+                                        <div id="thongTinSp-id" class="product-img" style="background-image: url(@item.SanPham.AvatarSanPham);">
                                         </div>
-                                        <div class="col-sm-3">
-                                            <input type="submit" value="Apply Coupon" class="btn btn-primary">
+                                        <div class="display-tc">
+                                            <h3 id="thongTinSp-TenSp">@item.SanPham.TenSanPham</h3>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-                            <div class="col-sm-4 text-center">
-                                <div class="total">
-                                    <div class="sub">
-                                        <p><span>Subtotal:</span> <span></span></p>
-                                        <p><span>Delivery:</span> <span></span></p>
-                                        <p><span>Discount:</span> <span></span></p>
+                                    <div class="one-eight text-center">
+                                        <div class="display-tc">
+                                            <span class="price price-input-1" id="thongTinSp-GiaTri" value="@item.ThongSo_Id">@item.ThongSo_GiaTri</span>
+                                        </div>
                                     </div>
-                                    <div class="grand-total">
-                                        <p><span><strong>Total:</strong></span> <span class="price price-TotalResult"></span></p>
+
+                                    <div class="one-eight text-center">
+                                        <div class="display-tc">
+                                            <span class="price price-input" id="thongTinSp-Gia" value="@price">@price_string</span>
+                                        </div>
+                                    </div>
+                                    <div class="one-eight text-center">
+                                        <div class="display-tc">
+                                            <input type="text" id="quantity" name="quantity" class="form-control input-number text-center" value="@item.SoLuong" min="1" max="100">
+                                        </div>
+                                    </div>
+                                    <div class="one-eight text-center">
+                                        <div class="display-tc">
+                                            <span class="price price-result" id="result"></span>
+                                        </div>
+                                    </div>
+                                    <div class="one-eight text-center">
+                                        <div class="display-tc">
+                                            <a href="." data-id="@item.SanPham.Id" class="closed"></a>
+                                        </div>
                                     </div>
                                 </div>
+
+                                //myList.Add(item);
+                            }
+
+
+                        </div>
+
+                    </div>
+                    <button id="btnPayment" class="btn">Payment</button>
+                }
+                else
+                {
+
+                    <span class="alert alert-danger " style="margin-bottom: 20px;">CHƯA CÓ SẢN PHẨM NÀO TRONG GIỎ HÀNG</span>
+
+                }
+
+                <button id="btnContinue" class="btn">Continue Shopping</button>
+
+
+                <div class="row">
+                    <div class="col-sm-8 offset-sm-2 text-center colorlib-heading colorlib-heading-sm">
+                        <h2>Related Products</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 mb-4 text-center">
+                        <div class="product-entry border">
+                            <a href="#" class="prod-img">
+                                <img src="images/item-1.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+                            </a>
+                            <div class="desc">
+                                <h2><a href="#">Women's Boots Shoes Maca</a></h2>
+                                <span class="price">$139.00</span>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-8 offset-sm-2 text-center colorlib-heading colorlib-heading-sm">
-                    <h2>Related Products</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3 col-lg-3 mb-4 text-center">
-                    <div class="product-entry border">
-                        <a href="#" class="prod-img">
-                            <img src="images/item-1.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
-                        </a>
-                        <div class="desc">
-                            <h2><a href="#">Women's Boots Shoes Maca</a></h2>
-                            <span class="price">$139.00</span>
+                    <div class="col-md-3 col-lg-3 mb-4 text-center">
+                        <div class="product-entry border">
+                            <a href="#" class="prod-img">
+                                <img src="images/item-2.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+                            </a>
+                            <div class="desc">
+                                <h2><a href="#">Women's Minam Meaghan</a></h2>
+                                <span class="price">$139.00</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3 col-lg-3 mb-4 text-center">
-                    <div class="product-entry border">
-                        <a href="#" class="prod-img">
-                            <img src="images/item-2.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
-                        </a>
-                        <div class="desc">
-                            <h2><a href="#">Women's Minam Meaghan</a></h2>
-                            <span class="price">$139.00</span>
+                    <div class="col-md-3 col-lg-3 mb-4 text-center">
+                        <div class="product-entry border">
+                            <a href="#" class="prod-img">
+                                <img src="images/item-3.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+                            </a>
+                            <div class="desc">
+                                <h2><a href="#">Men's Taja Commissioner</a></h2>
+                                <span class="price">$139.00</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3 col-lg-3 mb-4 text-center">
-                    <div class="product-entry border">
-                        <a href="#" class="prod-img">
-                            <img src="images/item-3.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
-                        </a>
-                        <div class="desc">
-                            <h2><a href="#">Men's Taja Commissioner</a></h2>
-                            <span class="price">$139.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-lg-3 mb-4 text-center">
-                    <div class="product-entry border">
-                        <a href="#" class="prod-img">
-                            <img src="images/item-4.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
-                        </a>
-                        <div class="desc">
-                            <h2><a href="#">Russ Men's Sneakers</a></h2>
-                            <span class="price">$139.00</span>
+                    <div class="col-md-3 col-lg-3 mb-4 text-center">
+                        <div class="product-entry border">
+                            <a href="#" class="prod-img">
+                                <img src="images/item-4.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+                            </a>
+                            <div class="desc">
+                                <h2><a href="#">Russ Men's Sneakers</a></h2>
+                                <span class="price">$139.00</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
-</div>
+    <div class="gototop js-top">
+        <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+    </div>
 
-<div class="gototop js-top">
-    <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
-</div>
+    @section Scripts{
+        <script>
 
-@section Scripts{
-    <script>
-
-        var R = {
-            Init: function () {
-                R.RegisterEvent();
-                R.CalculatePrice();
-                R.CalculateTotalPrice();
-            },
-            RegisterEvent: function () {
-                $('.input-number').off('change').on('change', function () {
+            var R = {
+                Init: function () {
+                    R.RegisterEvent();
                     R.CalculatePrice();
-                }),
+                    R.CalculateTotalPrice();
 
-
-                    $('#btnContinue').off('click').on('click', function () {
-                        window.location.href = "/";
+                },
+                RegisterEvent: function () {
+                    $('.input-number').off('change').on('change', function () {
+                        R.CalculatePrice();
                     }),
 
 
+                        $('#btnContinue').off('click').on('click', function () {
+                            window.location.href = "/";
+                        }),
 
-                    $('#btnPayment').off('click').on('click', function () {
 
-                        /*window.location.href = "/GioHang/Checkout";*/
+
+
+                        $('#btnPayment').off('click').on('click', function () {
+                            window.location.href = "/GioHang/Checkout";
+                            debugger
+                            @*'@Session["gioHang"]' = myList;*@
+                                @*@foreach(var item in Session["gioHang"])
+                                {
+
+                                }*@
+
+
+                        }),
+
+
+
+
+                        $('.closed').off('click').on('click', function (e) {
                             e.preventDefault();
                             $.ajax({
-                                data: {
-                                    id: $(this).data('id'),
-                                    TenSanPham: $(this).data('TenSanPham'),
-                                    SoLuong: $(this).data('SoLuong'),
-                                    Gia: $(this).data('Gia'),
-                                    KichThuoc: $(this).data('KichThuoc')
-                                },
-                                url: '/GioHang/Checkout',
+                                data: { id: $(this).data('id') },
+                                url: '/GioHang/Delete',
                                 dataType: 'Json',
                                 type: 'POST',
                                 success: function (res) {
+                                    debugger
                                     if (res.status == true) {
                                         window.location.href = "/GioHang/Cart";
                                     }
                                 }
 
                             })
-                        
-                        ///////////////////////
-                        //fetch('/GioHang/Checkout', {
-                        //    method: 'POST',
-                        //    headers: {
-                        //        'Content-Type': 'application/json'
-                        //    },
-                        //    body: JSON.stringify({ data: 'hello world' })
-                        //});
-                        //$.ajax({
-                        //    data: {
-                        //        id: $(this).data('id'),
-                        //        TenSanPham: $(this).data('TenSanPham'),
-                        //        SoLuong: $(this).data('SoLuong'),
-                        //        Gia: $(this).data('Gia'),
-                        //        KichThuoc: $(this).data('KichThuoc')
-                        //    },
-                        //    url: '/GioHang/Checkout',
-                        //    dataType: 'Json',
-                        //    type: 'POST',
-                        //    success: function (res) {
-                        //        if (res.status == true) {
-                        //            window.location.href = "/GioHang/Checkout";
-                        //        }
-                        //    }
+                            R.RegisterEvent();
+                        });
 
-                        //})
-                        
-                    }),
+                },
+                CalculatePrice: function () {
 
 
+                    $('.product-cart').each((i, v) => {
+                        var priceInput = $(v).find('.price-input').attr('value');
+                        var quantity = $(v).find('.input-number').val();
+                        var result = parseInt(priceInput) * parseInt(quantity)
+                        /*var resultFormatNumber = numeral(result).format('0,0');*/
+                        var resultFormatNumber = result.toLocaleString();
+                        $(v).find('.price-result').text(resultFormatNumber)
+                    })
 
-                    $('.closed').off('click').on('click', function (e) {
-                        e.preventDefault();
-                        $.ajax({
-                            data: { id: $(this).data('id') },
-                            url: '/GioHang/Delete',
-                            dataType: 'Json',
-                            type: 'POST',
-                            success: function (res) {
-                                if (res.status == true) {
-                                    window.location.href = "/GioHang/Cart";
-                                }
-                            }
-
-                        })
-                    });
-
-            },
-            CalculatePrice: function () {
+                    /*var number = 123456.789;*/
 
 
-                $('.product-cart').each((i, v) => {
-                    var priceInput = $(v).find('.price-input').attr('value');
-                    var quantity = $(v).find('.input-number').val();
-                    var result = parseInt(priceInput) * parseInt(quantity)
-                    /*var resultFormatNumber = numeral(result).format('0,0');*/
-                    var resultFormatNumber = result.toLocaleString();
-                    $(v).find('.price-result').text(resultFormatNumber)
-                })
-
-                /*var number = 123456.789;*/
+                    R.RegisterEvent();
+                },
+                CalculateTotalPrice: function () {
 
 
-                R.RegisterEvent();
-            },
-            CalculateTotalPrice: function () {
+                    $('.grand-total').each((i, v) => {
+                        var result = $(v).find('.price-result').val();
+                        var total = result += parseInt($(this).text());
+                        var resultTotalNumber = total.toLocaleString();
+                        $(v).find('.price-TotalResult').text(resultTotalNumber)
 
 
-                $('.grand-total').each((i, v) => {
-                    var result = $(v).find('.price-result').val();
-                    var total = result += parseInt($(this).text());
-                    var resultTotalNumber = total.toLocaleString();
-                    $(v).find('.price-TotalResult').text(resultTotalNumber)
+                    })
+
+                    /*var number = 123456.789;*/
 
 
-                })
+                    R.RegisterEvent();
+                },
 
-                /*var number = 123456.789;*/
 
 
-                R.RegisterEvent();
             }
+            R.Init();
 
+        </script>
 
-        }
-        R.Init();
-
-    </script>
-
-    <script src="/footwear-master/js/Controller/cartController.js"></script>
-}
+        <script src="/footwear-master/js/Controller/cartController.js"></script>
+    }

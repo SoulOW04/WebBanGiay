@@ -14,6 +14,7 @@ using WebBanGiayMVC.DataAccess;
 using WebBanGiayMVC.Models;
 using WebBanGiayMVC.Service.ThongSoSanPham.ViewModel;
 using System.Xml.Linq;
+using WebBanGiayMVC.Service.SanPham.ViewModel;
 
 namespace WebBanGiayMVC.Controllers
 {
@@ -128,10 +129,10 @@ namespace WebBanGiayMVC.Controllers
         public PartialViewResult HeaderCart()
         {
             var cart = Session[gioHang];
-            var list = new List<ThongSoSanPhamViewModel>();
+            var list = new List<GioHangItem>();
             if (cart != null)
             {
-                list = (List<ThongSoSanPhamViewModel>)cart;//ep kieu cart sang list 
+                list = (List<GioHangItem>)cart;//ep kieu cart sang list 
             }
 
             return PartialView(list);
@@ -180,7 +181,7 @@ namespace WebBanGiayMVC.Controllers
                 ViewBag.AnhCH3 = CauHinhBanner3.GiaTriCauHinh;
                 ViewBag.TenCH3 = CauHinhBanner3.TenCauHinh;
             }
-            var cauHinhSanPhamTheoDanhMuc = sanPhamTrongDanhMucService.GetSanPhamTrongDanhMucByDanhMucId(1);
+            var cauHinhSanPhamTheoDanhMuc = sanPhamTrongDanhMucService.GetSanPhamTrongDanhMucByDanhMucId(21);
             if (cauHinhSanPhamTheoDanhMuc != null)
             {
                 ViewBag.SanPham = cauHinhSanPhamTheoDanhMuc.ToList();
@@ -226,7 +227,7 @@ namespace WebBanGiayMVC.Controllers
                 ViewBag.TenCH3 = CauHinhBanner3.TenCauHinh;
             }
            
-            var cauHinhSanPhamTheoDanhMuc = sanPhamTrongDanhMucService.GetSanPhamTrongDanhMucByDanhMucId(4);
+            var cauHinhSanPhamTheoDanhMuc = sanPhamTrongDanhMucService.GetSanPhamTrongDanhMucByDanhMucId(20);
             if (cauHinhSanPhamTheoDanhMuc != null)
             {
                 ViewBag.SanPham = cauHinhSanPhamTheoDanhMuc.ToList();

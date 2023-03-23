@@ -13,6 +13,7 @@ using System.IO;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using LicenseContext = OfficeOpenXml.LicenseContext;
+using WebBanGiayMVC.Service.SanPham.ViewModel;
 
 namespace WebBanGiayMVC.Controllers
 {
@@ -23,7 +24,7 @@ namespace WebBanGiayMVC.Controllers
         public GioHangController()
         {
             sanPhamService = new SanPhamService();
-            sp = new SanPham(); 
+            sp = new SanPham();
         }
 
 
@@ -33,131 +34,123 @@ namespace WebBanGiayMVC.Controllers
         // GET: GioHang
         public ActionResult Cart()
         {
-            var cart = Session[gioHang];
-            var list = new List<ThongSoSanPhamViewModel>();
+            var cart = Session["gioHang"];
+            var list = new List<GioHangItem>();
             if (cart != null)
             {
-                list = (List<ThongSoSanPhamViewModel>)cart;//ep kieu cart sang list 
-                ////
-                //string json = JsonConvert.SerializeObject(list);
-                //ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                list = (List<GioHangItem>)cart;
+                
+                
+                //ep kieu cart sang list 
+                                               ////
+                                               //string json = JsonConvert.SerializeObject(list);
+                                               //ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
                 //ExcelPackage excelPackage = new ExcelPackage();
                 //ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Data");
-                
+
             }
 
-            if (cart == null)
-            {
-                
-            }
+           
 
-            //lay giaSpFOrmat
-            var giaSanPham = sanPhamService.GetAllGiaSanPhamFormat();
 
-            if (giaSanPham != null)
-            {
-                ViewBag.SanPham = giaSanPham;
-            }
 
-            //lay all san pham
-            var sp = sanPhamService.GetAllGiaSanPhamFormat();
 
-            if (sp != null)
-            {
-                ViewBag.Sp = sp;
-            }
             return View(list);
         }
 
         public JsonResult Delete(int id)
         {
-            var sessionCart = (List<ThongSoSanPhamViewModel>)Session[gioHang];
-            sessionCart.RemoveAll(x => x.SanPhamId == id);
-            Session[gioHang] = sessionCart; 
-            return Json(new { 
-            
+            var sessionCart = (List<GioHangItem>)Session["gioHang"];
+            sessionCart.RemoveAll(x => x.SanPham.Id == id);
+            Session["gioHang"] = sessionCart;
+            return Json(new
+            {
+
                 status = true
             });
 
         }
-
-        public ActionResult AddItem(int productId, int quantity)
+        [HttpGet]
+        public ActionResult AddItem(int productId, int quantity, int thongSo_id, string thongSo_GiaTri)
         {
-            var product = new ThongSoSanPhamDA().GetThongTinSanPhamById(productId);
-            var cart = Session[gioHang];
-            if (cart != null)
+            if (productId > 0)
             {
-                var list = (List<ThongSoSanPhamViewModel>)cart;
-                if (list.Exists(x => x.SanPhamId == productId))
+                var prod = sanPhamService.GetChiTietSanPham(productId);
+                if (prod != null)
                 {
-                    foreach (var item in list)
+                    var gioHangIteam = new GioHangItem
                     {
-                        if (item.SanPhamId == productId)
+                        SanPham = prod,
+                        SoLuong = quantity,
+                        ThongSo_Id = thongSo_id,
+                        ThongSo_GiaTri = thongSo_GiaTri
+                    };
+                    var cart = Session["gioHang"];
+                    if (cart == null) //<--Gio hang rong
+                    {
+                        var n_GioHang = new List<GioHangItem>();
+                        n_GioHang.Add(gioHangIteam);
+
+                        Session["gioHang"] = n_GioHang;
+                    }
+                    else
+                    {
+                        var n_GioHang = (List<GioHangItem>)Session["gioHang"];
+                        foreach (var item in n_GioHang)
                         {
-                            item.SoLuong += quantity;
+                            var idSp = item.SanPham.Id;
+                            if (idSp == gioHangIteam.SanPham.Id)
+                            {
+                                var sPAff = n_GioHang.Where(R => R.SanPham.Id == idSp).FirstOrDefault();
+                                if (sPAff != null)
+                                {
+                                    sPAff.SoLuong = sPAff.SoLuong + gioHangIteam.SoLuong;
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                n_GioHang.Add(gioHangIteam);
+                                break;
+                            }
                         }
+                        
+                        Session["gioHang"] = n_GioHang;
                     }
-                }
-                else
-                {
-                    //Tạo mới đối tượng Chi Tiet Don Hang 
-                    var item = new ThongSoSanPhamViewModel();
-                    foreach (var prod in product)
-                    {
-                        item.GiaTri = prod.GiaTri  ;
-                        item.GiaSanPham = prod.GiaSanPham ;
-                        item.AvatarSanPham = prod.AvatarSanPham;
-                        item.SanPhamId = productId;
-                        item.TenSanPham = prod.TenSanPham;
-                        item.MoTaSanPham = prod.MoTaSanPham;
-                        item.SoLuong = quantity;
+                    var cart_s = Session["gioHang"];
+                    var list = new List<GioHangItem>();
 
 
-                    }
-                    
-                    list.Add(item);
                 }
-                //Gán vào session
-                Session[gioHang] = list;
+                RedirectToAction("Cart");
             }
-            else
-            {
+            return null;
 
-                //Tạo mới đối tượng Chi Tiet Don Hang 
-                var item = new ThongSoSanPhamViewModel();
-                foreach (var prod in product)
-                {
-                    item.GiaTri = prod.GiaTri;
-                    item.GiaSanPham = prod.GiaSanPham;
-                    item.AvatarSanPham = prod.AvatarSanPham;
-                    item.SanPhamId = productId;
-                    item.TenSanPham = prod.TenSanPham;
-                    item.MoTaSanPham = prod.MoTaSanPham;
-                    item.SoLuong = quantity;
-
-
-                }
-
-                var list = new List<ThongSoSanPhamViewModel>();
-                list.Add(item);
-
-                //Gán vào session
-                Session[gioHang] = list;
-
-            }
-            return RedirectToAction("Cart");
             //return View(product);
         }
 
-        public ActionResult Checkout(int id, string tenSanPham, string soLuong, int gia, int kichThuoc )
+
+        public ActionResult Payment()
         {
 
-            var cart = Session[gioHang];
-            var list = new List<ThongSoSanPhamViewModel>();
+            var cart = Session["gioHang"];
+            var list = new List<GioHangItem>();
             if (cart != null)
             {
-                list = (List<ThongSoSanPhamViewModel>)cart;//ep kieu cart sang list 
+                list = (List<GioHangItem>)cart;//ep kieu cart sang list 
+            }
+            return View();
+        }
+
+        public ActionResult Checkout()
+        {
+
+            var cart = Session["gioHang"];
+            var list = new List<GioHangItem>();
+            if (cart != null)
+            {
+                list = (List<GioHangItem>)cart;//ep kieu cart sang list 
             }
             return View();
         }

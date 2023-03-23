@@ -9,6 +9,15 @@
 
 }
 
+@section styles{
+
+    <style>
+        .thong-so-active {
+            border: 5px solid lightblue;
+        }
+    </style>
+
+}
 
 <div class="colorlib-loader"></div>
 <div id="page">
@@ -74,7 +83,7 @@
                                 (74 Rating)
                             </span>
                         </p>
-                        <p>@Model.MoTaSanPham</p>
+                        <p>@Html.Raw(Model.MoTaSanPham)</p>
                         <div class="size-wrap">
                             @foreach (var grouped in tsktGropped)
                             {
@@ -86,7 +95,7 @@
                                             var ts = tskts.Where(r => r.ThongSo_Id == grouped.ThongSo_Id);
                                             foreach (var ts_item in ts)
                                             {
-                                                <li thong-so-id="@ts_item.ThongSo_Id">@ts_item.GiaTri</li>
+                                                <li thong-so-id="@ts_item.ThongSo_Id" class="chon-thong-so">@ts_item.GiaTri</li>
                                             }
                                         }
                                     </ul>
@@ -111,7 +120,7 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12 text-center">
-                                <p class="add-to-cart"><a href="@Url.Action("AddItem", "GioHang", new { productId = Model.Id,quantity = 1 })" class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Add to Cart</a></p>
+                                <p class="add-to-cart"><a href="javascript:void(0)" class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Add to Cart</a></p>
                             </div>
                         </div>
                     </div>
@@ -138,11 +147,11 @@
 
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane border fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
-                                        @Model.MoTaSanPham
+                                        @Html.Raw(Model.MoTaSanPham)
                                     </div>
 
                                     <div class="tab-pane border fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
-                                        @Model.HangSanPham
+                                        @Html.Raw(@Model.HangSanPham) 
                                     </div>
 
                                     <div class="tab-pane border fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
@@ -291,7 +300,8 @@
 </div>
 
 
-<script>
+@section scripts{
+    <script>
     $(document).ready(function () {
 
         var quantitiy = 0;
@@ -325,8 +335,46 @@
             }
         });
 
-    });</script>
+        $('.btn-addtocart').off('click').on('click', function () {
+            var productId = @Model.Id;
+            var soLuong = $('#quantity').val();
+            var thong_so_id = $('.thong-so-active').attr('thong-so-id');
+            var gt = [];
+            $('.thong-so-active').each((i, v) => {
+                gt.push($(v).text())
+            })
+            var thong_so_gt = $('.thong-so-active').text();
+            var params = {
+                pId: productId,
+                sL: soLuong,
+                ts_id: thong_so_id,
+                ts_gt: gt.toString()
+            }
+            console.log(params);
+            //int productId, int quantity, int thongSo_id, string thongSo_GiaTri
+            var url = `/GioHang/AddItem?productId=${params.pId}&quantity=${params.sL}&thongSo_id=${params.ts_id}&thongSo_GiaTri=${params.ts_gt}`
+            $.get(url, function () {
+                alert('Thêm vào giỏ hàng thành công!');
+                window.location.href = "/GioHang/Cart";
+            })
+        })
+        $('.chon-thong-so').off('click').on('click', function () {
 
+            //B1: Xoa het thong so active tren tat cac cac thang do
+            var actived = $(this).parent().find('li');
+            actived.each((index, element) => {
+                $(element).removeClass('thong-so-active');
+            })
+            console.log('Xoa thong so active cu thanh cong!');
+            //B2: Them moi 1 thang thong so active duy nhat
+            $(this).addClass('thong-so-active');
+        })
+
+    });
+    </script>
+
+
+}
 
 
 
