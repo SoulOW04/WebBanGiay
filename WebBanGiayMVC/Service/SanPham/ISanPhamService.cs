@@ -46,6 +46,12 @@ namespace WebBanGiayMVC.Business
             
             return spDa.FilterSanPham(out total, keyword, pageIndex, pageSize);
         }
+        public List<SanPham> FilterSanPhamInDanhMuc(out int total, string keyword, int pageIndex, int pageSize,int category)
+        {
+            total = 0;
+
+            return spDa.FilterSanPhamInDanhMuc(out total, keyword, pageIndex, pageSize,category);
+        }
         public bool CreateSanPham(InsertSanPhamWithDanhMucs sp)
         {
             return spDa.CreateSanPham(sp);

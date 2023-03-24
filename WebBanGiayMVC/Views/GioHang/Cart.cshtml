@@ -254,6 +254,7 @@
                         $('#btnPayment').off('click').on('click', function () {
 
                             const items = [];
+                            var tong = 0;
                             $('.product-cart').each((index, val) => {
                                 
                                 var ten = $(val).find('.sp-tenSP').text();
@@ -271,13 +272,16 @@
                                 var ketQuaFormatNumber = parseInt(ketQua);
 
                                 //VD 100k sp 1 + 200k sp 2 = 300k
-                                
+                                tong = tong + parseInt(ketQua);
+                                var resultTotalNumber = parseInt(tong);
+
                                 var obj = {
                                     Ten: tenString,
                                     Gia: giaInt,
                                     SoLuong: soLuongInt,
                                     KetQua: ketQuaFormatNumber,
                                     ThongSoSP: thongSoGiaTriString,
+                                    TongGia: resultTotalNumber
 
                                 }
                                 items.push(obj)

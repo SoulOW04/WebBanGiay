@@ -170,6 +170,40 @@ namespace WebBanGiayMVC.DataAccess
             }
 
         }
+        public List<SanPham> FilterSanPhamInDanhMuc(out int total, string keyword, int pageIndex, int pageSize, int category)
+        {
+            pageIndex = pageIndex == 0 ? 1 : pageIndex;
+            try
+            {
+                using (var conn = new SqlConnection(cs))
+                {
+                    var storeName = "web_FilterSanPham";//ten proc
+                    conn.Open();
+                    //Add param
+                    DynamicParameters parameters = new DynamicParameters();
+                    parameters.Add("keyword", keyword);
+                    parameters.Add("pageIndex", pageIndex);
+                    parameters.Add("pageSize", pageSize);
+                    parameters.Add("spdanhmuc", category);
+                    parameters.Add("total", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                    var result = conn.Query<SanPham>(storeName, parameters, commandType: System.Data.CommandType.StoredProcedure).ToList();
+                    total = parameters.Get<int>("total");
+
+                    conn.Close();
+                    return result;
+
+                }
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                total = 0;
+                return null;
+
+            }
+
+        }
         public List<SanPham> GetSanPhamByName(string searchSanPhamByName)
         {
             try

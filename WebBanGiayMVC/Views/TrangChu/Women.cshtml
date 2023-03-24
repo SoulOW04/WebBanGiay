@@ -14,7 +14,7 @@
     var anhCH3 = ViewBag.AnhCH3 as string;
     var tenCH3 = ViewBag.TenCH3 as string;
     //
-    var SanPham = ViewBag.SanPham as List<WebBanGiayMVC.Models.SanPham>;
+    var SanPham = ViewBag.SanPhamWomen as List<WebBanGiayMVC.Models.SanPham>;
     var total = (int)ViewBag.Total;
     var index = (int)ViewBag.Index;
     var size = (int)ViewBag.Size;
@@ -188,7 +188,7 @@
                     </div>
                     <div class="col-lg-9 col-xl-9">
                         <div class="row row-pb-md">
-                            @foreach (var item in @ViewBag.SanPham)
+                            @foreach (var item in SanPham)
                             {
                                 string price = Convert.ToDecimal(item.GiaSanPham).ToString("N0");
 

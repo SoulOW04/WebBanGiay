@@ -16,6 +16,7 @@ using LicenseContext = OfficeOpenXml.LicenseContext;
 using WebBanGiayMVC.Service.SanPham.ViewModel;
 using WebBanGiayMVC.Service.DonHang.ViewModel;
 using System.Security.Cryptography;
+using System.Threading;
 
 namespace WebBanGiayMVC.Controllers
 {
@@ -151,10 +152,15 @@ namespace WebBanGiayMVC.Controllers
 
             var cart = Session["itemsThongTinSP"];
             //var list = new List<GioHangItem>();
-            Session["itemTTSP"] = cart;
             return View();
         }
+        [HttpPost] 
+        public ActionResult Checkout(GioHangItem item)
+        {
+            return RedirectToAction("GioHang", "Order_Complete");
+        }
         
+
 
         public ActionResult Order_Complete()
         {
@@ -165,7 +171,19 @@ namespace WebBanGiayMVC.Controllers
         public ActionResult Order_Confirm(List<DonHangItem> items) //Viewmodel
         {
             Session["itemsThongTinSP"] = items ;
-            if(items.Count > 0)
+            List<int> list = new List<int>();
+            foreach(var t in items)
+            {
+                var gia = 0;
+                gia = t.TongGia;
+                if(t == items.Last())
+                {
+                    list.Add(gia);
+                }
+                
+            }
+            Session["TongGiaSP"] = list;
+            if (items.Count > 0)
             {
                 return RedirectToAction("Checkout", "GioHang");
             }
