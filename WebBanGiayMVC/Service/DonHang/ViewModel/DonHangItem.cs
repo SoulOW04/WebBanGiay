@@ -12,5 +12,6 @@ namespace WebBanGiayMVC.Service.DonHang.ViewModel
         public int SoLuong { get; set; }
         public int KetQua { get; set; }
         public string ThongSoSP { get; set; }
+        public int TongGia { get; set; }
     }
 }

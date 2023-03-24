@@ -2,8 +2,8 @@
 @{
     ViewBag.Title = "Checkout";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
-    var Titem = 0;
-    var gioHang = Session["itemTTSP"] as List<WebBanGiayMVC.Service.DonHang.ViewModel.DonHangItem>;
+    var gioHang = Session["itemsThongTinSP"] as List<WebBanGiayMVC.Service.DonHang.ViewModel.DonHangItem>;
+    var tongGia = Session["TongGiaSP"] as List<int>;
 
 }
 
@@ -48,7 +48,8 @@
                 <div class="col-lg-8">
                     <form method="post"
                           action="https://script.google.com/macros/s/AKfycbw_7hN-43fbRvu46RArLnKul2DmtAg1wynHCkGk7CufPh6RZbnoglqAd0CSz6zscCkB/exec"
-                          class="colorlib-form">
+                          class="colorlib-form"
+                          target="dummyframe">
                         <h2>Billing Details</h2>
                         <div class="row">
 
@@ -96,6 +97,29 @@
                                 </div>
                             </div>
                         </div>
+                        <div>
+                            @{
+                                var sanPhamList = new List<Dictionary<string, object>>();
+                                foreach (var item in gioHang)
+                                {
+                                    var sanPham = new Dictionary<string, object>();
+                                    sanPham.Add("Ten", item.Ten);
+                                    sanPham.Add("Gia", item.Gia);
+                                    sanPham.Add("SoLuong", item.SoLuong);
+                                    sanPham.Add("ThongSoSp", item.ThongSoSP);
+                                    sanPham.Add("TongGia", item.TongGia);
+                                    sanPhamList.Add(sanPham);
+                                    @*<input type="number" name="TongGia" value="ten" />*@
+                                }
+                            }
+                            <input type="text" name="ThongTinSp" value="@Newtonsoft.Json.JsonConvert.SerializeObject(sanPhamList)" style="display:none;" />
+                        </div>
+                        <div>
+                            <input type="number" name="TongGia" value="@tongGia.Sum()" style="display:none;" />
+                        </div>
+
+
+
                         <div class="row">
                             <div class="col-md-12 text-center">
                                 <button type="submit" class="btn btn-primary" id="btnOrderComplete">Place an order </button>
@@ -103,36 +127,47 @@
                         </div>
                     </form>
                 </div>
+                <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
 
                 <div class="col-lg-4">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-18">
                             <div class="cart-detail">
                                 <h2>Cart Total</h2>
                                 <ul>
-                                    
+
                                     <li>
-                                        <span>Subtotal</span> <span>$100.00</span>
+
                                         <ul>
-                                            @foreach (var item in gioHang) {
-                                            <li><span>@item.Ten</span> 
-                                            <span>@item.Gia.ToString("N0")đ</span>
-                                            <span>@item.ThongSoSP</span></li>
-                                            
+
+                                            @foreach (var item in gioHang)
+                                            {
+
+                                                <li name="ThongTinSp">
+                                                    <span>Sản Phẩm:</span> <span>@item.Ten</span>
+                                                    <span>Thông Số:</span><span>@item.ThongSoSP</span>
+                                                    <span>Giá:</span><span>@item.Gia.ToString("N0")đ</span>
+                                                    <span>Số Lượng:</span><span>@item.SoLuong</span>
+                                                    <span>Giá Tạm Tính:</span><span>@item.KetQua</span>
+
+                                                </li>
+
                                             }
                                         </ul>
+                                        <span>Tổng Giá: </span> <span>@Newtonsoft.Json.JsonConvert.SerializeObject(tongGia)</span>
                                     </li>
-                                    
+
                                 </ul>
                             </div>
                         </div>
 
                         <div class="w-100"></div>
 
-                        
+
                     </div>
 
                 </div>
+
             </div>
         </div>
     </div>
@@ -158,9 +193,9 @@
                 //    });
                 //}
 
-                $('#btnOrderComplete').off('click').on('click', function () {
-                    window.location.href = "/GioHang/Order_Complete";
-                });
+                //$('#btnOrderComplete').off('click').on('click', function () {
+                //    window.location.href = "/GioHang/Order_Complete";
+                //});
 
             }
 

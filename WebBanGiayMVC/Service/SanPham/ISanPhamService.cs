@@ -19,6 +19,7 @@ namespace WebBanGiayMVC.Business
         List<SanPham> GetAllGiaSanPhamByNameFormat();
         SanPham GetChiTietSanPham(int id);
         List<ThongSoSanPhamHT> GetThongSoSanPhams(int id);
+        
     }
 
     public class SanPhamService : ISanPhamService
@@ -42,6 +43,7 @@ namespace WebBanGiayMVC.Business
             
             return spDa.FilterSanPham(out total, keyword, pageIndex, pageSize);
         }
+        
         public bool CreateSanPham(InsertSanPhamWithDanhMucs sp)
         {
             return spDa.CreateSanPham(sp);
