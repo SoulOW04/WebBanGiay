@@ -14,6 +14,8 @@ using Newtonsoft.Json;
 using System.ComponentModel;
 using LicenseContext = OfficeOpenXml.LicenseContext;
 using WebBanGiayMVC.Service.SanPham.ViewModel;
+using WebBanGiayMVC.Service.DonHang.ViewModel;
+using System.Security.Cryptography;
 
 namespace WebBanGiayMVC.Controllers
 {
@@ -143,21 +145,31 @@ namespace WebBanGiayMVC.Controllers
             return View();
         }
 
+
         public ActionResult Checkout()
         {
 
-            var cart = Session["gioHang"];
-            var list = new List<GioHangItem>();
-            if (cart != null)
-            {
-                list = (List<GioHangItem>)cart;//ep kieu cart sang list 
-            }
+            var cart = Session["itemsThongTinSP"];
+            //var list = new List<GioHangItem>();
+            Session["itemTTSP"] = cart;
             return View();
         }
+        
 
         public ActionResult Order_Complete()
         {
             return View();
+        }
+        //[HttpPost, ValidateInput(false)]
+        [HttpPost]
+        public ActionResult Order_Confirm(List<DonHangItem> items) //Viewmodel
+        {
+            Session["itemsThongTinSP"] = items ;
+            if(items.Count > 0)
+            {
+                return RedirectToAction("Checkout", "GioHang");
+            }
+            return null;
         }
     }
 }

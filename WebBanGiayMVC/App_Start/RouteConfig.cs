@@ -7,6 +7,7 @@ using System.Web.Routing;
 
 namespace WebBanGiayMVC
 {
+    //https://localhost:44356/GioHang/Order_Confirm
     public class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)
@@ -18,7 +19,7 @@ namespace WebBanGiayMVC
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "TrangChu", action = "Index", id = UrlParameter.Optional }
             );
-
+             
             routes.MapRoute(
                 name: "Add Cart",
                 url: "them-gio-hang",

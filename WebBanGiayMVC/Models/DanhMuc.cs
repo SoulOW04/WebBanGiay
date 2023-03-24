@@ -12,7 +12,7 @@ namespace WebBanGiayMVC.Models
         public int Id { get; set; }
         [Required(ErrorMessage = "TenDanhMuc is required")]
         public string TenDanhMuc { get; set; }
-        [Required(ErrorMessage = "MoTaDanhmuc is required")]
+        
         public string MoTaDanhmuc { get; set; }
         [Required(ErrorMessage = "BannerDanhMuc is required")]
         public string BannerDanhMuc { get; set; }

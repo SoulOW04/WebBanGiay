@@ -2,6 +2,9 @@
 @{
     ViewBag.Title = "Checkout";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
+    var Titem = 0;
+    var gioHang = Session["itemTTSP"] as List<WebBanGiayMVC.Service.DonHang.ViewModel.DonHangItem>;
+
 }
 
 
@@ -107,54 +110,26 @@
                             <div class="cart-detail">
                                 <h2>Cart Total</h2>
                                 <ul>
+                                    
                                     <li>
                                         <span>Subtotal</span> <span>$100.00</span>
                                         <ul>
-                                            <li><span>1 x Product Name</span> <span>$99.00</span></li>
-                                            <li><span>1 x Product Name</span> <span>$78.00</span></li>
+                                            @foreach (var item in gioHang) {
+                                            <li><span>@item.Ten</span> 
+                                            <span>@item.Gia.ToString("N0")đ</span>
+                                            <span>@item.ThongSoSP</span></li>
+                                            
+                                            }
                                         </ul>
                                     </li>
-                                    <li><span>Shipping</span> <span>$0.00</span></li>
-                                    <li><span>Order Total</span> <span>$180.00</span></li>
+                                    
                                 </ul>
                             </div>
                         </div>
 
                         <div class="w-100"></div>
 
-                        <div class="col-md-12">
-                            <div class="cart-detail">
-                                <h2>Payment Method</h2>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <div class="radio">
-                                            <label><input type="radio" name="optradio"> Direct Bank Tranfer</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <div class="radio">
-                                            <label><input type="radio" name="optradio"> Check Payment</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <div class="radio">
-                                            <label><input type="radio" name="optradio"> Paypal</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value=""> I have read and accept the terms and conditions</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
 
                 </div>
