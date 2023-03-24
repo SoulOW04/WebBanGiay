@@ -168,6 +168,7 @@
     <Compile Include="Service\CauHinh\ICauHinhService.cs" />
     <Compile Include="Service\ChiTietDonHang\IChiTietDonHangService.cs" />
     <Compile Include="Service\DonHang\IDonHangService.cs" />
+    <Compile Include="Service\DonHang\ViewModel\DonHangItem.cs" />
     <Compile Include="Service\SanPhamTrongDanhMuc\ISanPhamTrongDanhMucService.cs" />
     <Compile Include="Service\SanPhamTrongDanhMuc\ViewModel\SanPhamtTrongDanhMucViewModel.cs" />
     <Compile Include="Service\SanPham\ISanPhamService.cs" />
@@ -884,7 +885,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Service\BaseService\" />
     <Folder Include="Service\DanhMuc\ViewModel\" />
-    <Folder Include="Service\DonHang\ViewModel\" />
     <Folder Include="Views\GioHang\GioHangDao\" />
     <Folder Include="Views\Test\" />
     <Folder Include="Views\UploadFiles\" />

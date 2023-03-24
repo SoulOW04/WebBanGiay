@@ -73,7 +73,7 @@
 
                         <h3>@Model.TenSanPham</h3>
                         <p class="price">
-                            <span>@Model.GiaSanPham</span>
+                            <span>@Model.GiaSanPham.Value.ToString("N0")đ</span>
                             <span class="rate">
                                 <i class="icon-star-full"></i>
                                 <i class="icon-star-full"></i>
@@ -95,7 +95,7 @@
                                             var ts = tskts.Where(r => r.ThongSo_Id == grouped.ThongSo_Id);
                                             foreach (var ts_item in ts)
                                             {
-                                                <li thong-so-id="@ts_item.ThongSo_Id" class="chon-thong-so">@ts_item.GiaTri</li>
+                                                <li thong-so-id="@ts_item.ThongSo_Id" class="chon-thong-so"> @ts_item.GiaTri</li>
                                             }
                                         }
                                     </ul>

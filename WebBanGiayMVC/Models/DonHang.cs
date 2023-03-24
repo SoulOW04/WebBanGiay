@@ -23,6 +23,7 @@ namespace WebBanGiayMVC.Models
         [Required(ErrorMessage = "SoDienThoai is required")]
         public string SoDienThoai { get; set; }
         [Required(ErrorMessage = "NgayDatHang is required")]
+        [DisplayFormat(DataFormatString = "{0:MMM dd yyyy}")]
         public string NgayDatHang { get; set; }
         [Required(ErrorMessage = "TrangThai is required")]
         public int? TrangThai { get; set; }

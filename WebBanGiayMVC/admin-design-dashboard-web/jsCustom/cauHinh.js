@@ -32,6 +32,7 @@
             })
 
         $('.edit-cauhinh').off('click').on('click', function () {
+            debugger
             var tenCauHinh = $('#TenCauHinh').val();
             var maCauHinh = $('#MaCauHinh').val();
             var giaTriCauHinh = $('#GiaTriCauHinh').attr('src');
@@ -50,7 +51,7 @@
                 ParentId: parentId
             }
 
-            $.post(`/CauHinhs/Edit?id=${params.Id}`, params, function (response) {
+            $.post('/CauHinhs/Edit', params, function (response) {
                 alert('Chỉnh sửa thành công!');
                 window.location.href = "/CauHinhs/Index"
             })
