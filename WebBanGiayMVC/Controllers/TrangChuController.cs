@@ -15,6 +15,7 @@ using WebBanGiayMVC.Models;
 using WebBanGiayMVC.Service.ThongSoSanPham.ViewModel;
 using System.Xml.Linq;
 using WebBanGiayMVC.Service.SanPham.ViewModel;
+using System.ComponentModel;
 
 namespace WebBanGiayMVC.Controllers
 {
@@ -146,14 +147,14 @@ namespace WebBanGiayMVC.Controllers
         public ActionResult Men(string keyword = "", int index = 1, int size = 5)
         {
             var total = 0;
-            var sanPham = sanPhamService.FilterSanPham(out total, keyword, index, size);
+            var sanPham = sanPhamTrongDanhMucService.FilterSanPhamTrongDanhMuc(out total, keyword, index, size,21);
             ViewBag.Total = total;
             ViewBag.Index = index;
             ViewBag.Size = size;
             ViewBag.Keyword = keyword;
             if (sanPham != null)
             {
-                ViewBag.SanPham = sanPham;
+                ViewBag.SanPhamMen = sanPham;
             }
             var CauHinhBanner = cauHinhService.GetCauHinhByMaCauHinh("MenBanner");
             if (CauHinhBanner != null)
@@ -191,14 +192,14 @@ namespace WebBanGiayMVC.Controllers
         public ActionResult Women(string keyword = "", int index = 1, int size = 5)
         {
             var total = 0;
-            var sanPham = sanPhamService.FilterSanPham(out total, keyword, index, size);
+            var sanPham = sanPhamTrongDanhMucService.FilterSanPhamTrongDanhMuc(out total, keyword, index, size, 20);
             ViewBag.Total = total;
             ViewBag.Index = index;
             ViewBag.Size = size;
             ViewBag.Keyword = keyword;
             if (sanPham != null)
             {
-                ViewBag.SanPham = sanPham;
+                ViewBag.SanPhamWomen = sanPham;
             }
             //loai 2 = muc Casual
             var CauHinhBanner = cauHinhService.GetCauHinhByMaCauHinh("WomenBanner");

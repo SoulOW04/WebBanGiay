@@ -170,32 +170,7 @@ namespace WebBanGiayMVC.DataAccess
             }
 
         }
-        public List<SanPham> GetSanPhamByName(string searchSanPhamByName)
-        {
-            try
-            {
-                using (var conn = new SqlConnection(cs))
-                {
-                    var storeName = "usp_WEB_GetSanPhamByName";//ten proc
-
-                    //Add param
-                    DynamicParameters parameters = new DynamicParameters();
-                    parameters.Add("name", searchSanPhamByName);
-                    conn.Open();
-                    var result = conn.Query<SanPham>(storeName, parameters, commandType: System.Data.CommandType.StoredProcedure).ToList();
-                    conn.Close();
-                    return result;
-                }
-            }
-            catch (Exception e)
-            {
-
-                Console.WriteLine(e.Message);
-                return null;
-            }
-
-
-        }
+        
 
         public List<SanPham> GetAllGiaSanPhamByNameFormat(string name)
         {

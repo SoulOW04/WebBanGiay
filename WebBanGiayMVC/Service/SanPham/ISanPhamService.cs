@@ -19,7 +19,6 @@ namespace WebBanGiayMVC.Business
         List<SanPham> GetAllGiaSanPhamByNameFormat();
         SanPham GetChiTietSanPham(int id);
         List<ThongSoSanPhamHT> GetThongSoSanPhams(int id);
-        List<SanPham> GetSanPhamByName(string searchSanPhamByName);
     }
 
     public class SanPhamService : ISanPhamService
@@ -36,10 +35,7 @@ namespace WebBanGiayMVC.Business
             return spDa.GetAllGiaSanPhamFormat();
         }
 
-        public List<SanPham> GetSanPhamByName(string searchSanPhamByName)
-        {
-            return spDa.GetSanPhamByName(searchSanPhamByName);
-        }
+        
         public List<SanPham> FilterSanPham(out int total, string keyword, int pageIndex, int pageSize)
         {
             total = 0;
