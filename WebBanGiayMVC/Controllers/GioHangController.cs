@@ -154,6 +154,7 @@ namespace WebBanGiayMVC.Controllers
             //var list = new List<GioHangItem>();
             return View();
         }
+
         [HttpPost] 
         public ActionResult Checkout(GioHangItem item)
         {
